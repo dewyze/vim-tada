@@ -1,0 +1,23 @@
+- Enter:
+  - Speed Mode:
+    - [ ] Configuration variable
+    - [ ] If on, topic of same level
+    - [ ] If off, then metadata or insert template or whatever
+  - Metadata:
+    - [ ] If not empty, add another | line
+    - [ ] If empty, delete | and add blank line
+  - Todo:
+    - [ ] If on, add - [ ]
+    - [ ] If off, Delete - and add blank likne
+          Does this go to a new topic?
+  - List Item:
+    - [ ] If on, add -
+    - [ ] If off, delete - and add blank line
+  - Topic:
+    - [ ] If speed mode is on, add topic of same level
+    - Metadata:
+      - [ ] Insert Default Metadata if defined
+      - [ ] Insert Template if defined
+- Tab/Shift+Tab:
+  - [ ] Variable
+  - [ ] If on, add tab/remove tab

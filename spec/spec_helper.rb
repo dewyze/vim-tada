@@ -23,17 +23,26 @@ Vimrunner::RSpec.configure do |config|
     vim
   end
 
-  def assert_correct_highlighting(string, patterns, group)
-    Tempfile.create(["file", ".tada"]) do |file|
-      file.write string
+  def with_file(content = "")
+    Tempfile.create(["test", ".tada"]) do |file|
+      file.write content
       file.rewind
       vim.edit file.path
-
-      Array(patterns).each do |pattern|
-        # TODO: add a custom matcher
-        expect(vim.echo("TestSyntax('#{pattern}', '#{group}')")).to eq '1'
-      end
+      yield file
     end
+  end
+end
+
+RSpec::Matchers.define :have_highlight do |expected|
+  match do |pattern|
+    vim.echo("TestSyntax('#{pattern}', '#{expected}')") == '1'
+  end
+
+  failure_message do |pattern|
+    <<~MSG
+      Expected highlight: '#{expected}'
+        Actual highlight: '#{vim.echo("CursorGroup()")}'
+    MSG
   end
 end
 

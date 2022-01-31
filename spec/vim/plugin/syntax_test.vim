@@ -1,7 +1,11 @@
 let s:debug = 0
 
+function! CursorGroup() abort
+  return synIDattr(synID(line('.'), col('.'), 0), 'name')
+endfunction
+
 function! s:CursorHasGroup(group) abort
-  return synIDattr(synID(line('.'), col('.'), 0), 'name') =~ a:group
+  return CursorGroup() =~ a:group
 endfunction
 
 function! TestSyntax(pattern, group) abort

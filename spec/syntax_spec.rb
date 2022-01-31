@@ -1,27 +1,19 @@
 RSpec.describe "syntax" do
   describe "topic levels" do
-    specify "parses level 1 topic" do
-      assert_correct_highlighting(<<~FILE, "Milestone", "tadaLevel1TopicTitle")
+    let(:content) do
+      <<~CONTENT
       - Milestone:
         - Epic:
           - Story:
-      FILE
+      CONTENT
     end
 
-    specify "parses level 2 topic" do
-      assert_correct_highlighting(<<~FILE, "Epic", "tadaLevel2TopicTitle")
-      - Milestone:
-        - Epic:
-          - Story:
-      FILE
-    end
-
-    specify "parses level 3 topic" do
-      assert_correct_highlighting(<<~FILE, "Story", "tadaLevel3TopicTitle")
-      - Milestone:
-        - Epic:
-          - Story:
-      FILE
+    it "parses the file" do
+      with_file(content) do
+        expect("Milestone").to have_highlight("tadaLevel1TopicTitle")
+        expect("Epic").to have_highlight("tadaLevel2TopicTitle")
+        expect("Story").to have_highlight("tadaLevel3TopicTitle")
+      end
     end
   end
 end
