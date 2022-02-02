@@ -1,3 +1,5 @@
+# vim: syntax=tada
+
 - Enter:
   - Speed Mode:
     - [ ] Configuration variable
@@ -26,15 +28,16 @@
 
 - Space:
   - [ ] Checkbox toggle
+    - If parent checkbox, toggle both?
   - [ ] Status toggle
   - [ ] Any other metadata features?
 - Configurations:
   - [ ] Default Metadata
   - [ ] Default Templates (for a topic or for tree of topics)
   - [ ] Assignees
-  - [ ] Statuses
-    - [ ] Checkbox statuses
-      - [ ] Include custom state/order
+  - [•] Statuses
+    - [✔︎] Checkbox statuses
+    - [✔︎] Include custom state/order
     - [ ] Project statuses
   - [ ] Auto add colon?
 - Keymaps:

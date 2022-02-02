@@ -28,15 +28,17 @@ if !exists('g:tada_todo_symbols')
   endif
 endif
 
-execute 'syn region tadaTodoItemBlank start=/^\s\{0,6}- \[' . g:tada_todo_symbols['todo'] . '\].*$/ end=/$/'
-execute 'syn region tadaTodoItemInProgress start=/^\s\{0,6}- \[' . g:tada_todo_symbols['inProgress'] . '\].*$/ end=/$/'
-execute 'syn region tadaTodoItemDone start=/^\s\{0,6}- \[' . g:tada_todo_symbols['done'] . '\].*$/ end=/$/'
-execute 'syn region tadaTodoItemBlocked start=/^\s\{0,6}- \[' . g:tada_todo_symbols['blocked'] . '\].*$/ end=/$/'
+execute 'syn region tadaTodoItemBlank start=/^\s\+- \[' . g:tada_todo_symbols['todo'] . '\].*$/ end=/$/'
+execute 'syn region tadaTodoItemInProgress start=/^\s\+- \[' . g:tada_todo_symbols['inProgress'] . '\].*$/ end=/$/'
+execute 'syn region tadaTodoItemDone start=/^\s\+- \[' . g:tada_todo_symbols['done'] . '\].*$/ end=/$/'
+execute 'syn region tadaTodoItemBlocked start=/^\s\+- \[' . g:tada_todo_symbols['blocked'] . '\].*$/ end=/$/'
 
-hi def link tadaTopicTitle1 Constant
-hi def link tadaTopicTitle2 Type
-hi def link tadaTopicTitle3 Keyword
-hi def link tadaTodoItem String
+hi def link tadaTopicTitle1 Define
+hi def link tadaTopicTitle2 Function
+hi def link tadaTopicTitle3 String
+hi def link tadaTodoItemInProgress Type
+hi def link tadaTodoItemDone Label
+hi def link tadaTodoItemBlocked Error
 hi def link tadaMetadata Identifier
 
 let b:current_syntax = "tada"
