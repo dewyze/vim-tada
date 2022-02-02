@@ -21,3 +21,36 @@
 - Tab/Shift+Tab:
   - [ ] Variable
   - [ ] If on, add tab/remove tab
+  - [ ] If on todo, <S-Tab> moves into continued description?
+
+
+- Space:
+  - [ ] Checkbox toggle
+  - [ ] Status toggle
+  - [ ] Any other metadata features?
+- Configurations:
+  - [ ] Default Metadata
+  - [ ] Default Templates (for a topic or for tree of topics)
+  - [ ] Assignees
+  - [ ] Statuses
+    - [ ] Checkbox statuses
+      - [ ] Include custom state/order
+    - [ ] Project statuses
+  - [ ] Auto add colon?
+- Keymaps:
+  - [ ] Keymap for speed mode
+  - [ ] Keymap for <C-T>
+  - [ ] Keymap for go to:
+    - [ ] parent
+    - [ ] grandparent
+    - [ ] metadata
+    - [ ] description
+    - [ ] todos
+    - [ ] list items
+  - [ ] Fold level 1
+  - [ ] Fold level 2
+  - [ ] Fold level 3
+  - [ ] insert o/O if not using comment method
+- More:
+  - [ ] Autofill assignees
+  - [ ] Todo item
