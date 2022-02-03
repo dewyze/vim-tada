@@ -1,5 +1,3 @@
-# vim: syntax=tada
-
 - Enter:
   - Speed Mode:
     - [ ] Configuration variable
@@ -37,7 +35,7 @@
   - [ ] Assignees
   - [•] Statuses
     - [✔︎] Checkbox statuses
-    - [✔︎] Include custom state/order
+      - [✔︎] Include custom state/order
     - [ ] Project statuses
   - [ ] Auto add colon?
 - Keymaps:

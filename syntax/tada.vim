@@ -28,10 +28,12 @@ if !exists('g:tada_todo_symbols')
   endif
 endif
 
-execute 'syn region tadaTodoItemBlank start=/^\s\+- \[' . g:tada_todo_symbols['todo'] . '\].*$/ end=/$/'
-execute 'syn region tadaTodoItemInProgress start=/^\s\+- \[' . g:tada_todo_symbols['inProgress'] . '\].*$/ end=/$/'
-execute 'syn region tadaTodoItemDone start=/^\s\+- \[' . g:tada_todo_symbols['done'] . '\].*$/ end=/$/'
-execute 'syn region tadaTodoItemBlocked start=/^\s\+- \[' . g:tada_todo_symbols['blocked'] . '\].*$/ end=/$/'
+syn region tadaTodoItem start=/^\s\+- \[.\]/ end=/$/ keepend oneline contains=tadaTodoItemBlank,tadaTodoItemInProgress,tadaTodoItemDone,tadaTodoItemBlocked
+
+execute 'syn region tadaTodoItemBlank oneline start=/\[' . g:tada_todo_symbols['todo'] . '\].*$/ end=/$/ contained'
+execute 'syn region tadaTodoItemInProgress oneline start=/\[' . g:tada_todo_symbols['inProgress'] . '\].*$/ end=/$/ contained'
+execute 'syn region tadaTodoItemDone oneline start=/\[' . g:tada_todo_symbols['done'] . '\].*$/ end=/$/ contained'
+execute 'syn region tadaTodoItemBlocked oneline start=/\[' . g:tada_todo_symbols['blocked'] . '\].*$/ end=/$/ contained'
 
 hi def link tadaTopicTitle1 Define
 hi def link tadaTopicTitle2 Function
