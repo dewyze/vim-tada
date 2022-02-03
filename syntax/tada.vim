@@ -21,19 +21,17 @@ syn match tadaMetadata /^\s\{2,}|.*$/
 
 if !exists('g:tada_todo_symbols')
   if exists('g:tada_todo_symbols_set') && g:tada_todo_symbols_set == 'ascii'
-    let g:tada_todo_symbols = { 'todo': ' ', 'inProgress': '-', 'done': 'x', 'blocked':'o' }
+    let g:tada_todo_symbols = { 'todo': ' ', 'in_progress': '-', 'done': 'x', 'blocked':'o' }
   else
     let g:tada_todo_symbols_set = 'unicode'
-    let g:tada_todo_symbols = { 'todo': ' ', 'inProgress': '•', 'done': '✔︎', 'blocked':'☒' }
+    let g:tada_todo_symbols = { 'todo': ' ', 'in_progress': '•', 'done': '✔︎', 'blocked':'☒' }
   endif
 endif
 
-syn region tadaTodoItem start=/^\s\+- \[.\]/ end=/$/ keepend oneline contains=tadaTodoItemBlank,tadaTodoItemInProgress,tadaTodoItemDone,tadaTodoItemBlocked
-
-execute 'syn region tadaTodoItemBlank oneline start=/\[' . g:tada_todo_symbols['todo'] . '\].*$/ end=/$/ contained'
-execute 'syn region tadaTodoItemInProgress oneline start=/\[' . g:tada_todo_symbols['inProgress'] . '\].*$/ end=/$/ contained'
-execute 'syn region tadaTodoItemDone oneline start=/\[' . g:tada_todo_symbols['done'] . '\].*$/ end=/$/ contained'
-execute 'syn region tadaTodoItemBlocked oneline start=/\[' . g:tada_todo_symbols['blocked'] . '\].*$/ end=/$/ contained'
+execute 'syn region tadaTodoItemBlank start=/^\s*-\s\?\[' . g:tada_todo_symbols['todo'] . '\].*$/ end=/$/'
+execute 'syn region tadaTodoItemInProgress start=/^\s*-\s\?\[' . g:tada_todo_symbols['in_progress'] . '\].*$/ end=/$/'
+execute 'syn region tadaTodoItemDone start=/^\s*-\s\?\[' . g:tada_todo_symbols['done'] . '\].*$/ end=/$/'
+execute 'syn region tadaTodoItemBlocked start=/^\s*-\s\?\[' . g:tada_todo_symbols['blocked'] . '\].*$/ end=/$/'
 
 hi def link tadaTopicTitle1 Define
 hi def link tadaTopicTitle2 Function

@@ -32,14 +32,18 @@ RSpec.describe "syntax" do
     context "with unicode symbols" do
       it "parses todo items" do
         content = <<~CONTENT
-          - [ ] Todo item
+         -[ ] Todo item 1
+          -[ ] Todo item 2
+          - [ ] Todo item 3
           - [•] In progress item
           - [✔︎] Done item
           - [☒] Blocked item
         CONTENT
 
         with_file(content) do
-          expect("\\[ ] Todo item").to have_highlight("tadaTodoItemBlank")
+          expect("\\[ ] Todo item 1").to have_highlight("tadaTodoItemBlank")
+          expect("\\[ ] Todo item 2").to have_highlight("tadaTodoItemBlank")
+          expect("\\[ ] Todo item 3").to have_highlight("tadaTodoItemBlank")
           expect("\\[•] In progress item").to have_highlight("tadaTodoItemInProgress")
           expect("\\[✔︎] Done item").to have_highlight("tadaTodoItemDone")
           expect("\\[☒] Blocked item").to have_highlight("tadaTodoItemBlocked")
@@ -69,7 +73,7 @@ RSpec.describe "syntax" do
 
     context "with custom symbols" do
       it "parses todo items" do
-        vim.command("let g:tada_todo_symbols = { 'todo': 'T', 'inProgress': 'I', 'done': 'D', 'blocked': 'B' }")
+        vim.command("let g:tada_todo_symbols = { 'todo': 'T', 'in_progress': 'I', 'done': 'D', 'blocked': 'B' }")
 
         content = <<~CONTENT
           - [T] Todo item

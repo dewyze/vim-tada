@@ -16,6 +16,16 @@ Plug 'dewyze/vim-tada'
 
 ## Features
 
+- Set custom todo symbols
+- Toggle todo states with <space> and <c-space>
+
+## Keymaps and Commands
+
+### Todo:
+
+- `<space>`: Toggle between todo item states
+- `<C-space>`: Toggle between todo item states in reverse
+
 ## Configuration
 
 Vim tada has a variety of configuration options below is a list of them all:
@@ -38,7 +48,17 @@ This variable will set `g:tada_todo_symbols` to a preset set of values:
 
 These are the symbols used to iterate through todo statuses.
 
-## Keymaps and Commands
+#### `g:tada_todo_switch_status_mapping`
+
+**Default:** `<space>`
+
+Set the mapping to toggle between todo states.
+
+#### `g:tada_todo_switch_status_reverse_mapping`
+
+**Default:** `<C-space>`
+
+Set the mapping to toggle between todo states in reverse.
 
 ## Contributing
 
