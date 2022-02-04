@@ -20,6 +20,7 @@ Vimrunner::RSpec.configure do |config|
     vim.add_plugin(File.expand_path('../vim', __FILE__), 'plugin/syntax_test.vim')
     vim.command "set nospell"
     vim.command "set nofoldenable"
+    vim.command "set backspace=indent,eol,start"
     vim
   end
 

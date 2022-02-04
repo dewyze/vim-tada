@@ -4,11 +4,11 @@
     - [ ] If on, topic of same level
     - [ ] If off, then metadata or insert template or whatever
   - Metadata:
-    - [ ] If not empty, add another | line
-    - [ ] If empty, delete | and add blank line
+    - [✔︎] If not empty, add another | line
+    - [✔︎] If empty, delete | and add blank line
   - Todo:
-    - [ ] If on, add - [ ]
-    - [ ] If off, Delete - and add blank likne
+    - [✔︎] If on, add - [ ]
+    - [✔︎] If off, Delete - and add blank likne
           Does this go to a new topic?
   - List Item:
     - [ ] If on, add -

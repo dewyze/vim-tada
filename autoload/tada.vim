@@ -16,6 +16,10 @@ function! tada#IsTodoItem(lnum)
   return tada#SyntaxGroupOfLine(a:lnum) =~ '^tadaTodoItem'
 endfunction
 
+function! tada#IsMetadata(lnum)
+  return tada#SyntaxGroupOfLine(a:lnum) =~ 'tadaMetadata'
+endfunction
+
 function! tada#NextTodoStatus()
   call tada#todo#ToggleTodoStatus(1)
 endfunction

@@ -24,8 +24,9 @@ RSpec.describe "syntax" do
   end
 
   describe "todo items" do
-    after do
+    around do |example|
       vim.command("unlet g:tada_todo_symbols")
+      example.run
       vim.command("unlet g:tada_todo_symbols_set")
     end
 

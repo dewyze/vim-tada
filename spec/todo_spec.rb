@@ -1,6 +1,6 @@
 RSpec.describe "todo" do
   let(:content) do
-    content = <<~CONTENT
+    <<~CONTENT
       - [ ] Todo item
       - [•] In progress item
       - [✔︎] Done item
