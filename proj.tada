@@ -1,5 +1,6 @@
 - Enter:
   - Speed Mode:
+    | ?:In Progress
     - [ ] Configuration variable
     - [ ] If on, topic of same level
     - [ ] If off, then metadata or insert template or whatever
@@ -55,3 +56,8 @@
 - More:
   - [ ] Autofill assignees
   - [✔︎] Todo item
+  - [ ] Fold text
+    - [✔︎] Include status
+    - [✔︎] Include todo counts
+    - [ ] Dates?
+    - [ ] Assignees?

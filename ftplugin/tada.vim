@@ -39,6 +39,7 @@ set fillchars=fold:\ "
 
 if !exists('g:tada_loaded_class_files')
   runtime lib/tada/metadata.vim
+  runtime lib/tada/todo.vim
   runtime lib/tada/topic.vim
 
   let g:tada_loaded_class_files = 1

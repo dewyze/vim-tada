@@ -13,17 +13,19 @@ endfunction
 
 function! tada#builder#Topic(lnum)
   let num = a:lnum
-  let topicData = {}
-  let topicData['line'] = num
-  let topicData['level'] = tada#builder#TopicLevel(num)
-  let titleResult = tada#builder#Title(num)
-  let topicData['title'] = titleResult.value
-  let metadataResult = tada#builder#Metadata(titleResult.nextLine)
-  let topicData['metadata'] = metadataResult.value
-  let descriptionResult = tada#builder#Description(metadataResult.nextLine)
-  let topicData['description'] = descriptionResult.value
+  let topic_data = {}
+  let topic_data['line'] = num
+  let topic_data['level'] = tada#builder#TopicLevel(num)
+  let title_result = tada#builder#Title(num)
+  let topic_data['title'] = title_result.value
+  let metadata_result = tada#builder#Metadata(title_result.nextLine)
+  let topic_data['metadata'] = metadata_result.value
+  let description_result = tada#builder#Description(metadata_result.nextLine)
+  let topic_data['description'] = description_result.value
+  let todos_result = tada#builder#Todos(metadata_result.nextLine)
+  let topic_data['todos'] = todos_result.value
 
-  return g:TadaTopic.New(topicData)
+  return g:TadaTopic.New(topic_data)
 endfunction
 
 function! tada#builder#Title(lnum)
@@ -81,4 +83,30 @@ function! tada#builder#Description(lnum)
   endwhile
 
   return tada#builder#Result(num, description)
+endfunction
+
+function! tada#builder#Todos(lnum)
+  let num = a:lnum
+  let todos = []
+
+  while tada#IsTodoItem(num)
+    let matches = matchlist(getline(num), '- \[\([^\]]*\)\]')
+    let symbol = matches[1]
+
+    for [key, value] in items(g:tada_todo_symbols)
+      if symbol == value
+        let params = {}
+        let params['status'] = key
+        let params['line'] = num
+        let todo = g:TadaTodo.New(params)
+
+        call add(todos, todo)
+        break
+      endif
+    endfor
+
+    let num += 1
+  endwhile
+
+  return tada#builder#Result(num, todos)
 endfunction
