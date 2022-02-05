@@ -11,8 +11,8 @@
     - [✔︎] If off, Delete - and add blank likne
           Does this go to a new topic?
   - List Item:
-    - [ ] If on, add -
-    - [ ] If off, delete - and add blank line
+    - [✔︎] If on, add -
+    - [✔︎] If off, delete - and add blank line
   - Topic:
     - [ ] If speed mode is on, add topic of same level
     - Metadata:
@@ -51,7 +51,7 @@
   - [ ] Fold level 1
   - [ ] Fold level 2
   - [ ] Fold level 3
-  - [ ] insert o/O if not using comment method
+  - [✔︎] insert o/O if not using comment method
 - More:
   - [ ] Autofill assignees
-  - [ ] Todo item
+  - [✔︎] Todo item

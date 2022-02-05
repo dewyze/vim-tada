@@ -4,14 +4,24 @@ if exists('b:did_ftplugin') | finish | endif
 if !exists('g:tada_todo_switch_status_mapping')
   let g:tada_todo_switch_status_mapping = '<Space>'
 endif
+
 if !exists('g:tada_todo_switch_status_reverse_mapping')
   let g:tada_todo_switch_status_reverse_mapping = '<C-Space>'
 endif
 
+if !exists('g:tada_autolines')
+  let g:tada_autolines = 1
+endif
+
 function! s:DoesHandleAutoline()
+  if !g:tada_autolines
+    return 0
+  endif
+
   let group = tada#SyntaxGroupOfLine('.')
 
-  return tada#IsTodoItem('.') || tada#IsMetadata('.')
+  echom 'group: ' . group
+  return tada#IsTodoItem('.') || tada#IsMetadata('.') || tada#IsListItem('.')
 endfunction
 
 execute 'nnoremap <silent> <buffer> ' . g:tada_todo_switch_status_mapping . ' :call tada#NextTodoStatus()<CR>'

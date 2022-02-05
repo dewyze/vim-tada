@@ -1,4 +1,69 @@
 RSpec.describe "autolines" do
+  describe "with configuration off" do
+    around do |example|
+      vim.command("let g:tada_autolines = 0")
+      example.run
+      vim.command("let g:tada_autolines = 1")
+    end
+
+    it "does not insert metadata line" do
+      content = <<~CONTENT
+          Topic:
+            | @:john
+      CONTENT
+
+      with_file(content) do |file|
+        vim.normal "2GA"
+        vim.feedkeys '\<CR>$:3'
+        vim.write
+
+        expect(file.read).to eq(<<~NEW)
+            Topic:
+              | @:john
+              $:3
+        NEW
+      end
+    end
+
+    it "does not insert todo line" do
+      content = <<~CONTENT
+          Topic:
+            - [ ] Walk the dog
+      CONTENT
+
+      with_file(content) do |file|
+        vim.normal "2GA"
+        vim.feedkeys '\<CR>Milk the cat'
+        vim.write
+
+        expect(file.read).to eq(<<~NEW)
+            Topic:
+              - [ ] Walk the dog
+              Milk the cat
+        NEW
+      end
+    end
+
+    it "does not insert list line" do
+      content = <<~CONTENT
+          Topic:
+            - Walk the dog
+      CONTENT
+
+      with_file(content) do |file|
+        vim.normal "2GA"
+        vim.feedkeys '\<CR>Milk the cat'
+        vim.write
+
+        expect(file.read).to eq(<<~NEW)
+            Topic:
+              - Walk the dog
+              Milk the cat
+        NEW
+      end
+    end
+  end
+
   describe "metadata" do
     context "with a non empty line" do
       let(:content) do
@@ -116,7 +181,7 @@ RSpec.describe "autolines" do
         CONTENT
       end
 
-      it "adds the metadata symbol for <CR>" do
+      it "adds a todo box for <CR>" do
         with_file(content) do |file|
           vim.normal "2GA"
           vim.feedkeys '\<CR>Milk the cat'
@@ -130,7 +195,7 @@ RSpec.describe "autolines" do
         end
       end
 
-      it "adds the metadata symbol for o" do
+      it "adds a todo box for o" do
         with_file(content) do |file|
           vim.normal "2G$"
           vim.feedkeys "oMilk the cat"
@@ -144,7 +209,7 @@ RSpec.describe "autolines" do
         end
       end
 
-      it "adds the metadata symbol for O" do
+      it "adds a todo box for O" do
         with_file(content) do |file|
           vim.normal "2G$"
           vim.feedkeys 'OMilk the cat'
@@ -198,7 +263,7 @@ RSpec.describe "autolines" do
         end
       end
 
-      it "adds the metadata symbol for O" do
+      it "adds a todo box for O" do
         with_file(content) do |file|
           vim.normal "3G"
           vim.feedkeys "OMilk the cat"
@@ -216,6 +281,110 @@ RSpec.describe "autolines" do
   end
 
   describe "list items" do
+    context "with a non empty line" do
+      let(:content) do
+        <<~CONTENT
+          Topic:
+            - Feed the dog
+        CONTENT
+      end
 
+      it "adds a list item for <CR>" do
+        with_file(content) do |file|
+          vim.normal "2GA"
+          vim.feedkeys '\<CR>Milk the cat'
+          vim.write
+
+          expect(file.read).to eq(<<~NEW)
+          Topic:
+            - Feed the dog
+            - Milk the cat
+          NEW
+        end
+      end
+
+      it "adds a list item for o" do
+        with_file(content) do |file|
+          vim.normal "2G$"
+          vim.feedkeys "oMilk the cat"
+          vim.write
+
+          expect(file.read).to eq(<<~NEW)
+            Topic:
+              - Feed the dog
+              - Milk the cat
+          NEW
+        end
+      end
+
+      it "adds a list item for O" do
+        with_file(content) do |file|
+          vim.normal "2G$"
+          vim.feedkeys 'OMilk the cat'
+          vim.write
+
+          expect(file.read).to eq(<<~NEW)
+            Topic:
+              - Milk the cat
+              - Feed the dog
+          NEW
+        end
+      end
+    end
+
+    context "with an empty line" do
+      let(:content) do
+        <<~CONTENT
+          Topic:
+            - Feed the dog
+            -
+        CONTENT
+      end
+
+      it "removes the dash and adds a blank line for <CR>" do
+        with_file(content) do |file|
+          vim.normal "3GA"
+          vim.feedkeys '\<CR>Hello'
+          vim.write
+
+          expect(file.read).to eq(<<~NEW)
+            Topic:
+              - Feed the dog
+
+              Hello
+          NEW
+        end
+      end
+
+      it "removes the dash and adds a blank line for o" do
+        with_file(content) do |file|
+          vim.normal "3G"
+          vim.feedkeys 'oHello'
+          vim.write
+
+          expect(file.read).to eq(<<~NEW)
+            Topic:
+              - Feed the dog
+
+              Hello
+          NEW
+        end
+      end
+
+      it "adds a list item for O" do
+        with_file(content) do |file|
+          vim.normal "3G"
+          vim.feedkeys "OMilk the cat"
+          vim.write
+
+          expect(file.read).to eq(<<~NEW)
+            Topic:
+              - Feed the dog
+              - Milk the cat
+              -
+          NEW
+        end
+      end
+    end
   end
 end

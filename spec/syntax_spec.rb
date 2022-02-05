@@ -8,6 +8,7 @@ RSpec.describe "syntax" do
           My description
           - Story:
             Description with -
+          - List item
       CONTENT
     end
 
@@ -19,15 +20,27 @@ RSpec.describe "syntax" do
         expect("@:john").to have_highlight("tadaMetadata")
         expect("My description").to have_highlight("tadaDescription")
         expect("Description with -").to have_highlight("tadaDescription")
+        expect("List item").to have_highlight("tadaListItem")
+      end
+    end
+
+    it "parses an empty list item" do
+      content = <<~CONTENT
+        -
+      CONTENT
+      with_file(content) do
+        expect("\-").to have_highlight("tadaListItem")
       end
     end
   end
 
   describe "todo items" do
     around do |example|
+      vim.command("unlet g:tada_todo_symbols_set")
       vim.command("unlet g:tada_todo_symbols")
       example.run
       vim.command("unlet g:tada_todo_symbols_set")
+      vim.command("unlet g:tada_todo_symbols")
     end
 
     context "with unicode symbols" do

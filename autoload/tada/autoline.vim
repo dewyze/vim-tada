@@ -10,6 +10,8 @@ function! tada#autoline#Down()
     call tada#autoline#HandleDown('^\s\{0,6}|\s*$', '| ')
   elseif group =~ '^tadaTodoItem'
     call tada#autoline#HandleDown('^\s\{0,6}-\s\?\[.\{-}\]\s*$', '- [ ] ')
+  elseif group == 'tadaListItem'
+    call tada#autoline#HandleDown('^\s*-\s*$', '- ')
   endif
 endfunction
 
@@ -31,6 +33,8 @@ function! tada#autoline#Up()
     call tada#autoline#HandleUp('| ')
   elseif group =~ '^tadaTodoItem'
     call tada#autoline#HandleUp('- [ ] ')
+  elseif group =~ 'tadaListItem'
+    call tada#autoline#HandleUp('- ')
   endif
 endfunction
 

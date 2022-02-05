@@ -12,12 +12,16 @@ function! tada#SyntaxGroupOfLine(lnum)
   return ''
 endfunction
 
+function! tada#IsListItem(lnum)
+  return tada#SyntaxGroupOfLine(a:lnum) == 'tadaListItem'
+endfunction
+
 function! tada#IsTodoItem(lnum)
   return tada#SyntaxGroupOfLine(a:lnum) =~ '^tadaTodoItem'
 endfunction
 
 function! tada#IsMetadata(lnum)
-  return tada#SyntaxGroupOfLine(a:lnum) =~ 'tadaMetadata'
+  return tada#SyntaxGroupOfLine(a:lnum) == 'tadaMetadata'
 endfunction
 
 function! tada#NextTodoStatus()
