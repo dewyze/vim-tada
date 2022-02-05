@@ -37,4 +37,20 @@ RSpec.describe "todo" do
       NEW
     end
   end
+
+  it "doesn't advance the cursor" do
+    content = <<~CONTENT
+      - [ ] Todo item
+    CONTENT
+
+    with_file(content) do |file|
+      vim.normal "gg03w"
+      vim.feedkeys ' iMy '
+      vim.write
+
+      expect(file.read).to eq(<<~NEW)
+        - [•] My Todo item
+      NEW
+    end
+  end
 end
