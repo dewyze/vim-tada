@@ -17,6 +17,18 @@ if !exists('g:tada_autolines')
   let g:tada_autolines = 1
 endif
 
+if !exists('g:tada_smart_tab')
+  let g:tada_smart_tab = 1
+endif
+
+function! s:EmptyTodo()
+  return '- [' . g:tada_todo_symbols['todo'] . '] '
+endfunction
+
+function! s:EmptyIndentable()
+  return g:tada_smart_tab && getline('.') =~ '^\s*-\s*\%(\[.\]\)\?\s*$'
+endfunction
+
 function! s:DoesHandleAutoline()
   if !g:tada_autolines
     return 0
@@ -30,14 +42,17 @@ endfunction
 
 execute 'nnoremap <silent> <buffer> ' . g:tada_todo_switch_status_mapping . ' :call tada#NextTodoStatus()<CR>'
 execute 'nnoremap <silent> <buffer> ' . g:tada_todo_switch_status_reverse_mapping . ' :call tada#PreviousTodoStatus()<CR>'
+inoremap <silent> <buffer> <script> <expr> <Tab> <SID>EmptyIndentable() ? '<C-T>' : '<Tab>'
+inoremap <silent> <buffer> <script> <expr> <S-Tab> <SID>EmptyIndentable() ? '<C-D>' : '<S-Tab>'
 inoremap <silent> <buffer> <script> <expr> <CR> <SID>DoesHandleAutoline() ? '<C-O>:call tada#autoline#Down()<CR>' : '<CR>'
+inoremap <silent> <buffer> <script> <expr> <C-B> <SID>EmptyTodo()
 nnoremap <silent> <buffer> <script> <expr> o <SID>DoesHandleAutoline() ? ':call tada#autoline#Down()<CR>a' : 'o'
 nnoremap <silent> <buffer> <script> <expr> O <SID>DoesHandleAutoline() ? ':call tada#autoline#Up()<CR>a' : 'O'
-noremap <silent> <buffer> <C-T>1 :call tada#FoldTo(1)<CR>
-noremap <silent> <buffer> <C-T>2 :call tada#FoldTo(2)<CR>
-noremap <silent> <buffer> <C-T>3 :call tada#FoldTo(3)<CR>
-noremap <silent> <buffer> <C-T>o :normal! zv<CR>
-noremap <silent> <buffer> <C-T>O :normal! zR<CR>
+nnoremap <silent> <buffer> <C-T>1 :call tada#FoldTo(1)<CR>
+nnoremap <silent> <buffer> <C-T>2 :call tada#FoldTo(2)<CR>
+nnoremap <silent> <buffer> <C-T>3 :call tada#FoldTo(3)<CR>
+nnoremap <silent> <buffer> <C-T>o :normal! zv<CR>
+nnoremap <silent> <buffer> <C-T>O :normal! zR<CR>
 
 setlocal ts=2 sw=2 expandtab smarttab
 setlocal autoindent
