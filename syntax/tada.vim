@@ -15,7 +15,7 @@ syn case ignore
 syn match tadaDescription /^\s*[^ \-|]\+.*$/
 syn match tadaMetadata /^\s\{2,}|.*$/
 syn match tadaListItem /^\s*-\s*$/
-syn match tadaListItem /^\s*-\s*[^ []/
+syn region tadaListItem start=/^\s*-\s*[^ []/ end=/[^:]$/ oneline
 
 syn region tadaTopicTitle1 matchgroup=tadaDelimiter start="^-\s\?" end=":$" oneline
 syn region tadaTopicTitle2 matchgroup=tadaDelimiter start="^\s\{2}-\s\?" end=":$" oneline
@@ -30,10 +30,10 @@ if !exists('g:tada_todo_symbols')
   endif
 endif
 
-execute 'syn region tadaTodoItemBlank start=/^\s*-\s*\[' . g:tada_todo_symbols['todo'] . '\].*$/ end=/$/'
-execute 'syn region tadaTodoItemInProgress start=/^\s*-\s*\[' . g:tada_todo_symbols['in_progress'] . '\].*$/ end=/$/'
-execute 'syn region tadaTodoItemDone start=/^\s*-\s*\[' . g:tada_todo_symbols['done'] . '\].*$/ end=/$/'
-execute 'syn region tadaTodoItemBlocked start=/^\s*-\s*\[' . g:tada_todo_symbols['blocked'] . '\].*$/ end=/$/'
+execute 'syn match tadaTodoItemBlank /^\s*-\s*\[' . g:tada_todo_symbols['todo'] . '\].*$/'
+execute 'syn match tadaTodoItemInProgress /^\s*-\s*\[' . g:tada_todo_symbols['in_progress'] . '\].*$/'
+execute 'syn match tadaTodoItemDone /^\s*-\s*\[' . g:tada_todo_symbols['done'] . '\].*$/'
+execute 'syn match tadaTodoItemBlocked /^\s*-\s*\[' . g:tada_todo_symbols['blocked'] . '\].*$/'
 
 hi def link tadaTopicTitle1 Define
 hi def link tadaTopicTitle2 Function
