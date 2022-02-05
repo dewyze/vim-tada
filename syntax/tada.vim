@@ -43,4 +43,6 @@ hi def link tadaTodoItemDone Label
 hi def link tadaTodoItemBlocked Error
 hi def link tadaMetadata Identifier
 
+hi Folded guifg=CadetBlue
+
 let b:current_syntax = "tada"

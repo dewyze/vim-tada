@@ -32,4 +32,16 @@ nnoremap <silent> <buffer> <script> <expr> O <SID>DoesHandleAutoline() ? ':call 
 
 setlocal ts=2 sw=2 expandtab smarttab
 setlocal autoindent
+set foldmethod=expr
+setlocal foldtext=tada#FoldTextForTopic()
+setlocal foldexpr=tada#FoldLevelOfLine(v:lnum)
+set fillchars=fold:\ "
+
+if !exists('g:tada_loaded_class_files')
+  runtime lib/tada/metadata.vim
+  runtime lib/tada/topic.vim
+
+  let g:tada_loaded_class_files = 1
+end
+
 let b:did_ftplugin = 1

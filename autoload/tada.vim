@@ -20,6 +20,10 @@ function! tada#IsTodoItem(lnum)
   return tada#SyntaxGroupOfLine(a:lnum) =~ '^tadaTodoItem'
 endfunction
 
+function! tada#IsTopicTitle(lnum)
+  return tada#SyntaxGroupOfLine(a:lnum) =~ '^tadaTopicTitle'
+endfunction
+
 function! tada#IsMetadata(lnum)
   return tada#SyntaxGroupOfLine(a:lnum) == 'tadaMetadata'
 endfunction
@@ -30,4 +34,23 @@ endfunction
 
 function! tada#PreviousTodoStatus()
   call tada#todo#ToggleTodoStatus(-1)
+endfunction
+
+function! tada#FoldTextForTopic()
+  let startLine = getline(v:foldstart)
+  let endLine = getline(v:foldstart)
+
+  let topic = tada#builder#Topic(v:foldstart)
+
+  return topic.FoldText()
+endfunction
+
+function! tada#FoldLevelOfLine(lnum)
+  let currentline = getline(a:lnum)
+
+  if tada#IsTopicTitle(a:lnum)
+    return '>1'
+  endif
+
+  return '='
 endfunction
