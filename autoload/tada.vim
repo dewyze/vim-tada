@@ -3,6 +3,8 @@ if exists('g:tada_loaded_autoload')
 endif
 let g:tada_loaded_autoload = 1
 
+let g:tada_fold_level = 3
+
 function! tada#SyntaxGroupOfLine(lnum)
   let stack = synstack(a:lnum, 1)
 
@@ -46,11 +48,19 @@ function! tada#FoldTextForTopic()
 endfunction
 
 function! tada#FoldLevelOfLine(lnum)
-  let currentline = getline(a:lnum)
+  let curline = getline(a:lnum)
 
-  if tada#IsTopicTitle(a:lnum)
+  let matches = matchlist(tada#SyntaxGroupOfLine(a:lnum), '^tadaTopicTitle\(\d\)')
+
+  if len(matches) > 0 && matches[1] <= g:tada_fold_level
     return '>1'
   endif
 
   return '='
+endfunction
+
+function! tada#FoldTo(level)
+  let g:tada_fold_level = a:level
+
+  normal! zxzM
 endfunction

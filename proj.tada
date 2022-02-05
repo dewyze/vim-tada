@@ -41,7 +41,7 @@
   - [ ] Auto add colon?
 - Keymaps:
   - [ ] Keymap for speed mode
-  - [ ] Keymap for <C-T>
+  - [•] Keymap for <C-T>
   - [ ] Keymap for go to:
     - [ ] parent
     - [ ] grandparent
@@ -49,9 +49,9 @@
     - [ ] description
     - [ ] todos
     - [ ] list items
-  - [ ] Fold level 1
-  - [ ] Fold level 2
-  - [ ] Fold level 3
+  - [✔︎] Fold level 1
+  - [✔︎] Fold level 2
+  - [✔︎] Fold level 3
   - [✔︎] insert o/O if not using comment method
 - More:
   - [ ] Autofill assignees

@@ -9,6 +9,10 @@ if !exists('g:tada_todo_switch_status_reverse_mapping')
   let g:tada_todo_switch_status_reverse_mapping = '<C-Space>'
 endif
 
+if !exists('g:tada_map_prefix')
+  let g:tada_map_prefix = '<C-T>'
+endif
+
 if !exists('g:tada_autolines')
   let g:tada_autolines = 1
 endif
@@ -29,6 +33,11 @@ execute 'nnoremap <silent> <buffer> ' . g:tada_todo_switch_status_reverse_mappin
 inoremap <silent> <buffer> <script> <expr> <CR> <SID>DoesHandleAutoline() ? '<C-O>:call tada#autoline#Down()<CR>' : '<CR>'
 nnoremap <silent> <buffer> <script> <expr> o <SID>DoesHandleAutoline() ? ':call tada#autoline#Down()<CR>a' : 'o'
 nnoremap <silent> <buffer> <script> <expr> O <SID>DoesHandleAutoline() ? ':call tada#autoline#Up()<CR>a' : 'O'
+noremap <silent> <buffer> <C-T>1 :call tada#FoldTo(1)<CR>
+noremap <silent> <buffer> <C-T>2 :call tada#FoldTo(2)<CR>
+noremap <silent> <buffer> <C-T>3 :call tada#FoldTo(3)<CR>
+noremap <silent> <buffer> <C-T>o :normal! zv<CR>
+noremap <silent> <buffer> <C-T>O :normal! zR<CR>
 
 setlocal ts=2 sw=2 expandtab smarttab
 setlocal autoindent
