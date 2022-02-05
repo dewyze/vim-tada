@@ -9,7 +9,8 @@ function! tada#autoline#Down()
   if group == 'tadaMetadata'
     call tada#autoline#HandleDown('^\s\{0,6}|\s*$', '| ')
   elseif group =~ '^tadaTodoItem'
-    call tada#autoline#HandleDown('^\s\{0,6}-\s\?\[.\{-}\]\s*$', '- [ ] ')
+    let sym = g:tada_todo_symbols['todo']
+    call tada#autoline#HandleDown('^\s\{0,6}-\s\?\[' . sym . '\]\s*$', '- [' . sym . '] ')
   elseif group == 'tadaListItem'
     call tada#autoline#HandleDown('^\s*-\s*$', '- ')
   endif
@@ -32,7 +33,8 @@ function! tada#autoline#Up()
   if group == 'tadaMetadata'
     call tada#autoline#HandleUp('| ')
   elseif group =~ '^tadaTodoItem'
-    call tada#autoline#HandleUp('- [ ] ')
+    let sym = g:tada_todo_symbols['todo']
+    call tada#autoline#HandleUp('- [' . sym . '] ')
   elseif group =~ 'tadaListItem'
     call tada#autoline#HandleUp('- ')
   endif

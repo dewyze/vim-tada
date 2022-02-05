@@ -11,6 +11,7 @@
     - [✔︎] If on, add - [ ]
     - [✔︎] If off, Delete - and add blank likne
           Does this go to a new topic?
+
   - List Item:
     - [✔︎] If on, add -
     - [✔︎] If off, delete - and add blank line
@@ -19,12 +20,12 @@
     - Metadata:
       - [ ] Insert Default Metadata if defined
       - [ ] Insert Template if defined
+- Syntax:
+  - [ ] Support comments?
 - Tab/Shift+Tab:
-  - [ ] Variable
-  - [ ] If on, add tab/remove tab
-  - [ ] If on todo, <S-Tab> moves into continued description?
-
-
+  - [✔︎] Variable
+  - [✔︎] If on, add tab/remove tab
+  - [✔︎] If on todo, <S-Tab> moves into continued description?
 - Space:
   - [✔︎] Checkbox toggle
     - [ ] If parent checkbox, toggle both?
@@ -35,10 +36,11 @@
   - [ ] Default Templates (for a topic or for tree of topics)
   - [ ] Assignees
   - [•] Statuses
-    - [✔︎] Checkbox statuses
+    - [•] Todo statuses
       - [✔︎] Include custom state/order
+      - [✔︎] Support Emojis
     - [ ] Project statuses
-  - [ ] Auto add colon?
+  - [☒] Auto add colon? # NOT GONNA DO
 - Keymaps:
   - [ ] Keymap for speed mode
   - [•] Keymap for <C-T>

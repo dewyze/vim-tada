@@ -40,6 +40,6 @@ function! tada#todo#ToggleTodoStatus(dir = 1)
   let offset = current_length - next_length
 
   let colpos = col('.')
-  call setline('.', substitute(getline('.'), '^\(\s*-\s\?\)\[.\{-}\]', '\1[' . next_symbol . ']', ''))
+  call setline('.', substitute(getline('.'), '^\(\s*-\s\?\)\[.\]', '\1[' . next_symbol . ']', ''))
   call cursor(line('.'), colpos - offset)
 endfunction

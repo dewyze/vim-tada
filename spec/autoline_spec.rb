@@ -278,6 +278,50 @@ RSpec.describe "autolines" do
         end
       end
     end
+
+    it "adds the configured todo state" do
+      content = <<~CONTENT
+          Topic:
+            - [◦] Feed the dog
+      CONTENT
+
+      vim.command "let g:tada_todo_symbols = { 'todo': '◦', 'in_progress': '•', 'done': '✔︎', 'blocked':'☒' }"
+      with_file(content) do |file|
+        vim.normal "2GA"
+        vim.feedkeys '\<CR>Hello'
+        vim.write
+
+        expect(file.read).to eq(<<~NEW)
+          Topic:
+            - [◦] Feed the dog
+            - [◦] Hello
+        NEW
+
+      end
+      vim.command "unlet g:tada_todo_symbols"
+    end
+
+    it "uses the configured empty state" do
+      content = <<~CONTENT
+          Topic:
+            - [◦]
+      CONTENT
+
+      vim.command "let g:tada_todo_symbols = { 'todo': '◦', 'in_progress': '•', 'done': '✔︎', 'blocked':'☒' }"
+      with_file(content) do |file|
+        vim.normal "2GA"
+        vim.feedkeys '\<CR>Hello'
+        vim.write
+
+        expect(file.read).to eq(<<~NEW)
+          Topic:
+
+            Hello
+        NEW
+
+      end
+      vim.command "unlet g:tada_todo_symbols"
+    end
   end
 
   describe "list items" do
