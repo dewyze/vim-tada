@@ -11,7 +11,7 @@ function! tada#autoline#Down()
   elseif group =~ '^tadaTodoItem'
     let sym = g:tada_todo_symbols['todo']
     call tada#autoline#HandleDown('^\s\{0,6}-\s\?\[' . sym . '\]\s*$', '- [' . sym . '] ')
-  elseif group == 'tadaListItem'
+  elseif getline('.') =~ '^\s*-'
     call tada#autoline#HandleDown('^\s*-\s*$', '- ')
   endif
 endfunction
@@ -35,7 +35,7 @@ function! tada#autoline#Up()
   elseif group =~ '^tadaTodoItem'
     let sym = g:tada_todo_symbols['todo']
     call tada#autoline#HandleUp('- [' . sym . '] ')
-  elseif group =~ 'tadaListItem'
+  elseif getline('.') =~ '^\s*-'
     call tada#autoline#HandleUp('- ')
   endif
 endfunction

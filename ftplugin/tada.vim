@@ -34,10 +34,7 @@ function! s:DoesHandleAutoline()
     return 0
   endif
 
-  let group = tada#SyntaxGroupOfLine('.')
-
-  echom 'group: ' . group
-  return tada#IsTodoItem('.') || tada#IsMetadata('.') || tada#IsListItem('.')
+  return getline('.') =~ '^\s*\%(-|\|\)'
 endfunction
 
 execute 'nnoremap <silent> <buffer> ' . g:tada_todo_switch_status_mapping . ' :call tada#NextTodoStatus()<CR>'

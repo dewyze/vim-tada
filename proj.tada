@@ -1,9 +1,9 @@
 - Enter:
-  - Speed Mode:
-    | ?:In Progress
+  - Wizard Mode:
+    - Metadata:
+      - [ ] Insert Default Metadata if defined
+      - [ ] Insert Template if defined
     - [ ] Configuration variable
-    - [ ] If on, topic of same level
-    - [ ] If off, then metadata or insert template or whatever
   - Metadata:
     - [✔︎] If not empty, add another | line
     - [✔︎] If empty, delete | and add blank line
@@ -16,10 +16,7 @@
     - [✔︎] If on, add -
     - [✔︎] If off, delete - and add blank line
   - Topic:
-    - [ ] If speed mode is on, add topic of same level
-    - Metadata:
-      - [ ] Insert Default Metadata if defined
-      - [ ] Insert Template if defined
+    - [✔︎] If speed mode is on, add topic of same level => Autolines
 - Syntax:
   - [ ] Support comments?
 - Tab/Shift+Tab:
@@ -36,11 +33,11 @@
   - [ ] Default Templates (for a topic or for tree of topics)
   - [ ] Assignees
   - [•] Statuses
-    - [•] Todo statuses
+    - [✔︎] Todo statuses
       - [✔︎] Include custom state/order
       - [✔︎] Support Emojis
     - [ ] Project statuses
-  - [☒] Auto add colon? # NOT GONNA DO
+  - [✔︎] Auto add colon? # NOT GONNA DO
 - Keymaps:
   - [ ] Keymap for speed mode
   - [•] Keymap for <C-T>
@@ -63,3 +60,7 @@
     - [✔︎] Include todo counts
     - [ ] Dates?
     - [ ] Assignees?
+  - [ ] Update README Keymap
+  - [ ] No keymap at all option
+  - [ ] Update README Filetype/markdown, note about setting filetype
+  - [ ] Convert to keymaps to commands
