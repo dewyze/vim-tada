@@ -1,6 +1,5 @@
 if exists('b:did_ftplugin') | finish | endif
 
-
 if !exists('g:tada_todo_switch_status_mapping')
   let g:tada_todo_switch_status_mapping = '<Space>'
 endif

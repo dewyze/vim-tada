@@ -11,7 +11,6 @@
     - [✔︎] If on, add - [ ]
     - [✔︎] If off, Delete - and add blank likne
           Does this go to a new topic?
-
   - List Item:
     - [✔︎] If on, add -
     - [✔︎] If off, delete - and add blank line
@@ -39,7 +38,7 @@
     - [ ] Project statuses
   - [✔︎] Auto add colon? # NOT GONNA DO
 - Keymaps:
-  - [ ] Keymap for speed mode
+  - [ ] Keymap for wizard mode
   - [•] Keymap for <C-T>
   - [ ] Keymap for go to:
     - [ ] parent
@@ -64,7 +63,8 @@
   - [ ] No keymap at all option
   - [ ] Update README Filetype/markdown, note about setting filetype
   - [ ] Convert to keymaps to commands
-  - [ ] Is there a better markdown related symbol for metadata?
+  - [☒] Is there a better markdown related symbol for metadata?
+        It doesn't seem like it.
   - [ ] when filetyp is markdown, use ascii symbols
   - [ ] Infinite nesting
   - [ ] Metadata only for topics
@@ -73,8 +73,9 @@
     - [ ] Normal?
     - [ ] Does not add, replaces instead
   - [ ] Fold status shows children
-  - [ ] Enter collapses/opens fold on a topic
-  - [ ] Ensure correct level
+  - [•] Enter collapses/opens fold on a topic
+    - [ ] Ensure correct level
   - [ ] Enter toggles between 'todo' and 'done' for todo items
   - [ ] When typing Pipe on list, convert line to metadata
   - [ ] Enter when in middle of todo line if text is after leaves that text on the line
+  - [ ] If clicking on not topic title, it does not recalculate fold on enter, look up for most recent topic

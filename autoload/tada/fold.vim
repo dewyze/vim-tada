@@ -30,3 +30,13 @@ function! tada#fold#To(level)
 
   normal! zxzM
 endfunction
+
+function! tada#fold#GetTopicLevel(lnum)
+  let matches = matchlist(tada#SyntaxGroupOfLine(a:lnum), '^tadaTopicTitle\(\d\)')
+
+  if len(matches) > 0
+    return matches[1]
+  else
+    return 0
+  endif
+endfunction
