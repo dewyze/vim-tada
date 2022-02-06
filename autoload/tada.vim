@@ -37,30 +37,3 @@ endfunction
 function! tada#PreviousTodoStatus()
   call tada#todo#ToggleTodoStatus(-1)
 endfunction
-
-function! tada#FoldTextForTopic()
-  let startLine = getline(v:foldstart)
-  let endLine = getline(v:foldstart)
-
-  let topic = tada#builder#Topic(v:foldstart)
-
-  return topic.FoldText()
-endfunction
-
-function! tada#FoldLevelOfLine(lnum)
-  let curline = getline(a:lnum)
-
-  let matches = matchlist(tada#SyntaxGroupOfLine(a:lnum), '^tadaTopicTitle\(\d\)')
-
-  if len(matches) > 0 && matches[1] <= g:tada_fold_level
-    return '>1'
-  endif
-
-  return '='
-endfunction
-
-function! tada#FoldTo(level)
-  let g:tada_fold_level = a:level
-
-  normal! zxzM
-endfunction

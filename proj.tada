@@ -64,3 +64,17 @@
   - [ ] No keymap at all option
   - [ ] Update README Filetype/markdown, note about setting filetype
   - [ ] Convert to keymaps to commands
+  - [ ] Is there a better markdown related symbol for metadata?
+  - [ ] when filetyp is markdown, use ascii symbols
+  - [ ] Infinite nesting
+  - [ ] Metadata only for topics
+  - [ ] Keymap to switch line to list item or description or box or metadata
+    - [ ] Insert?
+    - [ ] Normal?
+    - [ ] Does not add, replaces instead
+  - [ ] Fold status shows children
+  - [ ] Enter collapses/opens fold on a topic
+  - [ ] Ensure correct level
+  - [ ] Enter toggles between 'todo' and 'done' for todo items
+  - [ ] When typing Pipe on list, convert line to metadata
+  - [ ] Enter when in middle of todo line if text is after leaves that text on the line
