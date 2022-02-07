@@ -41,7 +41,7 @@ function! s:DoesHandleAutoline()
     return 0
   endif
 
-  return getline('.') =~ '^\s*\%(-|\|\)'
+  return getline('.') =~ '^\s*\%(-\||\)'
 endfunction
 
 execute 'nnoremap <silent> <buffer> ' . g:tada_todo_switch_status_mapping . ' :call tada#NextTodoStatus()<CR>'

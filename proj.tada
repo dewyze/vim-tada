@@ -75,8 +75,11 @@
   - [ ] Fold status shows children
   - [•] Enter collapses/opens fold on a topic
     - [ ] Ensure correct level
-  - [ ] Enter toggles between 'todo' and 'done' for todo items
+  - [☒] Enter toggles between 'todo' and 'done' for todo items
+    - [ ] Should this happen, or more just have configurable states?
   - [ ] When typing Pipe on list, convert line to metadata
   - [ ] Enter when in middle of todo line if text is after leaves that text on the line
   - [ ] If clicking on not topic title, it does not recalculate fold on enter, look up for most recent topic
   - [✔︎] Don't move todo cursor if cursor is in front of todo symbol
+
+
