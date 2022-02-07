@@ -38,8 +38,17 @@ function! tada#todo#ToggleTodoStatus(dir = 1)
   let next_symbol = tada#todo#TodoSyntaxToSymbol(next_status)
   let next_length = len(next_symbol)
   let offset = current_length - next_length
-
   let colpos = col('.')
+
+  call cursor(line('.'), 1)
+  let [symline, symcol] = searchpos('\[' . current_symbol . '\]', 'n', line('.'))
   call setline('.', substitute(getline('.'), '^\(\s*-\s\?\)\[.\]', '\1[' . next_symbol . ']', ''))
-  call cursor(line('.'), colpos - offset)
+
+  let symcol = symcol + 1
+
+  if colpos <= symcol
+    call cursor(line('.'), colpos)
+  elseif colpos > symcol
+    call cursor(line('.'), colpos - offset)
+  endif
 endfunction

@@ -20,6 +20,10 @@ if !exists('g:tada_smart_tab')
   let g:tada_smart_tab = 1
 endif
 
+function! s:IsTodoItem(line)
+  return tada#IsTodoItem(a:line)
+endfunction
+
 function! s:IsTopic()
   return getline('.') =~# '^\s*-\s*.*:$'
 endfunction
@@ -42,7 +46,8 @@ endfunction
 
 execute 'nnoremap <silent> <buffer> ' . g:tada_todo_switch_status_mapping . ' :call tada#NextTodoStatus()<CR>'
 execute 'nnoremap <silent> <buffer> ' . g:tada_todo_switch_status_reverse_mapping . ' :call tada#PreviousTodoStatus()<CR>'
-nnoremap <silent> <buffer> <nowait> <script> <expr> <CR> <SID>IsTopic() ? 'za' : '<CR>'
+nmap <silent> <buffer> <nowait> <script> <expr> <CR> <SID>IsTopic() ? 'za' : '<CR>'
+" nmap <silent> <buffer> <nowait> <script> <expr> <CR> <SID>IsTodoItem() ? 'za' : '<CR>'
 nnoremap <silent> <buffer> <C-T>1 :call tada#fold#To(1)<CR>
 nnoremap <silent> <buffer> <C-T>2 :call tada#fold#To(2)<CR>
 nnoremap <silent> <buffer> <C-T>3 :call tada#fold#To(3)<CR>

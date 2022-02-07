@@ -38,7 +38,7 @@ RSpec.describe "todo" do
     end
   end
 
-  it "doesn't advance the cursor" do
+  it "doesn't move the cursor if after the box" do
     content = <<~CONTENT
       - [ ] Todo item
     CONTENT
@@ -50,6 +50,38 @@ RSpec.describe "todo" do
 
       expect(file.read).to eq(<<~NEW)
         - [•] My Todo item
+      NEW
+    end
+  end
+
+  it "doesn't move the cursor if before the box" do
+    content = <<~CONTENT
+      - [ ] Todo item
+    CONTENT
+
+    with_file(content) do |file|
+      vim.normal "gg0"
+      vim.feedkeys ' iMy '
+      vim.write
+
+      expect(file.read).to eq(<<~NEW)
+        My - [•] Todo item
+      NEW
+    end
+  end
+
+  it "doesn't move the cursor if in the box" do
+    content = <<~CONTENT
+      - [ ] Todo item
+    CONTENT
+
+    with_file(content) do |file|
+      vim.normal "gg0wl"
+      vim.feedkeys ' iMy'
+      vim.write
+
+      expect(file.read).to eq(<<~NEW)
+        - [My•] Todo item
       NEW
     end
   end
