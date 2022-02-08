@@ -22,3 +22,13 @@ function! TestSyntax(pattern, group) abort
   endif
   return start_match && end_match
 endfunction
+
+function! ResetConfiguration() abort
+  unlet g:tada_todo_symbols
+  unlet g:tada_todo_symbols_set
+  unlet g:tada_todo_switch_status_mapping', "<Space>")
+  unlet g:tada_todo_switch_status_reverse_mapping', "<C-Space>")
+  unlet g:tada_map_prefix', "<C-T>")
+  unlet g:tada_autolines', 1)
+  unlet g:tada_smart_tab', 1)
+endfunction

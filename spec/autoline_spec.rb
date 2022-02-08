@@ -1,10 +1,6 @@
 RSpec.describe "autolines" do
   describe "with configuration off" do
-    around do |example|
-      vim.command("let g:tada_autolines = 0")
-      example.run
-      vim.command("let g:tada_autolines = 1")
-    end
+    before { vim.command("let g:tada_autolines = 0") }
 
     it "does not insert metadata line" do
       content = <<~CONTENT
@@ -296,7 +292,6 @@ RSpec.describe "autolines" do
         NEW
 
       end
-      vim.command "unlet g:tada_todo_symbols"
     end
 
     it "uses the configured empty state" do
@@ -318,7 +313,6 @@ RSpec.describe "autolines" do
         NEW
 
       end
-      vim.command "unlet g:tada_todo_symbols"
     end
   end
 

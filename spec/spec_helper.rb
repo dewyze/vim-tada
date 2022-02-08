@@ -48,6 +48,8 @@ RSpec::Matchers.define :have_highlight do |expected|
 end
 
 RSpec.configure do |config|
+  config.before(:each) { vim.command("call ResetConfiguration()") }
+
   config.after(:all) do
     vim.command "!#{ENV["VIM_TADA_REFOCUS_COMMAND"]}" if ENV["VIM_TADA_REFOCUS_COMMAND"]
   end

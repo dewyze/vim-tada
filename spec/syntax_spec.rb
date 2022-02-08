@@ -35,14 +35,6 @@ RSpec.describe "syntax" do
   end
 
   describe "todo items" do
-    around do |example|
-      vim.command("unlet g:tada_todo_symbols_set")
-      vim.command("unlet g:tada_todo_symbols")
-      example.run
-      vim.command("unlet g:tada_todo_symbols_set")
-      vim.command("unlet g:tada_todo_symbols")
-    end
-
     context "with unicode symbols" do
       it "parses todo items" do
         content = <<~CONTENT
