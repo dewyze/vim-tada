@@ -1,24 +1,6 @@
 if exists('b:did_ftplugin') | finish | endif
 
-if !exists('g:tada_todo_switch_status_mapping')
-  let g:tada_todo_switch_status_mapping = '<Space>'
-endif
-
-if !exists('g:tada_todo_switch_status_reverse_mapping')
-  let g:tada_todo_switch_status_reverse_mapping = '<C-Space>'
-endif
-
-if !exists('g:tada_map_prefix')
-  let g:tada_map_prefix = '<C-T>'
-endif
-
-if !exists('g:tada_autolines')
-  let g:tada_autolines = 1
-endif
-
-if !exists('g:tada_smart_tab')
-  let g:tada_smart_tab = 1
-endif
+call tada#init#Init()
 
 function! s:IsTodoItem(line)
   return tada#IsTodoItem(a:line)
@@ -66,13 +48,5 @@ set foldmethod=expr
 setlocal foldtext=tada#fold#TextForTopic()
 setlocal foldexpr=tada#fold#LevelOfLine(v:lnum)
 set fillchars=fold:\ "
-
-if !exists('g:tada_loaded_class_files')
-  runtime lib/tada/metadata.vim
-  runtime lib/tada/todo.vim
-  runtime lib/tada/topic.vim
-
-  let g:tada_loaded_class_files = 1
-end
 
 let b:did_ftplugin = 1
