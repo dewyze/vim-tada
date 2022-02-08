@@ -7,7 +7,7 @@ let s:todo_statuses = ['tadaTodoItemBlank', 'tadaTodoItemInProgress', 'tadaTodoI
 
 function! tada#todo#TodoSyntaxToSymbol(status)
   let symbol_keys = {
-        \ 'tadaTodoItemBlank': 'todo',
+        \ 'tadaTodoItemBlank': 'blank',
         \ 'tadaTodoItemInProgress': 'in_progress',
         \ 'tadaTodoItemDone': 'done',
         \ 'tadaTodoItemBlocked': 'blocked',

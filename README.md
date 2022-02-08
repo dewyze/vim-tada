@@ -37,14 +37,14 @@ Vim tada has a variety of configuration options below is a list of them all:
 
 This variable will set `g:tada_todo_symbols` to a preset set of values:
 
-- `unicode`: `{ 'todo': ' ', 'inProgress': '•', 'done': '✔︎', 'blocked':'☒' }`
-- `ascii`: `{ 'todo': ' ', 'inProgress': '-', 'done': 'x', 'blocked':'o' }`
+- `unicode`: `{ 'blank': ' ', 'inProgress': '•', 'done': '✔︎', 'blocked':'☒' }`
+- `ascii`: `{ 'blank': ' ', 'inProgress': '-', 'done': 'x', 'blocked':'o' }`
 
 #### `g:tada_todo_symbols`
 
-**Default**: `{ 'todo': ' ', 'inProgress': '•', 'done': '✔︎', 'blocked':'☒' }`
+**Default**: `{ 'blank': ' ', 'inProgress': '•', 'done': '✔︎', 'blocked':'☒' }`
 (Set via `unicode` in `g:tada_todo_symbols_set`)
-**Options**: Any dictionary with the keys: `['todo', 'inProgress', 'done', 'blocked']`
+**Options**: Any dictionary with the keys: `['blank', 'inProgress', 'done', 'blocked']`
 
 These are the symbols used to iterate through todo statuses.
 

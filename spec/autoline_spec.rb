@@ -279,7 +279,7 @@ RSpec.describe "autolines" do
             - [◦] Feed the dog
       CONTENT
 
-      vim.command "let g:tada_todo_symbols = { 'todo': '◦', 'in_progress': '•', 'done': '✔︎', 'blocked':'☒' }"
+      vim.command "let g:tada_todo_symbols = { 'blank': '◦', 'in_progress': '•', 'done': '✔︎', 'blocked':'☒' }"
       with_file(content) do |file|
         vim.normal "2GA"
         vim.feedkeys '\<CR>Hello'
@@ -300,7 +300,7 @@ RSpec.describe "autolines" do
             - [◦]
       CONTENT
 
-      vim.command "let g:tada_todo_symbols = { 'todo': '◦', 'in_progress': '•', 'done': '✔︎', 'blocked':'☒' }"
+      vim.command "let g:tada_todo_symbols = { 'blank': '◦', 'in_progress': '•', 'done': '✔︎', 'blocked':'☒' }"
       with_file(content) do |file|
         vim.normal "2GA"
         vim.feedkeys '\<CR>Hello'

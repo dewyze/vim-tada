@@ -23,14 +23,14 @@ syn region tadaTopicTitle3 matchgroup=tadaDelimiter start="^\s\{4}-\s\?" end=":$
 
 if !exists('g:tada_todo_symbols')
   if exists('g:tada_todo_symbols_set') && g:tada_todo_symbols_set == 'ascii'
-    let g:tada_todo_symbols = { 'todo': ' ', 'in_progress': '-', 'done': 'x', 'blocked':'o' }
+    let g:tada_todo_symbols = { 'blank': ' ', 'in_progress': '-', 'done': 'x', 'blocked':'o' }
   else
     let g:tada_todo_symbols_set = 'unicode'
-    let g:tada_todo_symbols = { 'todo': ' ', 'in_progress': '•', 'done': '✔︎', 'blocked':'☒' }
+    let g:tada_todo_symbols = { 'blank': ' ', 'in_progress': '•', 'done': '✔︎', 'blocked':'☒' }
   endif
 endif
 
-execute 'syn match tadaTodoItemBlank /^\s*-\s*\[' . g:tada_todo_symbols['todo'] . '\].*$/'
+execute 'syn match tadaTodoItemBlank /^\s*-\s*\[' . g:tada_todo_symbols['blank'] . '\].*$/'
 execute 'syn match tadaTodoItemInProgress /^\s*-\s*\[' . g:tada_todo_symbols['in_progress'] . '\].*$/'
 execute 'syn match tadaTodoItemDone /^\s*-\s*\[' . g:tada_todo_symbols['done'] . '\].*$/'
 execute 'syn match tadaTodoItemBlocked /^\s*-\s*\[' . g:tada_todo_symbols['blocked'] . '\].*$/'

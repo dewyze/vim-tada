@@ -79,7 +79,7 @@ RSpec.describe "syntax" do
 
     context "with custom symbols" do
       it "parses todo items" do
-        vim.command("let g:tada_todo_symbols = { 'todo': 'T', 'in_progress': 'I', 'done': 'D', 'blocked': 'B' }")
+        vim.command("let g:tada_todo_symbols = { 'blank': 'T', 'in_progress': 'I', 'done': 'D', 'blocked': 'B' }")
 
         content = <<~CONTENT
           - [T] Todo item
