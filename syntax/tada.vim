@@ -35,12 +35,17 @@ execute 'syn match tadaTodoItemInProgress /^\s*-\s*\[' . g:tada_todo_symbols['in
 execute 'syn match tadaTodoItemDone /^\s*-\s*\[' . g:tada_todo_symbols['done'] . '\].*$/'
 execute 'syn match tadaTodoItemBlocked /^\s*-\s*\[' . g:tada_todo_symbols['blocked'] . '\].*$/'
 
+syn match tadaInvalidConfig /^@config\..*$/
+syn match tadaBufferConfig /^@config\.[^ ]\+\s\?=\s\?.\+$/
+
 hi def link tadaTopicTitle1 Define
 hi def link tadaTopicTitle2 Function
 hi def link tadaTopicTitle3 String
 hi def link tadaTodoItemInProgress Type
 hi def link tadaTodoItemDone Label
 hi def link tadaTodoItemBlocked Error
+hi def link tadaInvalidConfig SpellBad
+hi def link tadaBufferConfig Comment
 hi def link tadaMetadata Identifier
 
 hi Folded guifg=CadetBlue

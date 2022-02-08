@@ -23,4 +23,6 @@ function! tada#init#Init()
   call tada#init#Global('tada_map_prefix', "<C-T>")
   call tada#init#Global('tada_autolines', 1)
   call tada#init#Global('tada_smart_tab', 1)
+
+  call tada#config#LoadConfigs()
 endfunction
