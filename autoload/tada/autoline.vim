@@ -3,43 +3,30 @@ if exists('g:tada_loaded_autoline_autoload')
 endif
 let g:tada_loaded_autoline_autoload = 1
 
-function! tada#autoline#Down()
-  let group = tada#SyntaxGroupOfLine('.')
-
-  if group == 'tadaMetadata'
-    call tada#autoline#HandleDown('^\s\{0,6}|\s*$', '| ')
-  elseif group =~ '^tadaTodoItem'
-    let sym = g:tada_todo_symbols['todo']
-    call tada#autoline#HandleDown('^\s\{0,6}-\s\?\[' . sym . '\]\s*$', '- [' . sym . '] ')
-  elseif getline('.') =~ '^\s*-'
-    call tada#autoline#HandleDown('^\s*-\s*$', '- ')
-  endif
+function tada#autoline#ImapCR()
+  return tada#autoline#Handle("\<CR>")
 endfunction
 
-function! tada#autoline#HandleDown(empty_pattern, text)
-  let spaces = indent('.')
+function! tada#autoline#Nmapo()
+  return tada#autoline#Handle("o")
+endfunction
 
-  if getline('.') =~ a:empty_pattern
-    call append('.', repeat(' ', spaces))
-    execute "normal! 0Dj$"
+function! tada#autoline#NmapO()
+  return tada#autoline#Handle("O", 0)
+endfunction
+
+function! tada#autoline#Handle(key, on_empty = 1)
+  if !g:tada_autolines
+    return a:key
+  endif
+
+  let empty_pattern = '^\s*\%(-\||\|-\s*\[' . g:tada_todo_symbols['todo'] . '\]\)\s*$'
+
+  if a:on_empty && getline('.') =~ empty_pattern
+    return "\<ESC>S\<CR>"
+  elseif tada#SyntaxGroupOfLine('.') =~ '^tadaTodoItem'
+    return a:key ."[" . g:tada_todo_symbols['todo'] . "] "
   else
-    execute 'normal! o' . a:text
+    return a:key
   endif
-endfunction
-
-function! tada#autoline#Up()
-  let group = tada#SyntaxGroupOfLine('.')
-
-  if group == 'tadaMetadata'
-    call tada#autoline#HandleUp('| ')
-  elseif group =~ '^tadaTodoItem'
-    let sym = g:tada_todo_symbols['todo']
-    call tada#autoline#HandleUp('- [' . sym . '] ')
-  elseif getline('.') =~ '^\s*-'
-    call tada#autoline#HandleUp('- ')
-  endif
-endfunction
-
-function! tada#autoline#HandleUp(text)
-  execute 'normal! O' . a:text
 endfunction

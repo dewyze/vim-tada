@@ -151,14 +151,14 @@ RSpec.describe "autolines" do
 
       it "adds the metadata symbol for O" do
         with_file(content) do |file|
-          vim.normal "3G"
+          vim.normal "3G$"
           vim.feedkeys 'OHello'
           vim.write
 
           expect(file.read).to eq(<<~NEW)
             - Topic:
               | @:john
-              | Hello
+              |Hello
               |
           NEW
         end
@@ -416,7 +416,7 @@ RSpec.describe "autolines" do
           expect(file.read).to eq(<<~NEW)
             - Topic:
               - Feed the dog
-              - Milk the cat
+              -Milk the cat
               -
           NEW
         end
@@ -469,6 +469,27 @@ RSpec.describe "autolines" do
             - Topic:
           NEW
         end
+      end
+    end
+  end
+
+  describe "with CR in middle of line" do
+    it "moves the text to the new line" do
+      content = <<~CONTENT
+        - Topic:
+          - Feed the dog
+      CONTENT
+
+      with_file(content) do |file|
+        vim.normal 'gg'
+        vim.feedkeys '/the\<CR>i\<BS>\<CR>Milk '
+        vim.write
+
+        expect(file.read).to eq(<<~NEW)
+          - Topic:
+            - Feed
+            - Milk the dog
+        NEW
       end
     end
   end

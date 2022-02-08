@@ -1,7 +1,8 @@
 - Enter:
   - Wizard Mode:
+    | ?:In progress
     - Metadata:
-      - [ ] Insert Default Metadata if defined
+      - [ ] Default Metadata if defined
       - [ ] Insert Template if defined
     - [ ] Configuration variable
   - Metadata:

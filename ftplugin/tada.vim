@@ -18,12 +18,16 @@ function! s:EmptyIndentable()
   return g:tada_smart_tab && getline('.') =~ '^\s*-\s*\%(\[.\]\)\?\s*$'
 endfunction
 
-function! s:DoesHandleAutoline()
-  if !g:tada_autolines
-    return 0
-  endif
+function! s:HandleCR()
+  return tada#autoline#ImapCR()
+endfunction
 
-  return getline('.') =~ '^\s*\%(-\||\)'
+function! s:Handleo()
+  return tada#autoline#Nmapo()
+endfunction
+
+function! s:HandleO()
+  return tada#autoline#NmapO()
 endfunction
 
 execute 'nnoremap <silent> <buffer> ' . g:tada_todo_switch_status_mapping . ' :call tada#NextTodoStatus()<CR>'
@@ -38,9 +42,14 @@ nnoremap <silent> <buffer> <C-T>O :normal! zR<CR>
 inoremap <silent> <buffer> <script> <expr> <Tab> <SID>EmptyIndentable() ? '<C-T>' : '<Tab>'
 inoremap <silent> <buffer> <script> <expr> <S-Tab> <SID>EmptyIndentable() ? '<C-D>' : '<S-Tab>'
 inoremap <silent> <buffer> <script> <expr> <C-B> <SID>EmptyTodo()
-inoremap <silent> <buffer> <script> <expr> <CR> <SID>DoesHandleAutoline() ? '<C-O>:call tada#autoline#Down()<CR>' : '<CR>'
-nnoremap <silent> <buffer> <script> <expr> o <SID>DoesHandleAutoline() ? ':call tada#autoline#Down()<CR>a' : 'o'
-nnoremap <silent> <buffer> <script> <expr> O <SID>DoesHandleAutoline() ? ':call tada#autoline#Up()<CR>a' : 'O'
+inoremap <silent> <buffer> <script> <expr> <CR> <SID>HandleCR()
+nnoremap <silent> <buffer> <script> <expr> o <SID>Handleo()
+nnoremap <silent> <buffer> <script> <expr> O <SID>HandleO()
+
+if g:tada_autolines
+  setlocal comments=b:\|,b:-
+  setlocal formatoptions=tron
+end
 
 setlocal ts=2 sw=2 expandtab smarttab
 setlocal autoindent
