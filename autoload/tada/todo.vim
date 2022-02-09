@@ -3,25 +3,18 @@ if exists('g:tada_loaded_todo_autoload')
 endif
 let g:tada_loaded_todo_autoload = 1
 
-let s:todo_statuses = ['tadaTodoItemBlank', 'tadaTodoItemInProgress', 'tadaTodoItemDone', 'tadaTodoItemBlocked']
-
-function! tada#todo#TodoSyntaxToSymbol(status)
-  let symbol_keys = {
-        \ 'tadaTodoItemBlank': 'blank',
-        \ 'tadaTodoItemInProgress': 'in_progress',
-        \ 'tadaTodoItemDone': 'done',
-        \ 'tadaTodoItemBlocked': 'blocked',
-        \ }
-
-  return g:tada_todo_symbols[symbol_keys[a:status]]
+function! tada#todo#DefaultSymbol()
+  return b:tada_todo_symbols[b:tada_todo_statuses[0]]
 endfunction
 
-function! tada#todo#GetNextTodoStatus(group, dir = 1)
-  let status_index = index(s:todo_statuses, a:group)
+function! tada#todo#TodoSyntaxToStatus(group)
+  let symbol_keys = {}
 
-  let new_index = (status_index + a:dir) % 4
+  for status in keys(b:tada_todo_symbols)
+    let symbol_keys['tadaTodoItem' . tada#utils#Camelize(status)] = status
+  endfor
 
-  return s:todo_statuses[new_index]
+  return symbol_keys[a:group]
 endfunction
 
 function! tada#todo#ToggleTodoStatus(dir = 1)
@@ -30,12 +23,13 @@ function! tada#todo#ToggleTodoStatus(dir = 1)
   endif
 
   let group = tada#SyntaxGroupOfLine(line('.'))
-  let current_symbol = tada#todo#TodoSyntaxToSymbol(group)
+  let status = tada#todo#TodoSyntaxToStatus(group)
+  let current_symbol = b:tada_todo_symbols[status]
   let current_length = len(current_symbol)
-  let status_index = index(s:todo_statuses, group)
-  let new_index = (status_index + a:dir) % 4
-  let next_status =  s:todo_statuses[new_index]
-  let next_symbol = tada#todo#TodoSyntaxToSymbol(next_status)
+  let status_index = index(b:tada_todo_statuses, status)
+  let new_index = (status_index + a:dir) % len(b:tada_todo_statuses)
+  let next_status =  b:tada_todo_statuses[new_index]
+  let next_symbol = b:tada_todo_symbols[next_status]
   let next_length = len(next_symbol)
   let offset = current_length - next_length
   let colpos = col('.')

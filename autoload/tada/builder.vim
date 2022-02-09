@@ -93,7 +93,7 @@ function! tada#builder#Todos(lnum)
     let matches = matchlist(getline(num), '- \[\([^\]]*\)\]')
     let symbol = matches[1]
 
-    for [key, value] in items(g:tada_todo_symbols)
+    for [key, value] in items(b:tada_todo_symbols)
       if symbol == value
         let params = {}
         let params['status'] = key

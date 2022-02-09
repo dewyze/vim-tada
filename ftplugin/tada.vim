@@ -11,7 +11,7 @@ function! s:IsTopic()
 endfunction
 
 function! s:EmptyTodo()
-  return '- [' . g:tada_todo_symbols['blank'] . '] '
+  return '- [' . b:tada_todo_default . '] '
 endfunction
 
 function! s:EmptyIndentable()

@@ -64,7 +64,7 @@
   - [ ] No keymap at all option
   - [ ] Update README Filetype/markdown, note about setting filetype
   - [ ] Convert to keymaps to commands
-  - [☒] Is there a better markdown related symbol for metadata?
+  - [⚑] Is there a better markdown related symbol for metadata?
         It doesn't seem like it.
   - [ ] when filetyp is markdown, use ascii symbols
   - [ ] Infinite nesting

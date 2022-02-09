@@ -23,12 +23,19 @@ function! TestSyntax(pattern, group) abort
   return start_match && end_match
 endfunction
 
+function! ResetVar(var) abort
+  if exists(a:var)
+    execute 'unlet ' . a:var
+  endif
+endfunction
+
 function! ResetConfiguration() abort
-  unlet g:tada_todo_symbols
-  unlet g:tada_todo_symbols_set
-  unlet g:tada_todo_switch_status_mapping
-  unlet g:tada_todo_switch_status_reverse_mapping
-  unlet g:tada_map_prefix
-  unlet g:tada_autolines
-  unlet g:tada_smart_tab
+  call ResetVar("g:tada_todo_symbols")
+  call ResetVar("g:tada_todo_style")
+  call ResetVar("g:tada_todo_statuses")
+  call ResetVar("g:tada_autolines")
+  call ResetVar("g:tada_smart_tab")
+  call ResetVar("g:tada_todo_switch_status_mapping")
+  call ResetVar("g:tada_todo_switch_status_reverse_mapping")
+  call ResetVar("g:tada_map_prefix")
 endfunction

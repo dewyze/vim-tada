@@ -20,12 +20,12 @@ function! tada#autoline#Handle(key, on_empty = 1)
     return a:key
   endif
 
-  let empty_pattern = '^\s*\%(-\||\|-\s*\[' . g:tada_todo_symbols['blank'] . '\]\)\s*$'
+  let empty_pattern = '^\s*\%(-\||\|-\s*\[' . b:tada_todo_default . '\]\)\s*$'
 
   if a:on_empty && getline('.') =~ empty_pattern
     return "\<ESC>S\<CR>"
   elseif tada#SyntaxGroupOfLine('.') =~ '^tadaTodoItem'
-    return a:key ."[" . g:tada_todo_symbols['blank'] . "] "
+    return a:key ."[" . b:tada_todo_default . "] "
   else
     return a:key
   endif

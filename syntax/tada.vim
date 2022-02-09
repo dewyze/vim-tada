@@ -21,19 +21,11 @@ syn region tadaTopicTitle1 matchgroup=tadaDelimiter start="^-\s\?" end=":$" onel
 syn region tadaTopicTitle2 matchgroup=tadaDelimiter start="^\s\{2}-\s\?" end=":$" oneline
 syn region tadaTopicTitle3 matchgroup=tadaDelimiter start="^\s\{4}-\s\?" end=":$" oneline
 
-if !exists('g:tada_todo_symbols')
-  if exists('g:tada_todo_symbols_set') && g:tada_todo_symbols_set == 'ascii'
-    let g:tada_todo_symbols = { 'blank': ' ', 'in_progress': '-', 'done': 'x', 'blocked':'o' }
-  else
-    let g:tada_todo_symbols_set = 'unicode'
-    let g:tada_todo_symbols = { 'blank': ' ', 'in_progress': '•', 'done': '✔︎', 'blocked':'☒' }
-  endif
-endif
+for [status, symbol] in items(b:tada_todo_symbols)
+  let name = tada#utils#Camelize(status)
 
-execute 'syn match tadaTodoItemBlank /^\s*-\s*\[' . g:tada_todo_symbols['blank'] . '\].*$/'
-execute 'syn match tadaTodoItemInProgress /^\s*-\s*\[' . g:tada_todo_symbols['in_progress'] . '\].*$/'
-execute 'syn match tadaTodoItemDone /^\s*-\s*\[' . g:tada_todo_symbols['done'] . '\].*$/'
-execute 'syn match tadaTodoItemBlocked /^\s*-\s*\[' . g:tada_todo_symbols['blocked'] . '\].*$/'
+  execute 'syn match tadaTodoItem' . name . ' /^\s*-\s*\[' . symbol . '\].*$/'
+endfor
 
 syn match tadaInvalidConfig /^@config\..*$/
 syn match tadaBufferConfig /^@config\.[^ ]\+\s\?=\s\?.\+$/
