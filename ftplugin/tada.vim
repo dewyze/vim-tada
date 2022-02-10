@@ -54,9 +54,10 @@ end
 
 setlocal ts=2 sw=2 expandtab smarttab
 setlocal autoindent
-set foldmethod=expr
+setlocal foldmethod=expr
 setlocal foldtext=tada#fold#TextForTopic()
 setlocal foldexpr=tada#fold#LevelOfLine(v:lnum)
-set fillchars=fold:\ "
+setlocal fillchars=fold:\ "
+setlocal nofoldenable
 
 let b:did_ftplugin = 1

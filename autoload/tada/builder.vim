@@ -77,7 +77,7 @@ function! tada#builder#Description(lnum)
   let num = a:lnum
   let description = []
 
-  while !(tada#IsTopicTitle(num)) && !(tada#IsTodoItem(num))
+  while !(tada#IsTopicTitle(num)) && !(tada#IsTodoItem(num)) && num <= line('$')
     call add(description, substitute(getline(num), '^\s*', '', ''))
     let num += 1
   endwhile
