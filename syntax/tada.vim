@@ -11,7 +11,6 @@ syn spell toplevel
 syn sync fromstart
 syn case ignore
 
-
 syn match tadaDescription /^\s*[^ \-|]\+.*$/
 syn match tadaMetadata /^\s\{2,}|.*$/
 syn match tadaListItem /^\s*-\s*$/

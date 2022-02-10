@@ -1,91 +1,134 @@
-- Enter:
-  - Wizard Mode:
-    | ?:In progress
+- Keymaps:
+  - Enter:
+    - Topic:
+      - [✔] Insert dash
+      - [ ] Insert topic template
+        - [ ] Level specific
     - Metadata:
-      - [ ] Default Metadata if defined
-      - [ ] Insert Template if defined
-    - [ ] Configuration variable
-  - Metadata:
-    - [✔] If not empty, add another | line
-    - [✔] If empty, delete | and add blank line
+      - [✔] If not empty, add another | line
+      - [✔] If empty, delete | and add blank line
+      - [ ] Add default metadata if defined
+    - Wizard Mode:
+      - [ ] Configuration
+      - [ ] Guide through metadata, description, todos
   - Todo:
     - [✔] If on, add - [ ]
-    - [✔] If off, Delete - and add blank likne
-          Does this go to a new topic?
+    - [✔] If off, Delete - and add blank like
+    - [✔] Enter when in middle of todo line if text is after leaves that text on the line
+    - [⚑] Does this go to a new topic?
+  - Space:
+    - [✔] Don't move todo cursor if cursor is in front of todo symbol
+    - [✔] Checkbox toggle
+      - [ ] If parent checkbox, toggle both?
+    - [ ] Status toggle
+    - [ ] Any other metadata features?
+  - Tab/Shift+Tab:
+    - [✔] Variable
+    - [✔] If on, add tab/remove tab
+    - [✔] If on todo, <S-Tab> moves into continued description?
   - List Item:
     - [✔] If on, add -
     - [✔] If off, delete - and add blank line
-  - Topic:
-    - [✔] If speed mode is on, add topic of same level => Autolines
-- Syntax:
-  - [ ] Support comments?
-- Tab/Shift+Tab:
-  - [✔] Variable
-  - [✔] If on, add tab/remove tab
-  - [✔] If on todo, <S-Tab> moves into continued description?
-- Space:
-  - [✔] Checkbox toggle
-    - [ ] If parent checkbox, toggle both?
-  - [ ] Status toggle
-  - [ ] Any other metadata features?
-- Configurations:
-  - [ ] Default Metadata
-  - [ ] Default Templates (for a topic or for tree of topics)
-  - [ ] Assignees
-  - [•] Statuses
-    - [•] Todo statuses
-      - [✔] Include custom state/order
-      - [✔] Support Emojis
-    - [ ] Project statuses
-  - [✔] Auto add colon? # NOT GONNA DO
-- Keymaps:
-  - [ ] Keymap for wizard mode
-  - [•] Keymap for <C-T>
-  - [ ] Keymap for go to:
+  - Folds:
+    - [✔] Fold level 1
+    - [✔] Fold level 2
+    - [✔] Fold level 3
+    - [✔] insert o/O if not using comment method
+  - Wizard Mode:
+    - [ ] Turning wizard mode on/off
+  - Fold View:
+    - [•] Keymap for <C-T>
+  - Go to:
     - [ ] parent
     - [ ] grandparent
     - [ ] metadata
     - [ ] description
     - [ ] todos
     - [ ] list items
-  - [✔] Fold level 1
-  - [✔] Fold level 2
-  - [✔] Fold level 3
-  - [✔] insert o/O if not using comment method
-- More:
+  - Insert shortcuts:
+    - [ ] Insert list/metadata/todo
+    - [ ] Convert line to list/metadata/todo
+    - [ ] When typing Pipe on list, convert line to metadata
+    - [ ] Auto insert topic status
+    - [ ] Auto insert today's date for topic creation
+    - [ ] Insert date via keymap
+  - Normal shortcuts:
+    - [ ] Convert line to list/metadata/todo
+  - Docs:
+    - [ ] Update README Keymap
+  - Backspace:
+    - [ ] Backspace on empty todo does what?
+    - [ ] <C-W> on empty todo does what?
+  - Configuration:
+    - [ ] No keymap at all option
+  - Dates:
+    - [ ] Add day(s)
+    - [ ] Add week(s)
+    - [ ] Add month(s)
+- Editing:
   - [ ] Autofill assignees
-  - [✔] Todo item
-  - [ ] Fold text
+- Syntax:
+  - [ ] Support comments
+  - [ ] Infinite Nesting
+  - [✔] Accept Tadafile
+- Folding:
+  - Fold text:
     - [✔] Include status
     - [✔] Include todo counts
     - [ ] Dates?
     - [ ] Assignees?
-  - [ ] Update README Keymap
-  - [ ] No keymap at all option
-  - [ ] Update README Filetype/markdown, note about setting filetype
-  - [ ] Convert to keymaps to commands
-  - [⚑] Is there a better markdown related symbol for metadata?
-        It doesn't seem like it.
-  - [ ] when filetyp is markdown, use ascii symbols
-  - [ ] Infinite nesting
-  - [ ] Metadata only for topics
-  - [ ] Keymap to switch line to list item or description or box or metadata
-    - [ ] Insert?
-    - [ ] Normal?
-    - [ ] Does not add, replaces instead
-  - [ ] Fold status shows children
-  - [•] Enter collapses/opens fold on a topic
-    - [ ] Ensure correct level
-  - [✔] Enter toggles between 'todo' and 'done' for todo items
-    - [✔] Should this happen, or more just have configurable states?
-  - [ ] When typing Pipe on list, convert line to metadata
-  - [✔] Enter when in middle of todo line if text is after leaves that text on the line
-  - [ ] If clicking on not topic title, it does not recalculate fold on enter, look up for most recent topic
-  - [✔] Don't move todo cursor if cursor is in front of todo symbol
-  - [ ] Customize colors
-  - [ ] Should blank todo status be required?
-  - [✔] Rename todo status ascii simple to markdown?
-  - [ ] Configuration warnings
+    - [ ] Show sum of child counts
+  - Fold Levels:
+    - [ ] Automatically Fold topics if status is done OR all todos are done
+  - Keymaps:
+    - [•] Enter collapses/opens fold on a topic
+    - [ ] If clicking on not topic title, it does not recalculate fold on enter, look up for most recent topic
+- Metadata:
+  - [ ] Support symbols or strings
+- Configurations:
+  - Templates:
+    - [ ] Default Metadata
+    - [ ] Default Templates (for a topic or for tree of topics)
+  - Assignees:
+    - [ ] Set assigneers
+    - [ ] Pmenu for assignees?
+  - Statuses:
+    - [•] Todo statuses
+      - [✔] Include custom state/order
+      - [✔] Support Emojis
+    - [ ] Topic statuses
+  - Customize colors:
+    - [ ] Todo statuses
+    - [ ] Topic Levels
+  - Warnings:
     - [ ] Duplicate statuses
     - [ ] Multiple statuses with the same symbol
     - [ ] Configurating an unused variable
+- Todos:
+  - [ ] Add "project" style: unplanned, ready, in progress, done, blocked, ignored
+  - [ ] Remove "blocked" from the unicode style
+- Housekeeping:
+  - [ ] Convert to keymaps to commands
+- Post MVP:
+  - [ ] Update README Filetype/markdown, note about setting filetype
+- Markdown Compatibility:
+  - [ ] Use ascii symbols
+  - [ ] Can you unload markdown files?
+- Archives:
+  - What are options?:
+    - [ ] Some sort of archive option
+    - [ ] Archive goes below config?
+    - [ ] Does this matter without fancy UI?
+  - Folds:
+    - [ ] Archived ones are always folded
+- UI:
+  - Active UI:
+    - [ ] Search
+    - [ ] Collapsing
+    - [ ] Go to line
+  - Cards UI:
+    - [ ] Display it
+    - [ ] Move around
+  - Milestone/Gantt Chart:
+    - [ ] Display it
+    - [ ] Data?

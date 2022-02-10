@@ -22,6 +22,11 @@ function! tada#init#BufferGlobal(str, val)
 endfunction
 
 function! tada#init#Init()
+  if exists('g:tada_init_initialized')
+    return
+  endif
+  let g:tada_init_initialized = 1
+
   call tada#init#Settings()
   call tada#config#LoadConfigs()
   call tada#init#TodoConfig()

@@ -1,1 +1,1 @@
-au BufRead,BufNewFile *.tada set filetype=tada
+au BufRead,BufNewFile *.tada,Tadafile set filetype=tada
