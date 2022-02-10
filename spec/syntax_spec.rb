@@ -42,7 +42,7 @@ RSpec.describe "syntax" do
           -[ ] Todo item 2
           - [ ] Todo item 3
           - [•] In progress item
-          - [✔︎] Done item
+          - [✔] Done item
           - [⚑] Blocked item
         CONTENT
 
@@ -51,7 +51,7 @@ RSpec.describe "syntax" do
           expect("\\[ ] Todo item 2").to have_highlight("tadaTodoItemBlank")
           expect("\\[ ] Todo item 3").to have_highlight("tadaTodoItemBlank")
           expect("\\[•] In progress item").to have_highlight("tadaTodoItemInProgress")
-          expect("\\[✔︎] Done item").to have_highlight("tadaTodoItemDone")
+          expect("\\[✔] Done item").to have_highlight("tadaTodoItemDone")
           expect("\\[⚑] Blocked item").to have_highlight("tadaTodoItemBlocked")
         end
       end
@@ -64,14 +64,14 @@ RSpec.describe "syntax" do
         content = <<~CONTENT
           - [ ] Todo item
           - [-] In progress item
-          - [X] Done item
+          - [x] Done item
           - [O] Blocked item
         CONTENT
 
         with_file(content) do
           expect("\\[ ] Todo item").to have_highlight("tadaTodoItemBlank")
           expect("\\[\-] In progress item").to have_highlight("tadaTodoItemInProgress")
-          expect("\\[X] Done item").to have_highlight("tadaTodoItemDone")
+          expect("\\[x] Done item").to have_highlight("tadaTodoItemDone")
           expect("\\[O] Blocked item").to have_highlight("tadaTodoItemBlocked")
         end
       end

@@ -3,7 +3,7 @@ RSpec.describe "todo" do
     <<~CONTENT
       - [ ] Todo item
       - [•] In progress item
-      - [✔︎] Done item
+      - [✔] Done item
       - [⚑] Blocked item
     CONTENT
   end
@@ -17,7 +17,7 @@ RSpec.describe "todo" do
 
         expect(file.read).to eq(<<~NEW)
         - [•] Todo item
-        - [✔︎] In progress item
+        - [✔] In progress item
         - [⚑] Done item
         - [ ] Blocked item
         NEW
@@ -62,7 +62,7 @@ RSpec.describe "todo" do
         - [⚑] Todo item
         - [ ] In progress item
         - [•] Done item
-        - [✔︎] Blocked item
+        - [✔] Blocked item
       NEW
     end
   end

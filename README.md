@@ -37,12 +37,12 @@ Vim tada has a variety of configuration options below is a list of them all:
 
 This variable will set `g:tada_todo_symbols` to a preset set of values:
 
-- `unicode`: `{ 'blank': ' ', 'inProgress': '•', 'done': '✔︎', 'blocked':'☒' }`
+- `unicode`: `{ 'blank': ' ', 'inProgress': '•', 'done': '✔', 'blocked':'⚑' }`
 - `ascii`: `{ 'blank': ' ', 'inProgress': '-', 'done': 'x', 'blocked':'o' }`
 
 #### `g:tada_todo_symbols`
 
-**Default**: `{ 'blank': ' ', 'inProgress': '•', 'done': '✔︎', 'blocked':'☒' }`
+**Default**: `{ 'blank': ' ', 'inProgress': '•', 'done': '✔', 'blocked':'⚑' }`
 (Set via `unicode` in `g:tada_todo_symbols_set`)
 **Options**: Any dictionary with the keys: `['blank', 'inProgress', 'done', 'blocked']`
 

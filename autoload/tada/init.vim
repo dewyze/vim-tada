@@ -58,16 +58,16 @@ function! tada#init#TodoConfig()
 
   if b:tada_todo_style == 'unicode'
     let statuses = "['blank', 'in_progress', 'done', 'blocked']"
-    let symbols = "{ 'blank': ' ', 'in_progress': '•', 'done': '✔︎', 'blocked': '⚑' }"
+    let symbols = "{ 'blank': ' ', 'in_progress': '•', 'done': '✔', 'blocked': '⚑' }"
   elseif b:tada_todo_style == 'ascii'
     let statuses = "['blank', 'in_progress', 'done', 'blocked']"
-    let symbols =  "{ 'blank': ' ', 'in_progress': '-', 'done': 'X', 'blocked': 'O' }"
-  elseif b:tada_todo_style == 'simple_unicode'
+    let symbols =  "{ 'blank': ' ', 'in_progress': '-', 'done': 'x', 'blocked': 'o' }"
+  elseif b:tada_todo_style == 'simple'
     let statuses = "['blank', 'done']"
     let symbols =  "{ 'blank': ' ', 'done': '✔' }"
-  elseif b:tada_todo_style == 'simple_ascii'
+  elseif b:tada_todo_style == 'markdown'
     let statuses = "['blank', 'done']"
-    let symbols =  "{ 'blank': ' ', 'done': 'X' }"
+    let symbols =  "{ 'blank': ' ', 'done': 'x' }"
   endif
 
   call tada#init#BufferGlobal('tada_todo_statuses', statuses)

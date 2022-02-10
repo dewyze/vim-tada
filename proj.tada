@@ -6,25 +6,25 @@
       - [ ] Insert Template if defined
     - [ ] Configuration variable
   - Metadata:
-    - [✔︎] If not empty, add another | line
-    - [✔︎] If empty, delete | and add blank line
+    - [✔] If not empty, add another | line
+    - [✔] If empty, delete | and add blank line
   - Todo:
-    - [✔︎] If on, add - [ ]
-    - [✔︎] If off, Delete - and add blank likne
+    - [✔] If on, add - [ ]
+    - [✔] If off, Delete - and add blank likne
           Does this go to a new topic?
   - List Item:
-    - [✔︎] If on, add -
-    - [✔︎] If off, delete - and add blank line
+    - [✔] If on, add -
+    - [✔] If off, delete - and add blank line
   - Topic:
-    - [✔︎] If speed mode is on, add topic of same level => Autolines
+    - [✔] If speed mode is on, add topic of same level => Autolines
 - Syntax:
   - [ ] Support comments?
 - Tab/Shift+Tab:
-  - [✔︎] Variable
-  - [✔︎] If on, add tab/remove tab
-  - [✔︎] If on todo, <S-Tab> moves into continued description?
+  - [✔] Variable
+  - [✔] If on, add tab/remove tab
+  - [✔] If on todo, <S-Tab> moves into continued description?
 - Space:
-  - [✔︎] Checkbox toggle
+  - [✔] Checkbox toggle
     - [ ] If parent checkbox, toggle both?
   - [ ] Status toggle
   - [ ] Any other metadata features?
@@ -33,11 +33,11 @@
   - [ ] Default Templates (for a topic or for tree of topics)
   - [ ] Assignees
   - [•] Statuses
-    - [✔︎] Todo statuses
-      - [✔︎] Include custom state/order
-      - [✔︎] Support Emojis
+    - [•] Todo statuses
+      - [✔] Include custom state/order
+      - [✔] Support Emojis
     - [ ] Project statuses
-  - [✔︎] Auto add colon? # NOT GONNA DO
+  - [✔] Auto add colon? # NOT GONNA DO
 - Keymaps:
   - [ ] Keymap for wizard mode
   - [•] Keymap for <C-T>
@@ -48,16 +48,16 @@
     - [ ] description
     - [ ] todos
     - [ ] list items
-  - [✔︎] Fold level 1
-  - [✔︎] Fold level 2
-  - [✔︎] Fold level 3
-  - [✔︎] insert o/O if not using comment method
+  - [✔] Fold level 1
+  - [✔] Fold level 2
+  - [✔] Fold level 3
+  - [✔] insert o/O if not using comment method
 - More:
   - [ ] Autofill assignees
-  - [✔︎] Todo item
+  - [✔] Todo item
   - [ ] Fold text
-    - [✔︎] Include status
-    - [✔︎] Include todo counts
+    - [✔] Include status
+    - [✔] Include todo counts
     - [ ] Dates?
     - [ ] Assignees?
   - [ ] Update README Keymap
@@ -76,10 +76,16 @@
   - [ ] Fold status shows children
   - [•] Enter collapses/opens fold on a topic
     - [ ] Ensure correct level
-  - [☒] Enter toggles between 'todo' and 'done' for todo items
-    - [ ] Should this happen, or more just have configurable states?
+  - [✔] Enter toggles between 'todo' and 'done' for todo items
+    - [✔] Should this happen, or more just have configurable states?
   - [ ] When typing Pipe on list, convert line to metadata
-  - [✔︎] Enter when in middle of todo line if text is after leaves that text on the line
+  - [✔] Enter when in middle of todo line if text is after leaves that text on the line
   - [ ] If clicking on not topic title, it does not recalculate fold on enter, look up for most recent topic
-  - [✔︎] Don't move todo cursor if cursor is in front of todo symbol
+  - [✔] Don't move todo cursor if cursor is in front of todo symbol
   - [ ] Customize colors
+  - [ ] Should blank todo status be required?
+  - [✔] Rename todo status ascii simple to markdown?
+  - [ ] Configuration warnings
+    - [ ] Duplicate statuses
+    - [ ] Multiple statuses with the same symbol
+    - [ ] Configurating an unused variable
