@@ -14,6 +14,7 @@ syn case ignore
 syn match tadaDescription /^\s*[^ \-|]\+.*$/
 syn match tadaMetadata /^\s\{2,}|.*$/
 syn match tadaListItem /^\s*-\s*$/
+syn match tadaComment /^\s*#.*$/
 syn region tadaListItem start=/^\s*-\s*[^ []/ end=/[^:]$/ oneline
 
 syn region tadaTopicTitle1 matchgroup=tadaDelimiter start="^-\s\?" end=":$" oneline
@@ -37,6 +38,7 @@ hi def link tadaTodoItemDone Label
 hi def link tadaTodoItemBlocked Error
 hi def link tadaInvalidConfig SpellBad
 hi def link tadaBufferConfig Comment
+hi def link tadaComment Comment
 hi def link tadaMetadata Identifier
 
 hi Folded guifg=CadetBlue

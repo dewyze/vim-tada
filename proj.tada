@@ -47,14 +47,14 @@
     - [ ] todos
     - [ ] list items
   - Insert shortcuts:
-    - [ ] Insert list/metadata/todo
-    - [ ] Convert line to list/metadata/todo
+    - [✔] Insert list/metadata/todo
+    - [✔] Convert line to list/metadata/todo
     - [ ] When typing Pipe on list, convert line to metadata
     - [ ] Auto insert topic status
     - [ ] Auto insert today's date for topic creation
     - [ ] Insert date via keymap
   - Normal shortcuts:
-    - [ ] Convert line to list/metadata/todo
+    - [✔] Convert line to list/metadata/todo
   - Docs:
     - [ ] Update README Keymap
   - Backspace:
@@ -70,7 +70,7 @@
   - [ ] Autofill assignees
 - Syntax:
   - [ ] Single character list item not recognized
-  - [ ] Support comments
+  - [✔] Support comments
   - [ ] Infinite Nesting
   - [✔] Accept Tadafile
 - Folding:
@@ -111,6 +111,7 @@
   - [ ] Remove "blocked" from the unicode style
 - Housekeeping:
   - [ ] Convert to keymaps to commands
+  - [ ] Builder should iterate over lines and not assume order
 - Post MVP:
   - [ ] Update README Filetype/markdown, note about setting filetype
 - Markdown Compatibility:

@@ -52,6 +52,7 @@ if g:tada_autolines
   setlocal formatoptions=tron
 end
 
+setlocal commentstring=#\ %s
 setlocal ts=2 sw=2 expandtab smarttab
 setlocal autoindent
 setlocal foldmethod=expr

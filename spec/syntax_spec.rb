@@ -5,6 +5,7 @@ RSpec.describe "syntax" do
       - Milestone:
         | @:john
         - Epic:
+        # - Commented:
           My description
           - Story:
             Description with -
@@ -16,6 +17,7 @@ RSpec.describe "syntax" do
       with_file(content) do
         expect("Milestone").to have_highlight("tadaTopicTitle1")
         expect("Epic").to have_highlight("tadaTopicTitle2")
+        expect("Commented").to have_highlight("tadaComment")
         expect("Story").to have_highlight("tadaTopicTitle3")
         expect("@:john").to have_highlight("tadaMetadata")
         expect("My description").to have_highlight("tadaDescription")
