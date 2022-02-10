@@ -13,9 +13,9 @@ syn case ignore
 
 syn match tadaDescription /^\s*[^ \-|]\+.*$/
 syn match tadaMetadata /^\s\{2,}|.*$/
-syn match tadaListItem /^\s*-\s*$/
 syn match tadaComment /^\s*#.*$/
-syn region tadaListItem start=/^\s*-\s*[^ []/ end=/[^:]$/ oneline
+syn match tadaListItem /^\s*-\s*$/
+syn region tadaListItem start=/^\s*-\s*[^ []/ end=/\(:\)\@<!$/ oneline
 
 syn region tadaTopicTitle1 matchgroup=tadaDelimiter start="^-\s\?" end=":$" oneline
 syn region tadaTopicTitle2 matchgroup=tadaDelimiter start="^\s\{2}-\s\?" end=":$" oneline

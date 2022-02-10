@@ -34,6 +34,16 @@ RSpec.describe "syntax" do
         expect("\-").to have_highlight("tadaListItem")
       end
     end
+
+    it "parses a single character list item" do
+      content = <<~CONTENT
+        - A
+      CONTENT
+
+      with_file(content) do
+        expect("A").to have_highlight("tadaListItem")
+      end
+    end
   end
 
   describe "todo items" do

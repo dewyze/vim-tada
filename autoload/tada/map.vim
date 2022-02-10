@@ -14,7 +14,7 @@ function! tada#map#ToggleBox()
     call setline('.', substitute(getline('.'), '^\(\s*\).*$', '\1- [ ] ', ''))
     normal! $
   elseif group =~ '^tadaTodoItem'
-    call setline('.', substitute(getline('.'), '^\(\s*-\s*\)\[.\]\s*\(\S.*\)$', '\1\2', ''))
+    call setline('.', substitute(getline('.'), '^\(\s*\)-\s*\[.\]\s*\(.*\)$', '\1- \2', ''))
     call cursor(line('.'), s:NewColPos(save_col, boxlen))
   elseif group == 'tadaListItem' || group =~ '^tadaTopicTitle'
     call setline('.', substitute(getline('.'), '^\(\s*-\s*\)\(\S.*\)$', '\1[' . tada#todo#DefaultSymbol() . '] \2', ''))
@@ -31,3 +31,14 @@ function! s:NewColPos(colpos, offset)
     return spaces + len('- ') + 1
   endif
 endfunction
+  "
+  " if text =~ '^\s*-\?\s*$'
+  "   call setline('.', substitute(getline('.'), '^\(\s*\).*$', '\1- [ ] ', ''))
+  "   normal! $
+  " elseif group =~ '^tadaTodoItem'
+  "   call setline('.', substitute(getline('.'), '^\(\s*-\)\s*\[.\]\s*\(.*\)$', '\1 \2', ''))
+  "   call cursor(line('.'), s:NewColPos(save_col, boxlen))
+  " elseif group == 'tadaListItem' || group =~ '^tadaTopicTitle'
+  "   call setline('.', substitute(getline('.'), '^\(\s*-\s*\)\(\S.*\)$', '\1[' . tada#todo#DefaultSymbol() . '] \2', ''))
+  "   call cursor(line('.'), s:NewColPos(save_col, -1 * boxlen))
+  " endif

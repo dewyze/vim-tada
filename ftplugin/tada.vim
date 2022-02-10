@@ -40,9 +40,9 @@ nnoremap <silent> <buffer> <C-T>3 :call tada#fold#To(3)<CR>
 nnoremap <silent> <buffer> <C-T>o :normal! zv<CR>
 nnoremap <silent> <buffer> <C-T>O :normal! zR<CR>
 nnoremap <silent> <buffer> <C-B> :call tada#map#ToggleBox()<CR>
+inoremap <silent> <buffer> <script> <expr> <C-B> '<C-O>:call tada#map#ToggleBox()<CR>'
 inoremap <silent> <buffer> <script> <expr> <Tab> <SID>EmptyIndentable() ? '<C-T>' : '<Tab>'
 inoremap <silent> <buffer> <script> <expr> <S-Tab> <SID>EmptyIndentable() ? '<C-D>' : '<S-Tab>'
-inoremap <silent> <buffer> <script> <expr> <C-B> '<C-O>:call tada#map#ToggleBox()<CR>'
 inoremap <silent> <buffer> <script> <expr> <CR> <SID>HandleCR()
 nnoremap <silent> <buffer> <script> <expr> o <SID>Handleo()
 nnoremap <silent> <buffer> <script> <expr> O <SID>HandleO()
