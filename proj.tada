@@ -1,13 +1,14 @@
 - Keymaps:
   - Enter:
     - Topic:
-      - [✔] Insert dash
+      - [ ] Insert dash
       - [ ] Insert topic template
         - [ ] Level specific
     - Metadata:
       - [✔] If not empty, add another | line
       - [✔] If empty, delete | and add blank line
       - [ ] Add default metadata if defined
+      - [ ] Add metadata if defined
     - Wizard Mode:
       - [ ] Configuration
       - [ ] Guide through metadata, description, todos
@@ -68,6 +69,7 @@
 - Editing:
   - [ ] Autofill assignees
 - Syntax:
+  - [ ] Single character list item not recognized
   - [ ] Support comments
   - [ ] Infinite Nesting
   - [✔] Accept Tadafile
