@@ -50,7 +50,7 @@
   - Insert shortcuts:
     - [✔] Insert list/metadata/todo
     - [✔] Convert line to list/metadata/todo
-    - [ ] When typing Pipe on list, convert line to metadata
+    - [✔] When typing Pipe on list, convert line to metadata
     - [ ] Auto insert topic status
     - [ ] Auto insert today's date for topic creation
     - [ ] Insert date via keymap
@@ -69,12 +69,11 @@
     - [ ] Add month(s)
   - Empty Line:
     - [✔] Empty line before cursor
-    - [ ] Is there a keymap for both insert and normal mode available?
+    - [✔] Is there a keymap for both insert and normal mode available?
 - Editing:
   - [ ] Autofill assignees
-  - [ ]
 - Syntax:
-  - [ ] Single character list item not recognized
+  - [✔] Single character list item not recognized
   - [✔] Support comments
   - [ ] Infinite Nesting
   - [✔] Accept Tadafile
@@ -121,7 +120,7 @@
   - [ ] Update README Filetype/markdown, note about setting filetype
 - Markdown Compatibility:
   - [ ] Use ascii symbols
-  - [ ] Can you unload markdown files?
+  - [ ] Can you unload markdown plugin files?
 - Archives:
   - What are options?:
     - [ ] Some sort of archive option
