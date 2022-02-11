@@ -73,6 +73,25 @@ RSpec.describe "map specs" do
           NEW
         end
       end
+
+      it "adds a box at same level for empty line below todo item" do
+        content = <<~CONTENT
+          - [ ] Todo Item
+                A
+        CONTENT
+
+        with_file(content) do |file|
+          vim.normal "G$x"
+          vim.feedkeys '\<C-B>aHello'
+          vim.write
+
+          expect(file.read).to eq(<<~NEW)
+            - [ ] Todo Item
+            - [ ] Hello
+          NEW
+        end
+
+      end
     end
 
     context "in insert mode" do
@@ -147,6 +166,25 @@ RSpec.describe "map specs" do
             - Hello
           NEW
         end
+      end
+
+      it "adds a box at same level for empty line below todo item" do
+        content = <<~CONTENT
+          - [ ] Todo Item
+                A
+        CONTENT
+
+        with_file(content) do |file|
+          vim.normal "G$a"
+          vim.feedkeys '\<BS>\<C-B>Hello'
+          vim.write
+
+          expect(file.read).to eq(<<~NEW)
+            - [ ] Todo Item
+            - [ ] Hello
+          NEW
+        end
+
       end
     end
   end
