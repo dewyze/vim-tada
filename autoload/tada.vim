@@ -31,10 +31,8 @@ function! tada#IsMetadata(lnum)
 endfunction
 
 function! tada#TitleLevel(lnum)
-  let matches = matchlist(tada#SyntaxGroupOfLine(a:lnum), '^tadaTopicTitle\(\d\)')
-
-  if len(matches) > 0
-    return matches[1]
+  if getline(a:lnum) =~ '\s*-.*:$'
+    return (indent(a:lnum) + 2) / 2
   else
     return 0
   endif

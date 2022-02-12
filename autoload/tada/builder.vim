@@ -42,7 +42,7 @@ function! tada#builder#Metadata(lnum)
   let num = a:lnum
   let l:metadata = {}
 
-  while tada#SyntaxGroupOfLine(num) == 'tadaMetadata'
+  while getline(num) =~ '/^\s\{2,}|.*$/'
     let matches = matchlist(getline(num), '| \(.\):\(.*\)$')
     let l:metadata[matches[1]] = matches[2]
     let num += 1
