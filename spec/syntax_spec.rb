@@ -13,6 +13,7 @@ RSpec.describe "syntax" do
             - Level 4:
               - Level 5:
                 - Level 6:
+                  > Note
       CONTENT
     end
 
@@ -29,6 +30,7 @@ RSpec.describe "syntax" do
         expect("My description").to have_highlight("tadaDescription")
         expect("Description with -").to have_highlight("tadaDescription")
         expect("List item").to have_highlight("tadaListItem")
+        expect("Note").to have_highlight("tadaNote")
       end
     end
 

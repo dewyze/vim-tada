@@ -11,7 +11,8 @@ syn spell toplevel
 syn sync fromstart
 syn case ignore
 
-syn match tadaDescription /^\s*[^ \-|]\+.*$/
+syn match tadaDescription /^\s*[^ \-|>]\+.*$/
+syn match tadaNote /^\s*>.*/
 syn match tadaMetadata /^\s\{2,}|.*$/
 syn match tadaComment /^\s*#.*$/
 syn match tadaListItem /^\s*-\s*$/
@@ -46,6 +47,7 @@ hi def link tadaInvalidConfig SpellBad
 hi def link tadaBufferConfig Comment
 hi def link tadaComment Comment
 hi def link tadaMetadata Identifier
+hi def link tadaNote SpecialComment
 
 hi Folded guifg=CadetBlue
 
