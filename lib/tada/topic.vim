@@ -15,6 +15,26 @@ function! s:TadaTopic.New(data)
   return topic
 endfunction
 
+function! s:TadaTopic.ToJson()
+  let topic = copy(self)
+
+  call remove(topic, 'FoldText')
+  call remove(topic, 'New')
+  call remove(topic, 'ToJson')
+  call remove(topic, 'MapTodo')
+  let topic["metadata"] = topic["metadata"].ToJson()
+
+  # TODO: This should just gather data about todos, counts, etc.
+
+  let topic["todos"] = map(topic["todos"], s:TadaTopic.MapTodo)
+
+  return topic
+endfunction
+
+function! s:TadaTopic.MapTodo(idx, todo)
+  return a:todo.ToJson()
+endfunction
+
 function! s:TadaTopic.FoldText()
 
   let fold_text = '- '

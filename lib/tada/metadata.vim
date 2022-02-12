@@ -14,3 +14,12 @@ function! s:TadaMetadata.New(data)
 
   return metadata
 endfunction
+
+function! s:TadaMetadata.ToJson()
+  let metadata = copy(self)
+
+  call remove(metadata, 'New')
+  call remove(metadata, 'ToJson')
+
+  return metadata
+endfunction

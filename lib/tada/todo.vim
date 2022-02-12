@@ -9,3 +9,12 @@ function! s:TadaTodo.New(data)
 
   return todo
 endfunction
+
+function! s:TadaTodo.ToJson()
+  let todo = copy(self)
+
+  call remove(todo, 'New')
+  call remove(todo, 'ToJson')
+
+  return todo
+endfunction

@@ -51,6 +51,8 @@ function! tada#init#Mappings()
 endfunction
 
 function! tada#init#TodoConfig()
+  " TODO: check array of b:statuses to see if custom
+
   call tada#init#BufferGlobal('tada_todo_style', "'unicode'")
 
   let statuses = []
