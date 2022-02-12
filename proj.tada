@@ -110,6 +110,9 @@
     - [ ] Duplicate statuses
     - [ ] Multiple statuses with the same symbol
     - [ ] Configurating an unused variable
+- Help:
+  - [ ] Help UI?
+  - [ ] Vim help file
 - Todos:
   - [ ] Add "project" style: unplanned, ready, in progress, done, blocked, ignored
   - [ ] Remove "blocked" from the unicode style

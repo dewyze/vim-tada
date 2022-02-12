@@ -52,25 +52,13 @@ function! tada#builder#Metadata(lnum)
 endfunction
 
 function! tada#builder#TopicLevel(lnum)
-  if tada#builder#TitleLevel(a:lnum)
-    return tada#builder#TitleLevel(a:lnum)
+  let title_level = tada#TitleLevel(a:lnum)
+
+  if title_level
+    return title_level
   endif
 
   return min([indent(a:lnum) / 2, 3])
-endfunction
-
-function! tada#builder#TitleLevel(lnum)
-  let group = tada#SyntaxGroupOfLine(a:lnum)
-
-  if group == 'tadaTopicTitle1'
-    return 1
-  elseif group == 'tadaTopicTitle2'
-    return 2
-  elseif group == 'tadaTopicTitle3'
-    return 3
-  else
-    return 0
-  endif
 endfunction
 
 function! tada#builder#Description(lnum)

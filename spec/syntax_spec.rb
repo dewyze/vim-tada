@@ -10,6 +10,9 @@ RSpec.describe "syntax" do
           - Story:
             Description with -
           - List item
+            - Level 4:
+              - Level 5:
+                - Level 6:
       CONTENT
     end
 
@@ -19,6 +22,9 @@ RSpec.describe "syntax" do
         expect("Epic").to have_highlight("tadaTopicTitle2")
         expect("Commented").to have_highlight("tadaComment")
         expect("Story").to have_highlight("tadaTopicTitle3")
+        expect("Level 4").to have_highlight("tadaTopicTitle4")
+        expect("Level 5").to have_highlight("tadaTopicTitle5")
+        expect("Level 6").to have_highlight("tadaTopicTitle6")
         expect("@:john").to have_highlight("tadaMetadata")
         expect("My description").to have_highlight("tadaDescription")
         expect("Description with -").to have_highlight("tadaDescription")

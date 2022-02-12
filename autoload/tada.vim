@@ -30,6 +30,16 @@ function! tada#IsMetadata(lnum)
   return tada#SyntaxGroupOfLine(a:lnum) == 'tadaMetadata'
 endfunction
 
+function! tada#TitleLevel(lnum)
+  let matches = matchlist(tada#SyntaxGroupOfLine(a:lnum), '^tadaTopicTitle\(\d\)')
+
+  if len(matches) > 0
+    return matches[1]
+  else
+    return 0
+  endif
+endfunction
+
 function! tada#NextTodoStatus()
   call tada#todo#ToggleTodoStatus(1)
 endfunction

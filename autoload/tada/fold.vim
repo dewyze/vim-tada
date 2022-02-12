@@ -14,11 +14,11 @@ function! tada#fold#TextForTopic()
 endfunction
 
 function! tada#fold#LevelOfLine(lnum)
-  let curline = getline(a:lnum)
-
   let matches = matchlist(tada#SyntaxGroupOfLine(a:lnum), '^tadaTopicTitle\(\d\)')
 
-  if len(matches) > 0 && matches[1] <= g:tada_fold_level
+  let title_level = tada#TitleLevel(a:lnum)
+
+  if title_level > 0 && title_level <= g:tada_fold_level
     return '>1'
   endif
 
