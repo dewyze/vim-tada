@@ -14,8 +14,8 @@ function! s:IsEmptyIndentable()
   return g:tada_smart_tab && getline('.') =~ '^\s*-\s*\%(\[.\]\)\?\s*$'
 endfunction
 
-function! s:IsEmptyListItem()
-  return getline('.') =~# '^\s*-\s*$'
+function! s:IsEmptyListOrTodo()
+  return getline('.') =~ '^\s*-\s*\%(\[.\]\)\?\s*$'
 endfunction
 
 function! s:HandleCR()
@@ -42,7 +42,8 @@ nnoremap <silent> <buffer> <C-T>O :normal! zR<CR>
 nnoremap <silent> <buffer> <C-B> :call tada#box#Toggle()<CR>
 inoremap <silent> <buffer> <script> <expr> <C-B> ' <BS><C-O>:call tada#box#Toggle()<CR>'
 inoremap <silent> <buffer> <script> <expr> <C-H> '<C-O>:call tada#map#EmptyLine()<CR>'
-inoremap <silent> <buffer> <script> <expr> \| <SID>IsEmptyListItem() ? '\|<C-O>:call tada#map#EmptyLine()<CR>' : '\|'
+inoremap <silent> <buffer> <script> <expr> \| <SID>IsEmptyListOrTodo() ? '\|<C-O>:call tada#map#EmptyLine()<CR>' : '\|'
+inoremap <silent> <buffer> <script> <expr> > <SID>IsEmptyListOrTodo() ? '><C-O>:call tada#map#EmptyLine()<CR>' : '>'
 inoremap <silent> <buffer> <script> <expr> <Tab> <SID>IsEmptyIndentable() ? '<C-T>' : '<Tab>'
 inoremap <silent> <buffer> <script> <expr> <S-Tab> <SID>IsEmptyIndentable() ? '<C-D>' : '<S-Tab>'
 inoremap <silent> <buffer> <script> <expr> <CR> <SID>HandleCR()

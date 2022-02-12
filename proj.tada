@@ -1,6 +1,10 @@
 - Keymaps:
   - Enter:
     - Topic:
+      | @:john
+      | ^:2022-03-01
+      | #:1
+
       - [✔] Insert dash
       - [ ] Insert topic template
         - [ ] Level specific
@@ -122,8 +126,8 @@
 - Post MVP:
   - [ ] Update README Filetype/markdown, note about setting filetype
 - Markdown Compatibility:
-  - [ ] Use ascii symbols
-  - [ ] Can you unload markdown plugin files?
+  - [⚑] Use ascii symbols
+  - [⚑] Can you unload markdown plugin files?
 - Archives:
   - What are options?:
     - [ ] Some sort of archive option

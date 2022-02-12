@@ -36,5 +36,58 @@ RSpec.describe "map specs" do
         NEW
       end
     end
+
+    it "removes the leading todo boxes" do
+      content = <<~CONTENT
+        - [ ] Todo Item:
+      CONTENT
+
+      with_file(content) do |file|
+        vim.normal "A"
+        vim.feedkeys '\<CR>| Description'
+        vim.write
+
+        expect(file.read).to eq(<<~NEW)
+          - [ ] Todo Item:
+                | Description
+        NEW
+      end
+    end
+  end
+
+  describe "delete list item if immediately typing note" do
+    it "removes the leading hyphen" do
+      content = <<~CONTENT
+        - Todo Item:
+      CONTENT
+
+      with_file(content) do |file|
+        vim.normal "A"
+        vim.feedkeys '\<CR>> Note'
+        vim.write
+
+        expect(file.read).to eq(<<~NEW)
+          - Todo Item:
+            > Note
+        NEW
+      end
+    end
+
+    it "removes the leading todo box" do
+      content = <<~CONTENT
+        - [ ] Todo Item:
+      CONTENT
+
+      with_file(content) do |file|
+        vim.normal "A"
+        vim.feedkeys '\<CR>> Note'
+        vim.write
+
+        expect(file.read).to eq(<<~NEW)
+          - [ ] Todo Item:
+                > Note
+        NEW
+      end
+    end
   end
 end
