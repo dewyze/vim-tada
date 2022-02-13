@@ -27,7 +27,7 @@ RSpec.describe "map specs" do
 
       with_file(content) do |file|
         vim.normal "A"
-        vim.feedkeys '\<CR>| Description'
+        vim.feedkeys '\<CR>|Description'
         vim.write
 
         expect(file.read).to eq(<<~NEW)
@@ -44,7 +44,7 @@ RSpec.describe "map specs" do
 
       with_file(content) do |file|
         vim.normal "A"
-        vim.feedkeys '\<CR>| Description'
+        vim.feedkeys '\<CR>|Description'
         vim.write
 
         expect(file.read).to eq(<<~NEW)
@@ -63,7 +63,7 @@ RSpec.describe "map specs" do
 
       with_file(content) do |file|
         vim.normal "A"
-        vim.feedkeys '\<CR>> Note'
+        vim.feedkeys '\<CR>>Note'
         vim.write
 
         expect(file.read).to eq(<<~NEW)
@@ -80,12 +80,52 @@ RSpec.describe "map specs" do
 
       with_file(content) do |file|
         vim.normal "A"
-        vim.feedkeys '\<CR>> Note'
+        vim.feedkeys '\<CR>>Note'
         vim.write
 
         expect(file.read).to eq(<<~NEW)
           - [ ] Todo Item:
                 > Note
+        NEW
+      end
+    end
+  end
+
+  describe "dedent and remove box if typing colon after hypen or box" do
+    it "removes the leading hyphen" do
+      content = <<~CONTENT
+        - Topic:
+          - [ ] Todo Item
+      CONTENT
+
+      with_file(content) do |file|
+        vim.normal "GA"
+        vim.feedkeys '\<CR>:Topic 2:'
+        vim.write
+
+        expect(file.read).to eq(<<~NEW)
+          - Topic:
+            - [ ] Todo Item
+          - Topic 2:
+        NEW
+      end
+    end
+
+    it "removes the leading todo box" do
+      content = <<~CONTENT
+          - Topic 1:
+            - Topic 1A
+      CONTENT
+
+      with_file(content) do |file|
+        vim.normal "GA"
+        vim.feedkeys '\<CR>:Topic 2:'
+        vim.write
+
+        expect(file.read).to eq(<<~NEW)
+          - Topic 1:
+            - Topic 1A
+          - Topic 2:
         NEW
       end
     end

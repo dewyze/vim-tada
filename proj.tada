@@ -8,20 +8,23 @@
       - [✔] Insert dash
       - [ ] Insert topic template
         - [ ] Level specific
-      - [ ] If description/notes after todo item, can we get the previous todo item width for the <C-B> command?
+      - [✔] If description/notes after todo item, can we get the previous todo item width for the <C-B> command?
     - Metadata:
       - [✔] If not empty, add another | line
       - [✔] If empty, delete | and add blank line
       - [ ] Add default metadata if defined
       - [ ] Add metadata if defined
     - Wizard Mode:
-      - Configuration
+      - [ ] Configuration
       - [ ] Guide through metadata, description, todos
+  - Colon:
+    - [✔] If we type a colon with a list item or block, we can convert it to a topic.
   - Todo:
     - [✔] If on, add - [ ]
     - [✔] If off, Delete - and add blank like
     - [✔] Enter when in middle of todo line if text is after leaves that text on the line
     - [⚑] Does this go to a new topic?
+          > No
   - Space:
     - [✔] Don't move todo cursor if cursor is in front of todo symbol
     - [✔] Checkbox toggle
@@ -64,7 +67,8 @@
     - [ ] Update README Keymap
   - Backspace:
     - [✔] Backspace on empty todo does what?
-    - [ ] <C-W> on empty todo does what?
+    - [✔] <C-W> on empty todo does what?
+          > Not gonna do, because we have other insert options to clear the line line C-H, |, >, and regular vim commands.
   - Configuration:
     - [ ] No keymap at all option
   - Dates:
@@ -126,8 +130,10 @@
 - Post MVP:
   - [ ] Update README Filetype/markdown, note about setting filetype
 - Markdown Compatibility:
-  - [⚑] Use ascii symbols
-  - [⚑] Can you unload markdown plugin files?
+  - [✔] Use ascii symbols
+        > There is a "markdown" mode, so it's still visible in markdown.
+  - [✔] Can you unload markdown plugin files?
+        > Ultimately not going to do this, if we want, we can produce some html.
 - Archives:
   - What are options?:
     - [ ] Some sort of archive option
