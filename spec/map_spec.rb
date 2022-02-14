@@ -113,8 +113,8 @@ RSpec.describe "map specs" do
 
     it "removes the leading todo box" do
       content = <<~CONTENT
-          - Topic 1:
-            - Topic 1A
+        - Topic 1:
+          - Topic 1A
       CONTENT
 
       with_file(content) do |file|
