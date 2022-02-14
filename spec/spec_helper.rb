@@ -29,6 +29,7 @@ Vimrunner::RSpec.configure do |config|
       file.write content
       file.rewind
       vim.edit file.path
+      vim.normal ""
       yield file
     end
   end

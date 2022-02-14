@@ -113,19 +113,19 @@ RSpec.describe "map specs" do
 
     it "removes the leading todo box" do
       content = <<~CONTENT
-          - Topic 1:
-            - Topic 1A
+        - Topic 1:
+          - Topic 2
       CONTENT
 
       with_file(content) do |file|
         vim.normal "GA"
-        vim.feedkeys '\<CR>:Topic 2:'
+        vim.feedkeys '\<CR>:Topic 3:'
         vim.write
 
         expect(file.read).to eq(<<~NEW)
           - Topic 1:
-            - Topic 1A
-          - Topic 2:
+            - Topic 2
+          - Topic 3:
         NEW
       end
     end
