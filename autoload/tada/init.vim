@@ -5,7 +5,7 @@ let g:tada_loaded_init_autoload = 1
 
 function! tada#init#Global(str, val)
   if !exists('g:' . a:str)
-    execute 'let g:' . a:str . ' = ' . a:val
+    let g:[a:str] = a:val
   endif
 endfunction
 
@@ -15,9 +15,9 @@ function! tada#init#BufferGlobal(str, val)
   endif
 
   if exists('g:' . a:str)
-    execute 'let b:' . a:str . ' = g:' . a:str
+    let b:[a:str] = get(g:, a:str)
   else
-    execute 'let b:' . a:str . ' = ' . a:val
+    let b:[a:str] = a:val
   endif
 endfunction
 
@@ -45,9 +45,9 @@ function! tada#init#Settings()
 endfunction
 
 function! tada#init#Mappings()
-  call tada#init#Global('tada_todo_switch_status_mapping', "'<Space>'")
-  call tada#init#Global('tada_todo_switch_status_reverse_mapping', "'<C-Space>'")
-  call tada#init#Global('tada_map_prefix', "'<C-T>'")
+  call tada#init#Global('tada_todo_switch_status_mapping', "<Space>")
+  call tada#init#Global('tada_todo_switch_status_reverse_mapping', "<C-Space>")
+  call tada#init#Global('tada_map_prefix', "<C-T>")
 endfunction
 
 function! tada#init#TodoConfig()
@@ -67,23 +67,23 @@ function! tada#init#TodoStyle()
     echoerr "Invalid @config.todo_style: " . b:tada_todo_style
     let b:tada_todo_style = 'unicode'
   else
-    call tada#init#BufferGlobal('tada_todo_style', "'unicode'")
+    call tada#init#BufferGlobal('tada_todo_style', 'unicode')
   endif
 endfunction
 
 function! tada#init#StatusesAndSymbols()
   if b:tada_todo_style == 'ascii'
-    let s:statuses = "['blank', 'in_progress', 'done', 'blocked']"
-    let s:symbols =  "{ 'blank': ' ', 'in_progress': '-', 'done': 'x', 'blocked': 'o' }"
+    let s:statuses = ['blank', 'in_progress', 'done', 'blocked']
+    let s:symbols =  { 'blank': ' ', 'in_progress': '-', 'done': 'x', 'blocked': 'o' }
   elseif b:tada_todo_style == 'simple'
-    let s:statuses = "['blank', 'done']"
-    let s:symbols =  "{ 'blank': ' ', 'done': '✔' }"
+    let s:statuses = ['blank', 'done']
+    let s:symbols =  { 'blank': ' ', 'done': '✔' }
   elseif b:tada_todo_style == 'markdown'
-    let s:statuses = "['blank', 'done']"
-    let s:symbols =  "{ 'blank': ' ', 'done': 'x' }"
+    let s:statuses = ['blank', 'done']
+    let s:symbols =  { 'blank': ' ', 'done': 'x' }
   else " 'unicode'
-    let s:statuses = "['blank', 'in_progress', 'done', 'blocked']"
-    let s:symbols = "{ 'blank': ' ', 'in_progress': '•', 'done': '✔', 'blocked': '⚑' }"
+    let s:statuses = ['blank', 'in_progress', 'done', 'blocked']
+    let s:symbols = { 'blank': ' ', 'in_progress': '•', 'done': '✔', 'blocked': '⚑' }
   endif
 endfunction
 
