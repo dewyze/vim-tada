@@ -152,3 +152,6 @@
   - Milestone/Gantt Chart:
     - [ ] Display it
     - [ ] Data?
+
+@config.todo_statuses = ['boring', 'donezo']
+@config.todo_symbols = {'boring': 'o', 'donezo': 'd'}

@@ -51,29 +51,52 @@ function! tada#init#Mappings()
 endfunction
 
 function! tada#init#TodoConfig()
-  " TODO: check array of b:statuses to see if custom
-
-  call tada#init#BufferGlobal('tada_todo_style', "'unicode'")
-
-  let statuses = []
-  let symbols = {}
-
-  if b:tada_todo_style == 'unicode'
-    let statuses = "['blank', 'in_progress', 'done', 'blocked']"
-    let symbols = "{ 'blank': ' ', 'in_progress': '•', 'done': '✔', 'blocked': '⚑' }"
-  elseif b:tada_todo_style == 'ascii'
-    let statuses = "['blank', 'in_progress', 'done', 'blocked']"
-    let symbols =  "{ 'blank': ' ', 'in_progress': '-', 'done': 'x', 'blocked': 'o' }"
-  elseif b:tada_todo_style == 'simple'
-    let statuses = "['blank', 'done']"
-    let symbols =  "{ 'blank': ' ', 'done': '✔' }"
-  elseif b:tada_todo_style == 'markdown'
-    let statuses = "['blank', 'done']"
-    let symbols =  "{ 'blank': ' ', 'done': 'x' }"
-  endif
-
-  call tada#init#BufferGlobal('tada_todo_statuses', statuses)
-  call tada#init#BufferGlobal('tada_todo_symbols', symbols)
+  call tada#init#TodoStyle()
+  call tada#init#StatusesAndSymbols()
+  call tada#init#BufferGlobal('tada_todo_statuses', s:statuses)
+  call tada#init#BufferGlobal('tada_todo_symbols', s:symbols)
+  call tada#init#ValidateTodoConfig()
 
   let b:tada_todo_default = b:tada_todo_symbols[b:tada_todo_statuses[0]]
+endfunction
+
+function! tada#init#TodoStyle()
+  if exists("b:tada_todo_symbols")
+    let b:tada_todo_style = "custom"
+  elseif exists("b:tada_todo_style") && index(["unicode", "ascii", "simple", "markdown"], b:tada_todo_style) < 0
+    echoerr "Invalid @config.todo_style: " . b:tada_todo_style
+    let b:tada_todo_style = 'unicode'
+  else
+    call tada#init#BufferGlobal('tada_todo_style', "'unicode'")
+  endif
+endfunction
+
+function! tada#init#StatusesAndSymbols()
+  if b:tada_todo_style == 'ascii'
+    let s:statuses = "['blank', 'in_progress', 'done', 'blocked']"
+    let s:symbols =  "{ 'blank': ' ', 'in_progress': '-', 'done': 'x', 'blocked': 'o' }"
+  elseif b:tada_todo_style == 'simple'
+    let s:statuses = "['blank', 'done']"
+    let s:symbols =  "{ 'blank': ' ', 'done': '✔' }"
+  elseif b:tada_todo_style == 'markdown'
+    let s:statuses = "['blank', 'done']"
+    let s:symbols =  "{ 'blank': ' ', 'done': 'x' }"
+  else " 'unicode'
+    let s:statuses = "['blank', 'in_progress', 'done', 'blocked']"
+    let s:symbols = "{ 'blank': ' ', 'in_progress': '•', 'done': '✔', 'blocked': '⚑' }"
+  endif
+endfunction
+
+function! tada#init#ValidateTodoConfig()
+  for status in b:tada_todo_statuses
+    if !has_key(b:tada_todo_symbols, status)
+      echoerr 'Todo status does not have symbol: ' . status
+
+      let b:tada_todo_style = 'unicode'
+      let b:tada_todo_statuses = ['blank', 'in_progress', 'done', 'blocked']
+      let b:tada_todo_symbols = { 'blank': ' ', 'in_progress': '•', 'done': '✔', 'blocked': '⚑' }
+
+      break
+    endif
+  endfor
 endfunction

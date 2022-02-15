@@ -238,6 +238,26 @@ RSpec.describe "box toggle specs" do
           NEW
         end
       end
+
+      it "works with box configuration" do
+        content = <<~CONTENT
+          - Todo item
+        CONTENT
+
+        vim.command("let g:tada_todo_statuses = ['doing', 'donezo']")
+        vim.command("let g:tada_todo_symbols = {'doing': 'o', 'donezo': 'd' }")
+
+        with_file(content) do |file|
+          vim.normal "$"
+          vim.feedkeys '\<C-B>'
+          vim.write
+
+          expect(file.read).to eq(<<~NEW)
+            - [o] Todo item
+          NEW
+        end
+
+      end
     end
 
     context "in insert mode" do
@@ -273,18 +293,18 @@ RSpec.describe "box toggle specs" do
         end
       end
 
-      it "works with an empty box" do
+      it "works with an empty list item" do
         content = <<~CONTENT
-          - [ ]
+          -
         CONTENT
 
         with_file(content) do |file|
-          vim.normal "gg$"
-          vim.feedkeys 'i\<C-B>Hello'
+          vim.normal "A"
+          vim.feedkeys '\<C-B>Hello'
           vim.write
 
           expect(file.read).to eq(<<~NEW)
-            - Hello
+            - [ ] Hello
           NEW
         end
       end

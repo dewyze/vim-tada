@@ -7,8 +7,8 @@ function! tada#box#Toggle()
   let group = tada#SyntaxGroupOfLine('.')
   let text = getline('.')
   let s:save_col = col('.')
-  let s:boxlen = len('[' . tada#todo#DefaultSymbol() . '] ')
   let s:blank_box = '[' . tada#todo#DefaultSymbol() . '] '
+  let s:boxlen = len(s:blank_box)
   let s:prev_line_num = line('.') - 1
 
   if text =~ '^\s*$' && tada#SyntaxGroupOfLine(s:prev_line_num) =~ '^tadaTodoItem'
@@ -45,7 +45,7 @@ function! s:BoxForDescriptionLine()
 endfunction
 
 function! s:BoxForEmptyTodoItem()
-  call setline('.', substitute(getline('.'), '^\(\s*\).*$', '\1- [ ] ', ''))
+  call setline('.', substitute(getline('.'), '^\(\s*\).*$', '\1- ' . s:blank_box, ''))
   normal! $
 endfunction
 

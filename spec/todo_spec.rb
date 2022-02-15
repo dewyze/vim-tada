@@ -15,6 +15,7 @@ RSpec.describe "todo" do
         vim.feedkeys " j j j "
         vim.write
 
+
         expect(file.read).to eq(<<~NEW)
         - [•] Todo item
         - [✔] In progress item
