@@ -112,7 +112,7 @@
       - [✔] Support Emojis
     - [ ] Topic statuses
   - Customize colors:
-    - [ ] Todo statuses
+    - [✔] Todo statuses
     - [ ] Topic Levels
   - Warnings:
     - [ ] Duplicate statuses
@@ -152,6 +152,3 @@
   - Milestone/Gantt Chart:
     - [ ] Display it
     - [ ] Data?
-
-@config.todo_statuses = ['boring', 'donezo']
-@config.todo_symbols = {'boring': 'o', 'donezo': 'd'}

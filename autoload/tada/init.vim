@@ -27,6 +27,7 @@ function! tada#init#Init()
   call tada#init#TodoConfig()
   call tada#init#ClassFiles()
   call tada#init#Mappings()
+  call tada#init#Colors()
 endfunction
 
 function! tada#init#ClassFiles()
@@ -99,4 +100,44 @@ function! tada#init#ValidateTodoConfig()
       break
     endif
   endfor
+endfunction
+
+function! tada#init#Colors()
+  let salmon = "e69ca0"
+  let red = "cc6666"
+  let orange = "de935f"
+  let yellow = "f0c674"
+  let green = "84b97c"
+  let jade = "4bb1a7"
+  let aqua = "639ee4"
+  let blue = "81a2be"
+  let royal = "648cb4"
+  let purple = "b294bb"
+  let gray = "969896"
+  let white = "ffffff"
+
+  let tada_colors = {
+  \   "comment": gray,
+  \   "metadata": jade,
+  \   "note": salmon,
+  \   "todo": {
+  \     "in_progress": yellow,
+  \     "done": green,
+  \     "blocked": red,
+  \   },
+  \   "topic": {
+  \     "1": purple,
+  \     "2": royal,
+  \     "3": orange,
+  \     "4": purple,
+  \     "5": royal,
+  \     "6": orange,
+  \   },
+  \ }
+
+  if exists("g:tada_colors")
+    call extend(tada_colors, g:tada_colors)
+  else
+    let g:tada_colors = tada_colors
+  endif
 endfunction

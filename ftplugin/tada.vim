@@ -65,4 +65,28 @@ setlocal foldexpr=tada#fold#LevelOfLine(v:lnum)
 setlocal fillchars=fold:\ "
 setlocal nofoldenable
 
+function s:Hi(group, fg, bg = "")
+  if a:fg != ""
+    exec "hi " . a:group . " guifg=#" . a:fg
+  endif
+
+  if a:bg != ""
+    exec "hi " . a:group . " guibg=#" . a:bg
+  endif
+endfun
+
+call <SID>Hi("tadaTopicTitle1", g:tada_colors["topic"]["1"])
+call <SID>Hi("tadaTopicTitle2", g:tada_colors["topic"]["2"])
+call <SID>Hi("tadaTopicTitle3", g:tada_colors["topic"]["3"])
+call <SID>Hi("tadaTopicTitle4", g:tada_colors["topic"]["4"])
+call <SID>Hi("tadaTopicTitle5", g:tada_colors["topic"]["5"])
+call <SID>Hi("tadaTopicTitle6", g:tada_colors["topic"]["6"])
+call <SID>Hi("tadaTodoItemInProgress", g:tada_colors["todo"]["in_progress"])
+call <SID>Hi("tadaTodoItemDone", g:tada_colors["todo"]["done"])
+call <SID>Hi("tadaTodoItemBlocked", g:tada_colors["todo"]["blocked"])
+call <SID>Hi("tadaInvalidConfig", "#ffffff", g:tada_colors["todo"]["blocked"])
+call <SID>Hi("tadaComment", g:tada_colors["comment"])
+call <SID>Hi("tadaMetadata", g:tada_colors["metadata"])
+call <SID>Hi("tadaNote", g:tada_colors["note"])
+
 let b:did_ftplugin = 1
