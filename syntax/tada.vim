@@ -18,6 +18,7 @@ syn match tadaComment /^\s*#.*$/
 syn match tadaListItem /^\s*-\s*$/
 syn region tadaListItem start=/^\s*-\s*[^ []/ end=/\(:\)\@<!$/ oneline
 
+syn region tadaArchived matchgroup=tadaDelmiter start="^===" end="==="
 syn region tadaTopicTitle1 matchgroup=tadaDelimiter start="^-\s\?" end=":$" oneline
 syn region tadaTopicTitle2 matchgroup=tadaDelimiter start="^\s\{2}-\s\?" end=":$" oneline
 syn region tadaTopicTitle3 matchgroup=tadaDelimiter start="^\s\{4}-\s\?" end=":$" oneline
@@ -34,6 +35,7 @@ endfor
 syn match tadaInvalidConfig /^\s*@config\..*$/
 syn match tadaBufferConfig /^\s*@config\.[^ ]\+\s\?=\s\?.\+$/
 
+hi def link tadaArchivedTopic Comment
 hi def link tadaTopicTitle1 Define
 hi def link tadaTopicTitle2 Function
 hi def link tadaTopicTitle3 String

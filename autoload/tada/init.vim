@@ -107,6 +107,7 @@ function! tada#init#Colors()
   let red = "cc6666"
   let orange = "de935f"
   let yellow = "f0c674"
+  let canary = "bfbc91"
   let green = "84b97c"
   let jade = "4bb1a7"
   let aqua = "639ee4"
@@ -117,9 +118,10 @@ function! tada#init#Colors()
   let white = "ffffff"
 
   let tada_colors = {
+  \   "archive": gray,
   \   "comment": gray,
   \   "metadata": jade,
-  \   "note": salmon,
+  \   "note": canary,
   \   "todo": {
   \     "in_progress": yellow,
   \     "done": green,

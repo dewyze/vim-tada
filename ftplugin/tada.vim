@@ -75,6 +75,7 @@ function s:Hi(group, fg, bg = "")
   endif
 endfun
 
+call <SID>Hi("tadaArchivedTopic", g:tada_colors["archive"])
 call <SID>Hi("tadaTopicTitle1", g:tada_colors["topic"]["1"])
 call <SID>Hi("tadaTopicTitle2", g:tada_colors["topic"]["2"])
 call <SID>Hi("tadaTopicTitle3", g:tada_colors["topic"]["3"])
