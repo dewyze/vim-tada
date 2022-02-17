@@ -41,9 +41,10 @@
     - [ ] Autolines
   - Folds:
     - Enter:
-      - [ ] Enter should always just fold the minimum amount
+      - [ ] Should enter fold from any line?
+      - [✔] Enter should always just fold the minimum amount
             > Ideally it should not fold/unfold anything else
-      - [ ] If clicking on not topic title, it does not recalculate fold on enter, look up for most recent topic
+      - [✔] If clicking on not topic title, it does not recalculate fold on enter, look up for most recent topic
     - Fold Text:
       - [ ] Show date?
       - [ ] Show priority?
@@ -60,18 +61,17 @@
     > Archive ability is really about automatic folding
     > Maybe also about moving stuff to the bottom of the file
     - What are options?:
-      - [ ] Some sort of archive option
-      - [ ] Archive goes below config?
-      - [ ] Does this matter without fancy UI?
+      - [✔] Some sort of archive option
+      - [✔] Archive goes below config?
+      - [✔] Does this matter without fancy UI?
     - Folds:
-      - [ ] Archived ones are always folded
+      - [✔] Archived ones are always folded
     - Keymap:
       - [ ] Keymap to archive, add leading =?
   - Bugs:
     - [ ] Remove '>' when converting to box
     - [ ] When typing '|' or ':' in a note, it should go do the typical thing
     - [ ] Shift tab when '>' should go backwards
-- Simple Todo Lists:
 - Fancy Todo Lists:
   - Metadata Enhancements:
     - Default Metadata:
@@ -127,83 +127,81 @@
     - [ ] Display it
     - [ ] Data?
 
-===
-= - Archive:
-=   - Keymaps:
-=     - Enter:
-=       - Topic:
-=         - [✔] Insert dash
-=         - [✔] If description/notes after todo item, can we get the previous todo item width for the <C-B> command?
-=       - Metadata:
-=         - [✔] If not empty, add another | line
-=         - [✔] If empty, delete | and add blank line
-=     - Colon:
-=       - [✔] If we type a colon with a list item or block, we can convert it to a topic.
-=     - Todo:
-=       - [✔] If on, add - [ ]
-=       - [✔] If off, Delete - and add blank like
-=       - [✔] Enter when in middle of todo line if text is after leaves that text on the line
-=       - [⚑] Does this go to a new topic?
-=             > No
-=     - Space:
-=       - [✔] Don't move todo cursor if cursor is in front of todo symbol
-=       - [✔] Checkbox toggle
-=     - Tab/Shift+Tab:
-=       - [✔] Variable
-=       - [✔] If on, add tab/remove tab
-=       - [✔] If on todo, <S-Tab> moves into continued description?
-=     - List Item:
-=       - [✔] If on, add -
-=       - [✔] If off, delete - and add blank line
-=     - Folds:
-=       - [✔] Fold level 1
-=       - [✔] Fold level 2
-=       - [✔] Fold level 3
-=       - [✔] insert o/O if not using comment method
-=     - Fold View:
-=       - [•] Keymap for <C-T>
-=     - Insert shortcuts:
-=       - [✔] Insert list/metadata/todo
-=       - [✔] Convert line to list/metadata/todo
-=       - [✔] When typing Pipe on list, convert line to metadata
-=     - Normal shortcuts:
-=       - [✔] Convert line to list/metadata/todo
-=     - Backspace:
-=       - [✔] Backspace on empty todo does what?
-=       - [✔] <C-W> on empty todo does what?
-=             > Not gonna do, because we have other insert options to clear the line line C-H, |, >, and regular vim commands.
-=     - Dates:
-=     - Empty Line:
-=       - [✔] Empty line before cursor
-=       - [✔] Is there a keymap for both insert and normal mode available?
-=   - Editing:
-=   - Syntax:
-=     - [✔] Single character list item not recognized
-=     - [✔] Support comments
-=     - [⚑] Infinite Nesting
-=           > 6 is enough
-=     - [✔] Accept Tadafile
-=   - Folding:
-=     - Fold text:
-=       - [✔] Include status
-=       - [✔] Include todo counts
-=     - Fold Levels:
-=     - Keymaps:
-=       - [✔] Enter collapses/opens fold on a topic
-=   - Configurations:
-=     - Statuses:
-=       - [✔] Todo statuses
-=         - [✔] Include custom state/order
-=         - [✔] Support Emojis
-=     - Customize colors:
-=       - [✔] Todo statuses
-=       - [✔] Topic Levels
-=   - Todos:
-=     - [⚑] Remove "blocked" from the unicode style
-=           > No
-=   - Markdown Compatibility:
-=     - [✔] Use ascii symbols
-=           > There is a "markdown" mode, so it's still visible in markdown.
-=     - [✔] Can you unload markdown plugin files?
-=           > Ultimately not going to do this, if we want, we can produce some html.
-===
+###
+# - Keymaps:
+#   - Enter:
+#     - Topic:
+#       - [✔] Insert dash
+#       - [✔] If description/notes after todo item, can we get the previous todo item width for the <C-B> command?
+#     - Metadata:
+#       - [✔] If not empty, add another | line
+#       - [✔] If empty, delete | and add blank line
+#   - Colon:
+#     - [✔] If we type a colon with a list item or block, we can convert it to a topic.
+#   - Todo:
+#     - [✔] If on, add - [ ]
+#     - [✔] If off, Delete - and add blank like
+#     - [✔] Enter when in middle of todo line if text is after leaves that text on the line
+#     - [⚑] Does this go to a new topic?
+#           > No
+#   - Space:
+#     - [✔] Don't move todo cursor if cursor is in front of todo symbol
+#     - [✔] Checkbox toggle
+#   - Tab/Shift+Tab:
+#     - [✔] Variable
+#     - [✔] If on, add tab/remove tab
+#     - [✔] If on todo, <S-Tab> moves into continued description?
+#   - List Item:
+#     - [✔] If on, add -
+#     - [✔] If off, delete - and add blank line
+#   - Folds:
+#     - [✔] Fold level 1
+#     - [✔] Fold level 2
+#     - [✔] Fold level 3
+#     - [✔] insert o/O if not using comment method
+#   - Fold View:
+#     - [•] Keymap for <C-T>
+#   - Insert shortcuts:
+#     - [✔] Insert list/metadata/todo
+#     - [✔] Convert line to list/metadata/todo
+#     - [✔] When typing Pipe on list, convert line to metadata
+#   - Normal shortcuts:
+#     - [✔] Convert line to list/metadata/todo
+#   - Backspace:
+#     - [✔] Backspace on empty todo does what?
+#     - [✔] <C-W> on empty todo does what?
+#           > Not gonna do, because we have other insert options to clear the line line C-H, |, >, and regular vim commands.
+#   - Dates:
+#   - Empty Line:
+#     - [✔] Empty line before cursor
+#     - [✔] Is there a keymap for both insert and normal mode available?
+# - Editing:
+# - Syntax:
+#   - [✔] Single character list item not recognized
+#   - [✔] Support comments
+#   - [⚑] Infinite Nesting
+#         > 6 is enough
+#   - [✔] Accept Tadafile
+# - Folding:
+#   - Fold text:
+#     - [✔] Include status
+#     - [✔] Include todo counts
+#   - Fold Levels:
+#   - Keymaps:
+#     - [✔] Enter collapses/opens fold on a topic
+# - Configurations:
+#   - Statuses:
+#     - [✔] Todo statuses
+#       - [✔] Include custom state/order
+#       - [✔] Support Emojis
+#   - Customize colors:
+#     - [✔] Todo statuses
+#     - [✔] Topic Levels
+# - Todos:
+#   - [⚑] Remove "blocked" from the unicode style
+#         > No
+# - Markdown Compatibility:
+#   - [✔] Use ascii symbols
+#         > There is a "markdown" mode, so it's still visible in markdown.
+#   - [✔] Can you unload markdown plugin files?
+#         > Ultimately not going to do this, if we want, we can produce some html.
