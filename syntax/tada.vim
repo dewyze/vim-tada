@@ -12,19 +12,16 @@ syn sync fromstart
 syn case ignore
 
 syn match tadaDescription /^\s*[^ \-|>]\+.*$/
-syn match tadaNote /^\s*>.*/
-syn match tadaMetadata /^\s\{2,}|.*$/
-syn match tadaComment /^\s*#.*$/
-syn match tadaListItem /^\s*-\s*$/
-syn region tadaListItem start=/^\s*-\s*[^ []/ end=/\(:\)\@<!$/ oneline
+execute 'syn match tadaNote "' . g:tada_pat_note . '"'
+execute 'syn match tadaMetadata "' . g:tada_pat_metadata . '"'
+execute 'syn match tadaComment "' . g:tada_pat_comment . '"'
+execute 'syn match tadaListItem "' . g:tada_pat_list_item_empty . '"'
+execute 'syn match tadaListItem "' . g:tada_pat_list_item . '"'
 
-syn region tadaArchived matchgroup=tadaDelmiter start="^===" end="==="
-syn region tadaTopicTitle1 matchgroup=tadaDelimiter start="^-\s\?" end=":$" oneline
-syn region tadaTopicTitle2 matchgroup=tadaDelimiter start="^\s\{2}-\s\?" end=":$" oneline
-syn region tadaTopicTitle3 matchgroup=tadaDelimiter start="^\s\{4}-\s\?" end=":$" oneline
-syn region tadaTopicTitle4 matchgroup=tadaDelimiter start="^\s\{6}-\s\?" end=":$" oneline
-syn region tadaTopicTitle5 matchgroup=tadaDelimiter start="^\s\{8}-\s\?" end=":$" oneline
-syn region tadaTopicTitle6 matchgroup=tadaDelimiter start="^\s\{10}-\s\?" end=":$" oneline
+for level in [1,2,3,4,5,6]
+  let indent = (level - 1) * 2
+  execute 'syn region tadaTopicTitle' . level . ' matchgroup=tadaDelimiter start="^\s\{' . indent . '}-\s*" end=":$" oneline'
+endfor
 
 for [status, symbol] in items(b:tada_todo_symbols)
   let name = tada#utils#Camelize(status)
@@ -32,8 +29,8 @@ for [status, symbol] in items(b:tada_todo_symbols)
   execute 'syn match tadaTodoItem' . name . ' /^\s*-\s*\[' . symbol . '\].*$/'
 endfor
 
-syn match tadaInvalidConfig /^\s*@config\..*$/
-syn match tadaBufferConfig /^\s*@config\.[^ ]\+\s\?=\s\?.\+$/
+execute 'syn match tadaInvalidConfig "' . g:tada_pat_invalid_config . '"'
+execute 'syn match tadaBufferConfig "' . g:tada_pat_buffer_config . '"'
 
 hi def link tadaArchivedTopic Comment
 hi def link tadaTopicTitle1 Define

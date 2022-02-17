@@ -22,6 +22,7 @@ function! tada#init#BufferGlobal(str, val)
 endfunction
 
 function! tada#init#Init()
+  call tada#init#Patterns()
   call tada#init#Settings()
   call tada#config#LoadConfigs()
   call tada#init#TodoConfig()
@@ -142,4 +143,20 @@ function! tada#init#Colors()
   else
     let g:tada_colors = tada_colors
   endif
+endfunction
+
+function! tada#init#Patterns()
+  let g:tada_pat_blank_line = '^\s*$'
+  let g:tada_pat_buffer_config = '^\s*@config\.[^ ]\+\s\?=\s\?.\+$'
+  let g:tada_pat_comment = '^\s*#.*$'
+  let g:tada_pat_invalid_config = '^\s*@config\..*$'
+  let g:tada_pat_list_item = '^\s*-\s*[^ [].*\(:\)\@<!$'
+  let g:tada_pat_list_item_empty = '^\s*-\s*$'
+  let g:tada_pat_list_item_end = '\(:\)\@<!$'
+  let g:tada_pat_list_item_start = '^\s*-\s*[^ []'
+  let g:tada_pat_topic = '^\s*-.*:$'
+  let g:tada_pat_metadata = '^\s\{2,}|.*$'
+  let g:tada_pat_note = '^\s*>.*'
+  let g:tada_pat_todo_item = '^\s*-\s*\[.\].*$'
+  let g:tada_pat_archive_header = '^\s*###\s*$'
 endfunction

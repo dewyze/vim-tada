@@ -40,6 +40,9 @@
     - [ ] Colors
     - [ ] Autolines
   - Folds:
+    - Comment:
+      - [ ] Fold commented topics
+      - [ ] Config as 'remember folds' or something
     - Enter:
       - [ ] Should enter fold from any line?
       - [✔] Enter should always just fold the minimum amount
@@ -63,7 +66,7 @@
     - What are options?:
       - [✔] Some sort of archive option
       - [✔] Archive goes below config?
-      - [✔] Does this matter without fancy UI?
+     jk - [✔] Does this matter without fancy UI?
     - Folds:
       - [✔] Archived ones are always folded
     - Keymap:

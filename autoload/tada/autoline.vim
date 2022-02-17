@@ -24,7 +24,7 @@ function! tada#autoline#Handle(key, on_empty = 1)
 
   if a:on_empty && getline('.') =~ empty_pattern
     return "\<ESC>S\<CR>"
-  elseif tada#SyntaxGroupOfLine('.') =~ '^tadaTodoItem'
+  elseif getline('.') =~ g:tada_pat_todo_item
     return a:key ."[" . b:tada_todo_default . "] "
   else
     return a:key

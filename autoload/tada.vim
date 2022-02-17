@@ -15,23 +15,23 @@ function! tada#SyntaxGroupOfLine(lnum)
 endfunction
 
 function! tada#IsListItem(lnum)
-  return tada#SyntaxGroupOfLine(a:lnum) == 'tadaListItem'
+  return getline('.') =~ g:tada_pat_list_item
 endfunction
 
 function! tada#IsTodoItem(lnum)
-  return tada#SyntaxGroupOfLine(a:lnum) =~ '^tadaTodoItem'
+  return getline('.') =~ g:tada_pat_todo_item
 endfunction
 
 function! tada#IsTopicTitle(lnum)
-  return tada#SyntaxGroupOfLine(a:lnum) =~ '^tadaTopicTitle'
+  return getline('.') =~ g:tada_pat_topic
 endfunction
 
 function! tada#IsMetadata(lnum)
-  return tada#SyntaxGroupOfLine(a:lnum) == 'tadaMetadata'
+  return getline('.') =~ g:tada_pat_metadata
 endfunction
 
 function! tada#TitleLevel(lnum)
-  if getline(a:lnum) =~ '\s*-.*:$'
+  if getline(a:lnum) =~ g:tada_pat_topic
     return (indent(a:lnum) + 2) / 2
   else
     return 0

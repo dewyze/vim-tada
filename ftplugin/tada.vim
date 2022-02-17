@@ -57,7 +57,7 @@ if g:tada_autolines
 end
 
 setlocal commentstring=#\ %s
-setlocal ts=2 sw=2 expandtab smarttab
+setlocal ts=2 sw=2 sts=2 expandtab smarttab
 setlocal autoindent
 setlocal foldmethod=expr
 setlocal foldtext=tada#fold#TextForTopic()
@@ -86,7 +86,7 @@ call <SID>Hi("tadaTopicTitle6", g:tada_colors["topic"]["6"])
 call <SID>Hi("tadaTodoItemInProgress", g:tada_colors["todo"]["in_progress"])
 call <SID>Hi("tadaTodoItemDone", g:tada_colors["todo"]["done"])
 call <SID>Hi("tadaTodoItemBlocked", g:tada_colors["todo"]["blocked"])
-call <SID>Hi("tadaInvalidConfig", "#ffffff", g:tada_colors["todo"]["blocked"])
+call <SID>Hi("tadaInvalidConfig", "ffffff", g:tada_colors["todo"]["blocked"])
 call <SID>Hi("tadaComment", g:tada_colors["comment"])
 call <SID>Hi("tadaMetadata", g:tada_colors["metadata"])
 call <SID>Hi("tadaNote", g:tada_colors["note"])

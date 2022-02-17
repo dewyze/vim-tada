@@ -11,13 +11,13 @@ function! tada#box#Toggle()
   let s:boxlen = len(s:blank_box)
   let s:prev_line_num = line('.') - 1
 
-  if text =~ '^\s*$' && tada#SyntaxGroupOfLine(s:prev_line_num) =~ '^tadaTodoItem'
+  if text =~ g:tada_pat_blank_line && tada#SyntaxGroupOfLine(s:prev_line_num) =~ '^tadaTodoItem'
     call s:BoxForBlankLinkBelowTodo()
-  elseif text =~ '^\s*$'
+  elseif text =~ g:tada_pat_blank_line
     call s:BoxForBlankLinkNotBelowTodo()
   elseif text =~ '^\(\s*-\)\@!.\+$'
     call s:BoxForDescriptionLine()
-  elseif text =~ '^\s*-\s*$'
+  elseif text =~ g:tada_pat_list_item_empty
     call s:BoxForEmptyTodoItem()
   elseif group == 'tadaListItem' || group =~ '^tadaTopicTitle'
     call s:BoxForListItemOrTopic()
@@ -40,6 +40,7 @@ endfunction
 
 function! s:BoxForDescriptionLine()
   let spaces = repeat(' ', max([indent('.') - 6, 0]))
+  let pat =
   call setline('.', substitute(getline('.'), '^\(\s*\)\(\S.*\)$', spaces . '- ' . s:blank_box . '\2', ''))
   call cursor(line('.'), s:NewColPos(0))
 endfunction
