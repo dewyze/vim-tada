@@ -76,19 +76,25 @@ function s:Hi(group, fg, bg = "")
   endif
 endfun
 
-call <SID>Hi("tadaArchivedTopic", g:tada_colors["archive"])
-call <SID>Hi("tadaTopicTitle1", g:tada_colors["topic"]["1"])
-call <SID>Hi("tadaTopicTitle2", g:tada_colors["topic"]["2"])
-call <SID>Hi("tadaTopicTitle3", g:tada_colors["topic"]["3"])
-call <SID>Hi("tadaTopicTitle4", g:tada_colors["topic"]["4"])
-call <SID>Hi("tadaTopicTitle5", g:tada_colors["topic"]["5"])
-call <SID>Hi("tadaTopicTitle6", g:tada_colors["topic"]["6"])
-call <SID>Hi("tadaTodoItemInProgress", g:tada_colors["todo"]["in_progress"])
-call <SID>Hi("tadaTodoItemDone", g:tada_colors["todo"]["done"])
-call <SID>Hi("tadaTodoItemBlocked", g:tada_colors["todo"]["blocked"])
-call <SID>Hi("tadaInvalidConfig", "ffffff", g:tada_colors["todo"]["blocked"])
-call <SID>Hi("tadaComment", g:tada_colors["comment"])
-call <SID>Hi("tadaMetadata", g:tada_colors["metadata"])
-call <SID>Hi("tadaNote", g:tada_colors["note"])
+call <SID>Hi("tadaArchivedTopic", b:tada_colors["archive"])
+call <SID>Hi("tadaTopicTitle1", b:tada_colors["topic"]["1"])
+call <SID>Hi("tadaTopicTitle2", b:tada_colors["topic"]["2"])
+call <SID>Hi("tadaTopicTitle3", b:tada_colors["topic"]["3"])
+call <SID>Hi("tadaTopicTitle4", b:tada_colors["topic"]["4"])
+call <SID>Hi("tadaTopicTitle5", b:tada_colors["topic"]["5"])
+call <SID>Hi("tadaTopicTitle6", b:tada_colors["topic"]["6"])
+call <SID>Hi("tadaInvalidConfig", "ffffff", b:tada_colors["invalid_config"])
+call <SID>Hi("tadaComment", b:tada_colors["comment"])
+call <SID>Hi("tadaMetadata", b:tada_colors["metadata"])
+call <SID>Hi("tadaNote", b:tada_colors["note"])
+
+for status in b:tada_todo_statuses
+  let name = tada#utils#Camelize(status)
+
+  if has_key(b:tada_colors["todo"], status)
+    let color = substitute(b:tada_colors["todo"][status], '^#', '', '')
+    execute 'call <SID>Hi("tadaTodoItem' . name . '", "' . color . '")'
+  endif
+endfor
 
 let b:did_ftplugin = 1

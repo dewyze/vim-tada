@@ -121,6 +121,7 @@ function! tada#init#Colors()
   let tada_colors = {
   \   "archive": gray,
   \   "comment": gray,
+  \   "invalid_config": red,
   \   "metadata": jade,
   \   "note": canary,
   \   "todo": {
@@ -140,9 +141,13 @@ function! tada#init#Colors()
 
   if exists("g:tada_colors")
     call extend(tada_colors, g:tada_colors)
-  else
-    let g:tada_colors = tada_colors
   endif
+
+  if exists("b:tada_todo_colors")
+    let tada_colors["todo"] = b:tada_todo_colors
+  endif
+
+  let b:tada_colors = tada_colors
 endfunction
 
 function! tada#init#Patterns()
