@@ -44,7 +44,7 @@ function! tada#fold#LevelOfLine(lnum)
 endfunction
 
 function! tada#fold#To(level)
-  execute 'set foldlevel=' . (a:level - 1)
+  execute 'setlocal foldlevel=' . (a:level - 1)
 
   normal! zX
 endfunction

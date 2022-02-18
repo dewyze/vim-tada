@@ -36,7 +36,7 @@ nmap <silent> <buffer> <nowait> <script> <expr> <CR> <SID>HandleNormalCR()
 nnoremap <silent> <buffer> <C-T>1 :call tada#fold#To(1)<CR>
 nnoremap <silent> <buffer> <C-T>2 :call tada#fold#To(2)<CR>
 nnoremap <silent> <buffer> <C-T>3 :call tada#fold#To(3)<CR>
-nnoremap <silent> <buffer> <C-T>0 :normal! zR<CR>
+nnoremap <silent> <buffer> <C-T>0 :call tada#fold#To(7)<CR>
 nnoremap <silent> <buffer> <C-T>o :normal! zO<CR>
 nnoremap <silent> <buffer> <C-T>c :normal! zc<CR>
 nnoremap <silent> <buffer> <C-B> :call tada#box#Toggle()<CR>
