@@ -15,19 +15,19 @@ function! tada#SyntaxGroupOfLine(lnum)
 endfunction
 
 function! tada#IsListItem(lnum)
-  return getline('.') =~ g:tada_pat_list_item
+  return getline(a:lnum) =~ g:tada_pat_list_item
 endfunction
 
 function! tada#IsTodoItem(lnum)
-  return getline('.') =~ g:tada_pat_todo_item
+  return getline(a:lnum) =~ g:tada_pat_todo_item
 endfunction
 
 function! tada#IsTopicTitle(lnum)
-  return getline('.') =~ g:tada_pat_topic
+  return getline(a:lnum) =~ g:tada_pat_topic
 endfunction
 
 function! tada#IsMetadata(lnum)
-  return getline('.') =~ g:tada_pat_metadata
+  return getline(a:lnum) =~ g:tada_pat_metadata
 endfunction
 
 function! tada#TitleLevel(lnum)

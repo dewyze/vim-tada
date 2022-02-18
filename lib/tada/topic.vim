@@ -36,7 +36,6 @@ function! s:TadaTopic.MapTodo(idx, todo)
 endfunction
 
 function! s:TadaTopic.FoldText()
-
   let fold_text = repeat(' ', (self.level - 1) * 2)
   let fold_text .= '- '
   let fold_text .= self.title . ': '

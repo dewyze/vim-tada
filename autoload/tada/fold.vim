@@ -17,9 +17,6 @@ function! tada#fold#HandleCR()
 endfunction
 
 function! tada#fold#TextForTopic()
-  let startLine = getline(v:foldstart)
-  let endLine = getline(v:foldstart)
-
   if getline(v:foldstart) =~ g:tada_pat_archive_header
     return "### ARCHIVE ###"
   else
