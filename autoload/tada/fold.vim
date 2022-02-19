@@ -7,8 +7,16 @@ function! tada#fold#HandleCR()
   let current = getline('.')
   let is_folded_at = foldclosed('.')
 
-  if current =~ g:tada_pat_topic || current =~ g:tada_pat_archive_header
+  if current =~ g:tada_pat_archive_header
     return "za"
+  elseif current =~ g:tada_pat_topic
+    if is_folded_at == line('.')
+      return "za"
+    else
+      return "zXza:call tada#fold#KeepCursor(function('tada#fold#Comment'))\<CR>"
+    endif
+  elseif current =~ g:tada_pat_commented_topic
+    return ":call tada#fold#KeepCursor(function('tada#fold#Uncomment'))\<CR>zXzo"
   elseif is_folded_at > -1 && line('.') != is_folded_at
     return "zv"
   else
@@ -16,9 +24,31 @@ function! tada#fold#HandleCR()
   endif
 endfunction
 
+function! tada#fold#KeepCursor(Func)
+  let save_cursor = getcurpos()
+  call a:Func()
+  call setpos('.', save_cursor)
+endfunction
+
+function! tada#fold#Comment()
+  let fold_start = foldclosed('.')
+  let fold_end = foldclosedend('.')
+  silent! execute fold_start . ',' . fold_end . 's/^/# /e'
+  silent! write
+endfunction
+
+function! tada#fold#Uncomment()
+  silent! execute foldclosed('.') . ',' . foldclosedend('.') . 's/# //e'
+  silent! write
+endfunction
+
 function! tada#fold#TextForTopic()
-  if getline(v:foldstart) =~ g:tada_pat_archive_header
+  let text = getline(v:foldstart)
+
+  if text =~ g:tada_pat_archive_header
     return "### ARCHIVE ###"
+  elseif text =~ g:tada_pat_comment
+    return substitute(text, '# ', '', '')
   else
     let topic = tada#builder#Topic(v:foldstart)
 
@@ -32,10 +62,12 @@ function! tada#fold#LevelOfLine(lnum)
 
   if current_line =~ g:tada_pat_blank_line
     return '='
-  elseif current_line =~ g:tada_pat_archive_header
-    return '>' . (&foldlevel + 1)
+  elseif current_line =~ g:tada_pat_archive_header || current_line =~ g:tada_pat_commented_topic
+    return '>' . (&foldlevel + 2)
+  elseif current_line =~ g:tada_pat_archive
+    execute 'return ' . (&foldlevel + 2)
   elseif current_line =~ g:tada_pat_comment
-    execute 'return ' . (&foldlevel + 1)
+    execute 'return ' . (&foldlevel + 2)
   elseif title_level
     return '>' . title_level
   else

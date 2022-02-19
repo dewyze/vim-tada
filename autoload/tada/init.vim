@@ -43,6 +43,7 @@ endfunction
 
 function! tada#init#Settings()
   call tada#init#Global('tada_autolines', 1)
+  call tada#init#Global('tada_persist_folds', 1)
   call tada#init#Global('tada_smart_tab', 1)
 endfunction
 
@@ -151,9 +152,12 @@ function! tada#init#Colors()
 endfunction
 
 function! tada#init#Patterns()
+  let g:tada_pat_archive_header = '^\s*===\s*$'
+  let g:tada_pat_archive = '^\s*=.*$'
   let g:tada_pat_blank_line = '^\s*$'
   let g:tada_pat_buffer_config = '^\s*@config\.[^ ]\+\s\?=\s\?.\+$'
   let g:tada_pat_comment = '^\s*#.*$'
+  let g:tada_pat_commented_topic = '^\s*#\+\s*-.*:$'
   let g:tada_pat_invalid_config = '^\s*@config\..*$'
   let g:tada_pat_list_item = '^\s*-\s*[^ [].*\(:\)\@<!$'
   let g:tada_pat_list_item_empty = '^\s*-\s*$'
@@ -163,5 +167,4 @@ function! tada#init#Patterns()
   let g:tada_pat_metadata = '^\s\{2,}|.*$'
   let g:tada_pat_note = '^\s*>.*'
   let g:tada_pat_todo_item = '^\s*-\s*\[.\].*$'
-  let g:tada_pat_archive_header = '^\s*###\s*$'
 endfunction
