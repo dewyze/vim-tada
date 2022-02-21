@@ -2,8 +2,8 @@
   - Housekeeping:
     - [ ] Convert to keymaps to commands
     - [ ] Builder should iterate over lines and not assume order
-  - Help text:
-    - [ ] Add help text for everything
+  <#> - Help text:
+  <#>   - [ ] Add help text for everything
   - Docs:
     - Features:
       - [ ] 6 layered todo list
@@ -28,7 +28,7 @@
       - [ ] <C-B>
       - [ ] \|
       - [ ] \>
-      - [ ] \:
+      - [ ] '\:'
       - [ ] <C-T>1-6
       - [ ] <C-T>o/O
       - [ ] <C-H>
@@ -70,6 +70,7 @@
     - Keymap:
       - [ ] Keymap to archive, add leading =?
   - Bugs:
+    - [ ] <C-B> with '>' throws an error
     - [ ] Remove '>' when converting to box
     - [ ] When typing '|' or ':' in a note, it should go do the typical thing
     - [ ] Shift tab when '>' should go backwards

@@ -32,7 +32,7 @@ endfor
 execute 'syn match tadaInvalidConfig "' . g:tada_pat_invalid_config . '"'
 execute 'syn match tadaBufferConfig "' . g:tada_pat_buffer_config . '"'
 
-hi def link tadaBufferConfig tadaComment
+hi def link tadaBufferConfig Comment
 hi def link tadaComment Comment
 hi def link tadaInvalidConfig SpellBad
 hi def link tadaMetadata Identifier

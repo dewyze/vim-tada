@@ -5,9 +5,9 @@ RSpec.describe "syntax" do
       - Milestone:
         | @:john
         - Epic:
-        # - Commented:
           My description
           - Story:
+          <#> - Commented:
             Description with -
           - List item
             - Level 4:
@@ -21,7 +21,7 @@ RSpec.describe "syntax" do
       with_file(content) do
         expect("Milestone").to have_highlight("tadaTopicTitle1")
         expect("Epic").to have_highlight("tadaTopicTitle2")
-        expect("Commented").to have_highlight("tadaComment")
+        expect("Commented").to have_highlight("tadaCommented")
         expect("Story").to have_highlight("tadaTopicTitle3")
         expect("Level 4").to have_highlight("tadaTopicTitle4")
         expect("Level 5").to have_highlight("tadaTopicTitle5")

@@ -33,11 +33,14 @@ endfunction
 execute 'nnoremap <silent> <buffer> ' . g:tada_todo_switch_status_mapping . ' :call tada#NextTodoStatus()<CR>'
 execute 'nnoremap <silent> <buffer> ' . g:tada_todo_switch_status_reverse_mapping . ' :call tada#PreviousTodoStatus()<CR>'
 nmap <silent> <buffer> <nowait> <script> <expr> <CR> <SID>HandleNormalCR()
-nnoremap <silent> <buffer> <C-T>1 :call tada#fold#To(1)<CR>
-nnoremap <silent> <buffer> <C-T>2 :call tada#fold#To(2)<CR>
-nnoremap <silent> <buffer> <C-T>3 :call tada#fold#To(3)<CR>
-nnoremap <silent> <buffer> <C-T>0 :call tada#fold#To(7)<CR>
-nnoremap <silent> <buffer> <C-T>o :normal! zO<CR>
+nnoremap <silent> <buffer> <C-T>1 :call tada#fold#To(0)<CR>
+nnoremap <silent> <buffer> <C-T>2 :call tada#fold#To(1)<CR>
+nnoremap <silent> <buffer> <C-T>3 :call tada#fold#To(2)<CR>
+nnoremap <silent> <buffer> <C-T>4 :call tada#fold#To(3)<CR>
+nnoremap <silent> <buffer> <C-T>5 :call tada#fold#To(4)<CR>
+nnoremap <silent> <buffer> <C-T>6 :call tada#fold#To(5)<CR>
+nnoremap <silent> <buffer> <C-T>0 :call tada#fold#To(6)<CR>
+nnoremap <silent> <buffer> <C-T>o :call tada#fold#Open('.')<CR>
 nnoremap <silent> <buffer> <C-T>c :normal! zc<CR>
 nnoremap <silent> <buffer> <C-B> :call tada#box#Toggle()<CR>
 inoremap <silent> <buffer> <script> <expr> <C-B> ' <BS><C-O>:call tada#box#Toggle()<CR>'
@@ -56,15 +59,15 @@ if g:tada_autolines
   setlocal formatoptions=tron
 end
 
-setlocal commentstring=#\ %s
+setlocal commentstring=<#>\ %s
 setlocal ts=2 sw=2 sts=2 expandtab smarttab
 setlocal autoindent
 setlocal foldmethod=expr
 setlocal foldtext=tada#fold#TextForTopic()
-setlocal foldexpr=tada#fold#LevelOfLine(v:lnum)
+setlocal foldexpr=tada#fold#Level(v:lnum)
 setlocal fillchars=fold:\ "
 setlocal foldenable
-setlocal foldlevel=10
+setlocal foldlevel=6
 
 function s:Hi(group, fg, bg = "")
   if a:fg != ""
