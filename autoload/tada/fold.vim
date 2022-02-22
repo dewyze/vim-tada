@@ -10,15 +10,21 @@ function! tada#fold#HandleCR()
   if current =~ g:tada_pat_topic || current =~ g:tada_pat_archive_header
     return "za"
   elseif is_folded_at > -1 && line('.') != is_folded_at
-    return "zv"
+    return ":call setpos('.', [0, " . is_folded_at . ", '$', 0])\<CR>zv"
   else
-    return "<CR>"
+    return "\<CR>"
   endif
 endfunction
 
 function! tada#fold#TextForTopic()
-  if getline(v:foldstart) =~ g:tada_pat_archive_header
-    return "### ARCHIVE ###"
+  let text = getline(v:foldstart)
+
+  if text =~ g:tada_pat_archive_header
+    if text =~ '^\s*===\s*$'
+      return "### ARCHIVE ###"
+    else
+      return substitute(text, '^\s*===\s*\(.*\)$', '### \1 ###', '')
+    endif
   else
     let topic = tada#builder#Topic(v:foldstart)
 
@@ -26,17 +32,17 @@ function! tada#fold#TextForTopic()
   endif
 endfunction
 
-function! tada#fold#LevelOfLine(lnum)
+function! tada#fold#Level(lnum)
   let title_level = tada#TitleLevel(a:lnum)
   let current_line = getline(a:lnum)
 
-  if current_line =~ g:tada_pat_blank_line
+  if current_line =~ g:tada_pat_blank_line || current_line =~ g:tada_pat_no_dash
     return '='
   elseif current_line =~ g:tada_pat_archive_header
     return '>' . (&foldlevel + 1)
-  elseif current_line =~ g:tada_pat_comment
-    execute 'return ' . (&foldlevel + 1)
-  elseif title_level
+  elseif current_line =~ g:tada_pat_archive
+    return &foldlevel + 1
+  elseif title_level > 0
     return '>' . title_level
   else
     return (indent(a:lnum) / 2)
@@ -44,7 +50,7 @@ function! tada#fold#LevelOfLine(lnum)
 endfunction
 
 function! tada#fold#To(level)
-  execute 'setlocal foldlevel=' . (a:level - 1)
+  execute 'setlocal foldlevel=' . a:level
 
   normal! zX
 endfunction
