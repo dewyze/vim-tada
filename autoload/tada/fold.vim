@@ -7,25 +7,26 @@ function! tada#fold#HandleCR()
   let current = getline('.')
   let is_folded_at = foldclosed('.')
 
-  if line('.') == is_folded_at && current =~ g:tada_pat_commented_topic
-    let mark_idx = match(current, '-')
-    let end_line = tada#utils#PatternEnd('^[^-]\{' . mark_idx . '}-')
-
-    let Uncomment = tada#utils#StayFunc('tada#fold#Uncomment', [line('.'), end_line])
-
-    return ':call ' . string(Uncomment) . "()\<CR>zo"
-  elseif line('.') == is_folded_at
-    return 'zv'
-  elseif current =~ g:tada_pat_topic
-    let spaces = indent('.')
-    let end_line = tada#utils#PatternEnd('^\s\{' . spaces . '}\S')
-
-    let Comment = tada#utils#StayFunc('tada#fold#Comment', [spaces, line('.'), end_line])
-
-    return ':call ' . string(Comment) . "()\<CR>zc"
-  else
-    return "zc"
-  endif
+  return "za"
+  " if line('.') == is_folded_at && current =~ g:tada_pat_commented_topic
+  "   let mark_idx = match(current, '-')
+  "   let end_line = tada#utils#PatternEnd('^[^-]\{' . mark_idx . '}-')
+  "
+  "   let Uncomment = tada#utils#StayFunc('tada#fold#Uncomment', [line('.'), end_line])
+  "
+  "   return ':call ' . string(Uncomment) . "()\<CR>zo"
+  " elseif line('.') == is_folded_at
+  "   return 'zv'
+  " elseif current =~ g:tada_pat_topic
+  "   let spaces = indent('.')
+  "   let end_line = tada#utils#PatternEnd('^\s\{' . spaces . '}\S')
+  "
+  "   let Comment = tada#utils#StayFunc('tada#fold#Comment', [spaces, line('.'), end_line])
+  "
+  "   return ':call ' . string(Comment) . "()\<CR>zc"
+  " else
+  "   return "zc"
+  " endif
 endfunction
 
 function! tada#fold#Open(lnum)
@@ -60,30 +61,30 @@ function! tada#fold#Level(lnum)
       return '>' . (&foldlevel + 1)
     elseif current =~ g:tada_pat_archive
       return &foldlevel + 1
-    elseif current =~ g:tada_pat_comment
-      let no_comments = substitute(current, '<#> ', '', 'g')
-      let start_index = match(no_comments, '-')
-      let indent_level = (&foldlevel * 2)
-
-      if &foldlevel < 6
-        if start_index < indent_level && count(current, "<#>") == 1 && current !~ '^\s*<#> \s'
-          let level = &foldlevel + 1 + (start_index / 1)
-        else
-          let level = &foldlevel + 1 + (start_index / 2)
-        endif
-      else
-        if count(current, "<#>") == 1 && current !~ '^\s*<#> \s'
-          let level = 7
-        else
-          let level = 8
-        endif
-      endif
-
-      if current =~ g:tada_pat_commented_topic
-        return '>' . level
-      else
-        return level
-      endif
+    " elseif current =~ g:tada_pat_comment
+    "   let no_comments = substitute(current, '<#> ', '', 'g')
+    "   let start_index = match(no_comments, '-')
+    "   let indent_level = (&foldlevel * 2)
+    "
+    "   if &foldlevel < 6
+    "     if start_index < indent_level && count(current, "<#>") == 1 && current !~ '^\s*<#> \s'
+    "       let level = &foldlevel + 1 + (start_index / 1)
+    "     else
+    "       let level = &foldlevel + 1 + (start_index / 2)
+    "     endif
+    "   else
+    "     if count(current, "<#>") == 1 && current !~ '^\s*<#> \s'
+    "       let level = 7
+    "     else
+    "       let level = 8
+    "     endif
+    "   endif
+    "
+    "   if current =~ g:tada_pat_commented_topic
+    "     return '>' . level
+    "   else
+    "     return level
+    "   endif
     elseif title_level
       return '>' . title_level
     else

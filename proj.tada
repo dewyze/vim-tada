@@ -2,8 +2,8 @@
   - Housekeeping:
     - [ ] Convert to keymaps to commands
     - [ ] Builder should iterate over lines and not assume order
-  <#> - Help text:
-  <#>   - [ ] Add help text for everything
+  - Help text:
+    - [ ] Add help text for everything
   - Docs:
     - Features:
       - [ ] 6 layered todo list
