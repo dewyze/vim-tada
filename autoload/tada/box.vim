@@ -19,9 +19,9 @@ function! tada#box#Toggle()
     call s:BoxForDescriptionLine()
   elseif text =~ g:tada_pat_list_item_empty
     call s:BoxForEmptyTodoItem()
-  elseif group == 'tadaListItem' || group =~ '^tadaTopicTitle'
+  elseif text =~ g:tada_pat_list_item_start
     call s:BoxForListItemOrTopic()
-  elseif group =~ '^tadaTodoItem'
+  elseif text =~ g:tada_pat_todo_item
     call s:RemoveBoxForTodoItem()
   endif
 endfunction
@@ -40,7 +40,6 @@ endfunction
 
 function! s:BoxForDescriptionLine()
   let spaces = repeat(' ', max([indent('.') - 6, 0]))
-  let pat =
   call setline('.', substitute(getline('.'), '^\(\s*\)\(\S.*\)$', spaces . '- ' . s:blank_box . '\2', ''))
   call cursor(line('.'), s:NewColPos(0))
 endfunction

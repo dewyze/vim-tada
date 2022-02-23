@@ -1,5 +1,6 @@
 - All:
   - Housekeeping:
+    - [ ] Description
     - [ ] Convert to keymaps to commands
     - [ ] Builder should iterate over lines and not assume order
   - Help text:
@@ -30,7 +31,7 @@
       - [ ] \>
       - [ ] '\:'
       - [ ] <C-T>1-6
-      - [ ] <C-T>o/O
+      - [ ] <C-T>o/c
       - [ ] <C-H>
       - [ ] <Space>
       - [ ] <Tab>/<S-Tab>
@@ -51,6 +52,7 @@
       - [ ] Show priority?
       - [ ] Show status?
       - [ ] Sum child counts?
+      - [ ] h few
   - Go to:
     - [ ] parent
       - [ ] add to config
@@ -70,7 +72,9 @@
     - Keymap:
       - [ ] Keymap to archive, add leading =?
   - Bugs:
-    - [ ] <C-B> with '>' throws an error
+    - [✔] <C-B> with '>' throws an error
+    - [✔] <C-H> after topic/just dash
+    - [ ] <C-H> after todo and delete space
     - [ ] Remove '>' when converting to box
     - [ ] When typing '|' or ':' in a note, it should go do the typical thing
     - [ ] Shift tab when '>' should go backwards

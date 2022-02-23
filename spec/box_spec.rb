@@ -310,4 +310,67 @@ RSpec.describe "box toggle specs" do
       end
     end
   end
+
+  describe "<C-B> converting non dash items to boxes" do
+    it "works with a description" do
+      content = <<~CONTENT
+        - Topic:
+          - [ ] Todo item
+                Description
+      CONTENT
+
+      with_file(content) do |file|
+        vim.normal "GA"
+        vim.feedkeys '\<C-B>'
+        vim.write
+
+        expect(file.read).to eq(<<~NEW)
+          - Topic:
+            - [ ] Todo item
+            - [ ] Description
+        NEW
+      end
+    end
+
+    it "works with a quote" do
+      content = <<~CONTENT
+        - Topic:
+          - [ ] Todo item
+                >
+      CONTENT
+
+      with_file(content) do |file|
+        vim.normal "GA"
+        vim.feedkeys '\<C-B> Hello'
+        vim.write
+
+        expect(file.read).to eq(<<~NEW)
+          - Topic:
+            - [ ] Todo item
+            - [ ] > Hello
+        NEW
+      end
+    end
+
+    it "works with a comment" do
+      content = <<~CONTENT
+        - Topic:
+          - [ ] Todo item
+                #
+      CONTENT
+
+      with_file(content) do |file|
+        vim.normal "GA"
+        vim.feedkeys '\<C-B> Hello'
+        vim.write
+
+        expect(file.read).to eq(<<~NEW)
+          - Topic:
+            - [ ] Todo item
+            - [ ] # Hello
+        NEW
+      end
+
+    end
+  end
 end
