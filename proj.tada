@@ -1,6 +1,5 @@
 - All:
   - Housekeeping:
-    - [ ] Description
     - [ ] Convert to keymaps to commands
     - [ ] Builder should iterate over lines and not assume order
   - Help text:

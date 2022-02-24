@@ -1,5 +1,22 @@
 RSpec.describe "map specs" do
   describe "<C-H> in insert mode" do
+    it "works with dash lines" do
+      content = <<~CONTENT
+        - Topic:
+      CONTENT
+
+      with_file(content) do |file|
+        vim.normal "A"
+        vim.feedkeys '\<CR>\<C-H>Description'
+        vim.write
+
+        expect(file.read).to eq(<<~NEW)
+          - Topic:
+            Description
+        NEW
+      end
+    end
+
     it "empties the beginning of the line" do
       content = <<~CONTENT
         - [ ] Todo Item
