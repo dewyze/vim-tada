@@ -175,8 +175,8 @@ RSpec.describe "box toggle specs" do
         CONTENT
 
         with_file(content) do |file|
-          vim.normal "G$a"
-          vim.feedkeys '\<BS>\<C-B>Hello'
+          vim.normal "G$S"
+          vim.feedkeys '\<C-B>Hello'
           vim.write
 
           expect(file.read).to eq(<<~NEW)
@@ -332,22 +332,42 @@ RSpec.describe "box toggle specs" do
       end
     end
 
-    it "works with a quote" do
+    it "works with metadata" do
       content = <<~CONTENT
         - Topic:
           - [ ] Todo item
-                >
+                | Hello
       CONTENT
 
       with_file(content) do |file|
         vim.normal "GA"
-        vim.feedkeys '\<C-B> Hello'
+        vim.feedkeys '\<C-B>'
         vim.write
 
         expect(file.read).to eq(<<~NEW)
           - Topic:
             - [ ] Todo item
-            - [ ] > Hello
+            - [ ] Hello
+        NEW
+      end
+    end
+
+    it "works with a note" do
+      content = <<~CONTENT
+        - Topic:
+          - [ ] Todo item
+                > Hello
+      CONTENT
+
+      with_file(content) do |file|
+        vim.normal "GA"
+        vim.feedkeys '\<C-B>'
+        vim.write
+
+        expect(file.read).to eq(<<~NEW)
+          - Topic:
+            - [ ] Todo item
+            - [ ] Hello
         NEW
       end
     end
@@ -356,21 +376,20 @@ RSpec.describe "box toggle specs" do
       content = <<~CONTENT
         - Topic:
           - [ ] Todo item
-                #
+                # Hello
       CONTENT
 
       with_file(content) do |file|
         vim.normal "GA"
-        vim.feedkeys '\<C-B> Hello'
+        vim.feedkeys '\<C-B>'
         vim.write
 
         expect(file.read).to eq(<<~NEW)
           - Topic:
             - [ ] Todo item
-            - [ ] # Hello
+            - [ ] Hello
         NEW
       end
-
     end
   end
 end

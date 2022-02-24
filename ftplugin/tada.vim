@@ -43,7 +43,7 @@ nnoremap <silent> <buffer> <C-T>0 :call tada#fold#To(6)<CR>
 nnoremap <silent> <buffer> <C-T>o :normal! zO<CR>
 nnoremap <silent> <buffer> <C-T>c :normal! zc<CR>
 nnoremap <silent> <buffer> <C-B> :call tada#box#Toggle()<CR>
-inoremap <silent> <buffer> <script> <expr> <C-B> ' <BS><C-O>:call tada#box#Toggle()<CR>'
+inoremap <buffer> <script> <C-B> <Cmd>call tada#box#Toggle()<CR>
 inoremap <silent> <buffer> <script> <expr> <C-H> '<C-O>:call tada#map#EmptyLine()<CR>'
 inoremap <silent> <buffer> <script> <expr> \| <SID>IsEmptyListOrTodo() ? '\|<C-O>:call tada#map#EmptyLine()<CR> ' : '\|'
 inoremap <silent> <buffer> <script> <expr> > <SID>IsEmptyListOrTodo() ? '><C-O>:call tada#map#EmptyLine()<CR> ' : '>'

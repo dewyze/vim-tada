@@ -1,6 +1,8 @@
 - All:
   - Housekeeping:
-    - [ ] Convert to keymaps to commands
+    - [ ] Check out <Cmd>/:map-cmd to simplify map commands
+    - [ ] Convert to keymaps to commands'
+    - [ ] Remove <expr>
     - [ ] Builder should iterate over lines and not assume order
   - Help text:
     - [ ] Add help text for everything
@@ -15,6 +17,7 @@
       - [ ] '>'
       - [ ] ':'
       - [ ] <C-T>1-6
+      - [ ] <C-T>o/O
       - [ ] <C-T>o/O
       - [ ] <C-H>
       - [ ] <Space>
@@ -31,6 +34,7 @@
       - [ ] '\:'
       - [ ] <C-T>1-6
       - [ ] <C-T>o/c
+      - [ ] <C-T>o/O
       - [ ] <C-H>
       - [ ] <Space>
       - [ ] <Tab>/<S-Tab>
@@ -39,10 +43,16 @@
     - [ ] Autolines
   - Folds:
     - Comment:
-      - [ ] Fold commented topics
-      - [ ] Config as 'remember folds' or something
+      - [⚑] Fold commented topics
+            > For now, this is too complicated. Maintaining <C-T> fold info is
+            > too difficult. It's possible we could implement something that
+            > would ignore those and just save the folds, but I can look at
+            > that later.
+      - [⚑] Config as 'remember folds' or something
+            > See same reasons as above.
     - Enter:
-      - [ ] Should enter fold from any line?
+      - [⚑] Should enter fold from any line?
+            > For now, no.
       - [✔] Enter should always just fold the minimum amount
             > Ideally it should not fold/unfold anything else
       - [✔] If clicking on not topic title, it does not recalculate fold on enter, look up for most recent topic
@@ -71,12 +81,14 @@
     - Keymap:
       - [ ] Keymap to archive, add leading =?
   - Bugs:
+    - [ ] <C-B> on empty line
     - [✔] <C-B> with '>' throws an error
     - [✔] <C-H> after topic/just dash
-    - [ ] <C-H> after todo and delete space
-    - [ ] Remove '>' when converting to box
-    - [ ] When typing '|' or ':' in a note, it should go do the typical thing
-    - [ ] Shift tab when '>' should go backwards
+    - [⚑] <C-H> after todo and delete space
+    - [✔] Remove '>' when converting to box
+    - [✔] When typing '|' or ':' in a note, it should go do the typical thing
+          > Not sure what this is.
+    - [✔] Shift tab when '>' should go backwards
 - Fancy Todo Lists:
   - Metadata Enhancements:
     - Default Metadata:
