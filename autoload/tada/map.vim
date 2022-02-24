@@ -10,7 +10,7 @@ function! tada#map#EmptyLine()
     let dash_index = match(current, '-')
     let spaces = repeat(' ', dash_index + 2)
     call setline('.', spaces)
-    call setpos('.', [0, line('.'), virtcol('$'), 0])
+    call setpos('.', [0, line('.'), col('$'), 0])
   else
     let curcol = col('.') - 1
     let rest = getline('.')[curcol:-1]

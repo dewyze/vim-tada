@@ -34,6 +34,23 @@ RSpec.describe "map specs" do
         NEW
       end
     end
+
+    it "works with a preceding character" do
+      content = <<~CONTENT
+        - [ ] Todo Item
+      CONTENT
+
+      with_file(content) do |file|
+        vim.normal "A"
+        vim.feedkeys '\<CR>\<BS>\<C-H> Description'
+        vim.write
+
+        expect(file.read).to eq(<<~NEW)
+          - [ ] Todo Item
+                Description
+        NEW
+      end
+    end
   end
 
   describe "delete list item if immediately typing metadata" do

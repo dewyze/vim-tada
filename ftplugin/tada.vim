@@ -44,7 +44,7 @@ nnoremap <silent> <buffer> <C-T>o :normal! zO<CR>
 nnoremap <silent> <buffer> <C-T>c :normal! zc<CR>
 nnoremap <silent> <buffer> <C-B> :call tada#box#Toggle()<CR>
 inoremap <buffer> <script> <C-B> <Cmd>call tada#box#Toggle()<CR>
-inoremap <silent> <buffer> <script> <expr> <C-H> '<C-O>:call tada#map#EmptyLine()<CR>'
+inoremap <buffer> <script> <C-H> <Cmd>call tada#map#EmptyLine()<CR>
 inoremap <silent> <buffer> <script> <expr> \| <SID>IsEmptyListOrTodo() ? '\|<C-O>:call tada#map#EmptyLine()<CR> ' : '\|'
 inoremap <silent> <buffer> <script> <expr> > <SID>IsEmptyListOrTodo() ? '><C-O>:call tada#map#EmptyLine()<CR> ' : '>'
 inoremap <silent> <buffer> <script> <expr> : <SID>IsEmptyListOrTodo() ? '<C-O>S<C-D>- ' : ':'
