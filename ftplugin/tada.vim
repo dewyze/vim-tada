@@ -7,7 +7,7 @@ function! s:IsTodoItem(line)
 endfunction
 
 function! s:IsEmptyIndentable()
-  return g:tada_smart_tab && getline('.') =~ '^\s*-\s*\%(\[.\]\)\?\s*$'
+  return g:tada_smart_tab && getline('.') =~ '^\s*\%(-\s*\%(\[.\]\)\?\|>\)\s*$'
 endfunction
 
 function! s:IsEmptyListOrTodo()

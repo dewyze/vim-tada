@@ -37,6 +37,26 @@ RSpec.describe "tabs" do
         CONTENT
       end
     end
+
+    it "does not indent note items" do
+      content = <<~CONTENT
+        - [ ] Item
+              >
+      CONTENT
+
+      vim.command("let g:tada_smart_tab = 0")
+
+      with_file(content) do |file|
+        vim.normal "GA"
+        vim.feedkeys ' \<Tab>Note'
+        vim.write
+
+        expect(file.read).to eq(<<~CONTENT)
+          - [ ] Item
+                >   Note
+        CONTENT
+      end
+    end
   end
 
   describe "with smart tabs on" do
@@ -70,6 +90,24 @@ RSpec.describe "tabs" do
         expect(file.read).to eq(<<~CONTENT)
           - [ ] Item
             - [ ] Item 2
+        CONTENT
+      end
+    end
+
+    it "indents note items" do
+      content = <<~CONTENT
+        - [ ] Item
+              >
+      CONTENT
+
+      with_file(content) do |file|
+        vim.normal "GA"
+        vim.feedkeys ' \<Tab>Note'
+        vim.write
+
+        expect(file.read).to eq(<<~CONTENT)
+          - [ ] Item
+                  > Note
         CONTENT
       end
     end
