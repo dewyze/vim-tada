@@ -1,8 +1,9 @@
 - All:
   - Housekeeping:
-    - [ ] Check out <Cmd>/:map-cmd to simplify map commands
-    - [ ] Convert to keymaps to commands'
-    - [ ] Remove <expr>
+    - [✔] Handle blank space for box when config has no blank
+    - [✔] Check out <Cmd>/:map-cmd to simplify map commands
+    - [✔] Convert to keymaps to commands'
+    - [✔] Remove <expr>
     - [ ] Builder should iterate over lines and not assume order
   - Help text:
     - [ ] Add help text for everything
@@ -61,14 +62,13 @@
       - [ ] Show priority?
       - [ ] Show status?
       - [ ] Sum child counts?
-      - [ ] h few
   - Go to:
-    - [ ] parent
+    - [✔] parent
       - [ ] add to config
-    - [ ] grandparent
+    - [✔] grandparent
       - [ ] add to config
-    - [ ] metadata
-      - [ ] add to config
+    - [⚑] metadata
+      - [⚑] add to config
   - Archive:
     > Archive ability is really about automatic folding
     > Maybe also about moving stuff to the bottom of the file
@@ -81,7 +81,7 @@
     - Keymap:
       - [ ] Keymap to archive, add leading =?
   - Bugs:
-    - [ ] <C-B> on empty line
+    - [✔] <C-B> on empty line
     - [✔] <C-B> with '>' throws an error
     - [✔] <C-H> after topic/just dash
     - [⚑] <C-H> after todo and delete space

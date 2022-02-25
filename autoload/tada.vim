@@ -37,11 +37,3 @@ function! tada#TitleLevel(lnum)
     return 0
   endif
 endfunction
-
-function! tada#NextTodoStatus()
-  call tada#todo#ToggleTodoStatus(1)
-endfunction
-
-function! tada#PreviousTodoStatus()
-  call tada#todo#ToggleTodoStatus(-1)
-endfunction

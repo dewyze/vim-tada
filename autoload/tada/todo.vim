@@ -3,18 +3,24 @@ if exists('g:tada_loaded_todo_autoload')
 endif
 let g:tada_loaded_todo_autoload = 1
 
+function! tada#todo#DefaultStatus()
+  return b:tada_todo_statuses[0]
+endfunction
+
 function! tada#todo#DefaultSymbol()
   return b:tada_todo_symbols[b:tada_todo_statuses[0]]
 endfunction
 
-function! tada#todo#TodoSyntaxToStatus(group)
-  let symbol_keys = {}
+function! tada#todo#SymbolToStatus(text)
+  let current = matchlist(a:text, '^\s*-\s\[\(.\)\]')[1]
 
-  for status in keys(b:tada_todo_symbols)
-    let symbol_keys['tadaTodoItem' . tada#utils#Camelize(status)] = status
+  for [status, symbol] in items(b:tada_todo_symbols)
+    if symbol == current
+      return status
+    endif
   endfor
 
-  return symbol_keys[a:group]
+  return tada#todo#DefaultStatus()
 endfunction
 
 function! tada#todo#ToggleTodoStatus(dir = 1)
@@ -22,8 +28,7 @@ function! tada#todo#ToggleTodoStatus(dir = 1)
     return
   endif
 
-  let group = tada#SyntaxGroupOfLine(line('.'))
-  let status = tada#todo#TodoSyntaxToStatus(group)
+  let status = tada#todo#SymbolToStatus(getline('.'))
   let current_symbol = b:tada_todo_symbols[status]
   let current_length = len(current_symbol)
   let status_index = index(b:tada_todo_statuses, status)
