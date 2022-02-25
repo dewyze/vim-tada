@@ -30,20 +30,33 @@ function! s:HandleO()
   return tada#autoline#NmapO()
 endfunction
 
-execute 'nnoremap <silent> <buffer> ' . g:tada_todo_switch_status_mapping . ' :call tada#NextTodoStatus()<CR>'
-execute 'nnoremap <silent> <buffer> ' . g:tada_todo_switch_status_reverse_mapping . ' :call tada#PreviousTodoStatus()<CR>'
+command -nargs=1 Fold :call tada#fold#To(<args>)
+command -nargs=0 TadaBox :call tada#box#Toggle()
+command -nargs=0 Cut :call tada#map#EmptyLine()
+command -nargs=0 NextTodo :call tada#todo#ToggleTodoStatus(1)
+command -nargs=0 PreviousTodo :call tada#todo#ToggleTodoStatus(-1)
+
+execute 'nnoremap <silent> <buffer> ' . g:tada_todo_switch_status_mapping . ' :NextTodo<CR>'
+execute 'nnoremap <silent> <buffer> ' . g:tada_todo_switch_status_reverse_mapping . ' :PreviousTodo<CR>'
 nmap <silent> <buffer> <nowait> <script> <expr> <CR> <SID>HandleNormalCR()
-nnoremap <silent> <buffer> <C-T>1 :call tada#fold#To(0)<CR>
-nnoremap <silent> <buffer> <C-T>2 :call tada#fold#To(1)<CR>
-nnoremap <silent> <buffer> <C-T>3 :call tada#fold#To(2)<CR>
-nnoremap <silent> <buffer> <C-T>4 :call tada#fold#To(3)<CR>
-nnoremap <silent> <buffer> <C-T>5 :call tada#fold#To(4)<CR>
-nnoremap <silent> <buffer> <C-T>6 :call tada#fold#To(5)<CR>
-nnoremap <silent> <buffer> <C-T>0 :call tada#fold#To(6)<CR>
+nnoremap <silent> <buffer> <C-T>1 :Fold(0)<CR>
+nnoremap <silent> <buffer> <C-T>2 :Fold(1)<CR>
+nnoremap <silent> <buffer> <C-T>3 :Fold(2)<CR>
+nnoremap <silent> <buffer> <C-T>4 :Fold(3)<CR>
+nnoremap <silent> <buffer> <C-T>5 :Fold(4)<CR>
+nnoremap <silent> <buffer> <C-T>6 :Fold(5)<CR>
+nnoremap <silent> <buffer> <C-T>0 :Fold(6)<CR>
 nnoremap <silent> <buffer> <C-T>o :normal! zO<CR>
 nnoremap <silent> <buffer> <C-T>c :normal! zc<CR>
-nnoremap <silent> <buffer> <C-B> :call tada#box#Toggle()<CR>
-inoremap <buffer> <script> <C-B> <Cmd>call tada#box#Toggle()<CR>
+nnoremap <silent> <buffer> <C-B> :TadaBox<CR>
+nnoremap <silent> <buffer> <script> <expr> o <SID>Handleo()
+nnoremap <silent> <buffer> <script> <expr> O <SID>HandleO()
+nnoremap <buffer> <script> ( <Cmd>call search('^\s\{,' . indent('.') . '\}.*:$', 'beW')<CR>
+nnoremap <buffer> <script> ) <Cmd>call search('^\s\{,' . indent('.') . '\}.*:$', 'eW')<CR>
+nnoremap <buffer> <script> { <Cmd>call search('^\s\{,' . (indent('.') - 1) . '\}[^ ].*:$', 'beW')<CR>
+nnoremap <buffer> <script> } <Cmd>call search('^\s\{,' . (indent('.') - 1) . '\}[^ ].*:$', 'eW')<CR>
+
+inoremap <buffer> <script> <C-B> <Cmd>TadaBox<CR>
 inoremap <buffer> <script> <C-H> <Cmd>call tada#map#EmptyLine()<CR>
 inoremap <silent> <buffer> <script> <expr> \| <SID>IsEmptyListOrTodo() ? '\|<C-O>:call tada#map#EmptyLine()<CR> ' : '\|'
 inoremap <silent> <buffer> <script> <expr> > <SID>IsEmptyListOrTodo() ? '><C-O>:call tada#map#EmptyLine()<CR> ' : '>'
@@ -51,8 +64,6 @@ inoremap <silent> <buffer> <script> <expr> : <SID>IsEmptyListOrTodo() ? '<C-O>S<
 inoremap <silent> <buffer> <script> <expr> <Tab> <SID>IsEmptyIndentable() ? '<C-T>' : '<Tab>'
 inoremap <silent> <buffer> <script> <expr> <S-Tab> <SID>IsEmptyIndentable() ? '<C-D>' : '<S-Tab>'
 inoremap <silent> <buffer> <script> <expr> <CR> <SID>HandleInsertCR()
-nnoremap <silent> <buffer> <script> <expr> o <SID>Handleo()
-nnoremap <silent> <buffer> <script> <expr> O <SID>HandleO()
 
 if g:tada_autolines
   setlocal comments=b:\|,b:-,b:>
