@@ -48,9 +48,16 @@ function! tada#init#Settings()
 endfunction
 
 function! tada#init#Mappings()
-  call tada#init#Global('tada_todo_switch_status_mapping', "<Space>")
-  call tada#init#Global('tada_todo_switch_status_reverse_mapping', "<C-Space>")
-  call tada#init#Global('tada_map_prefix', "<C-T>")
+  call tada#init#Global('tada_no_map', 0)
+
+  if !g:tada_no_map
+    call tada#init#Global('tada_todo_switch_status_mapping', "<Space>")
+    call tada#init#Global('tada_todo_switch_status_reverse_mapping', "<C-Space>")
+    call tada#init#Global('tada_map_prefix', "<C-T>")
+    call tada#init#Global('tada_map_box', "<C-B>")
+    call tada#init#Global('tada_map_empty_line', "<C-H>")
+    call tada#init#Global('tada_goto_maps', 1)
+  endif
 endfunction
 
 function! tada#init#TodoConfig()
@@ -92,6 +99,12 @@ endfunction
 
 function! tada#init#ValidateTodoConfig()
   for status in b:tada_todo_statuses
+    if count(b:tada_todo_statuses, status) > 1
+      echoerr 'Duplicate statuses: ' . status
+
+      break
+    endif
+
     if !has_key(b:tada_todo_symbols, status)
       echoerr 'Todo status does not have symbol: ' . status
 
@@ -99,6 +112,13 @@ function! tada#init#ValidateTodoConfig()
       let b:tada_todo_statuses = ['blank', 'in_progress', 'done', 'blocked']
       let b:tada_todo_symbols = { 'blank': ' ', 'in_progress': '•', 'done': '✔', 'blocked': '⚑' }
 
+      break
+    endif
+  endfor
+
+  for [_status, symbol] in items(b:tada_todo_symbols)
+    if count(values(b:tada_todo_symbols), symbol) > 1
+      echoerr 'Duplicate symbol: ' . symbol
       break
     endif
   endfor

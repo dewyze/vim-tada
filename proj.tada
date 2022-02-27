@@ -11,7 +11,10 @@
     - Features:
       - [ ] 6 layered todo list
       - [ ] Smart keystrokes built for speed
-      - [ ] Configurable keymaps, colors, statuses, symbols
+      - [ ] Keymaps
+      - [ ] Colors
+      - [ ] Statuses
+      - [ ] Symbols
     - Keymaps:
       - [ ] <C-B>
       - [ ] '|'
@@ -25,25 +28,26 @@
       - [ ] <Tab>/<S-Tab>
   - Configuration:
     - Performance:
-      - [ ] Nested Topics
+      - [✔] Nested Topics
     - Warnings:
-      - [ ] Duplicate statuses
-      - [ ] Duplicate symbols
-      - [ ] Invalid config variable
+      - [✔] Duplicate statuses
+      - [✔] Duplicate symbols
+      - [✔] Invalid config variable
     - Keymaps:
-      - [ ] <C-B>
-      - [ ] \|
-      - [ ] \>
-      - [ ] '\:'
-      - [ ] <C-T>1-6
-      - [ ] <C-T>o/c
-      - [ ] <C-T>o/O
-      - [ ] <C-H>
-      - [ ] <Space>
-      - [ ] <Tab>/<S-Tab>
-      - [ ] All on/off
-    - [ ] Colors
-    - [ ] Autolines
+      - [✔] <C-B>
+      - [⚑] \|
+      - [⚑] \>
+      - [⚑] '\:'
+      - [✔] <C-T>1-6
+      - [✔] <C-T>o/c
+      - [✔] <C-T>o/O
+      - [✔] <C-H>
+      - [✔] <Space>
+      - [⚑] <Tab>/<S-Tab>
+      - [⚑] Aal on/off
+      - [✔] (){}
+    - [✔] Colors
+    - [✔] Autolines
   - Folds:
     - Comment:
       - [⚑] Fold commented topics
@@ -59,16 +63,11 @@
       - [✔] Enter should always just fold the minimum amount
             > Ideally it should not fold/unfold anything else
       - [✔] If clicking on not topic title, it does not recalculate fold on enter, look up for most recent topic
-    - Fold Text:
-      - [ ] Show date?
-      - [ ] Show priority?
-      - [ ] Show status?
-      - [ ] Sum child counts?
   - Go to:
     - [✔] parent
-      - [ ] add to config
+      - [✔] add to config
     - [✔] grandparent
-      - [ ] add to config
+      - [✔] add to config
     - [⚑] metadata
       - [⚑] add to config
   - Archive:
@@ -114,6 +113,10 @@
       - [ ] Add to dates with keymaps/calculations
             > "| ^:2022-02-01 += 1.week"
   - Folding:
+    - Fold Text:
+      - [ ] Show date?
+      - [ ] Show priority?
+      - [ ] Show status?
     - [⚑] Automatically fold when all todos are done
           > No, instead it's better to just comment done ones and leave them commented
 - Project Collaboration:

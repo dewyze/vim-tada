@@ -30,6 +30,42 @@ function! s:HandleO()
   return tada#autoline#NmapO()
 endfunction
 
+function! s:NextTopic()
+  if getline('.') =~ g:tada_pat_topic
+    call <SID>SearchTopic(indent('.'), 'eW')
+  else
+    call s:NextParentTopic()
+  endif
+endfunction
+command -nargs=0 NextTopic :call <SID>NextTopic()
+
+function! s:NextParentTopic()
+  let next_indent = max([indent('.') - &sw, 0])
+
+  call <SID>SearchTopic(next_indent, 'eW')
+endfunction
+command -nargs=0 NextParentTopic :call <SID>NextParentTopic()
+
+function! s:PreviousTopic()
+  if getline('.') =~ g:tada_pat_topic
+    call <SID>SearchTopic(indent('.'), 'beW')
+  else
+    call s:PreviousParentTopic()
+  endif
+endfunction
+command -nargs=0 PreviousTopic :call <SID>PreviousTopic()
+
+function! s:PreviousParentTopic()
+  let next_indent = max([indent('.') - &sw, 0])
+
+  call <SID>SearchTopic(next_indent, 'beW')
+endfunction
+command -nargs=0 PreviousParentTopic :call <SID>PreviousParentTopic()
+
+function! s:SearchTopic(indent, flags)
+  call search('^\s\{,' . a:indent . '\}-.*:$', a:flags)
+endfunction
+
 command -nargs=1 Fold :call tada#fold#To(<args>)
 command -nargs=0 TadaBox :call tada#box#Toggle()
 command -nargs=0 Cut :call tada#map#EmptyLine()
@@ -39,25 +75,28 @@ command -nargs=0 PreviousTodo :call tada#todo#ToggleTodoStatus(-1)
 execute 'nnoremap <silent> <buffer> ' . g:tada_todo_switch_status_mapping . ' :NextTodo<CR>'
 execute 'nnoremap <silent> <buffer> ' . g:tada_todo_switch_status_reverse_mapping . ' :PreviousTodo<CR>'
 nmap <silent> <buffer> <nowait> <script> <expr> <CR> <SID>HandleNormalCR()
-nnoremap <silent> <buffer> <C-T>1 :Fold(0)<CR>
-nnoremap <silent> <buffer> <C-T>2 :Fold(1)<CR>
-nnoremap <silent> <buffer> <C-T>3 :Fold(2)<CR>
-nnoremap <silent> <buffer> <C-T>4 :Fold(3)<CR>
-nnoremap <silent> <buffer> <C-T>5 :Fold(4)<CR>
-nnoremap <silent> <buffer> <C-T>6 :Fold(5)<CR>
-nnoremap <silent> <buffer> <C-T>0 :Fold(6)<CR>
-nnoremap <silent> <buffer> <C-T>o :normal! zO<CR>
-nnoremap <silent> <buffer> <C-T>c :normal! zc<CR>
-nnoremap <silent> <buffer> <C-B> :TadaBox<CR>
 nnoremap <silent> <buffer> <script> <expr> o <SID>Handleo()
 nnoremap <silent> <buffer> <script> <expr> O <SID>HandleO()
-nnoremap <buffer> <script> ( <Cmd>call search('^\s\{,' . indent('.') . '\}.*:$', 'beW')<CR>
-nnoremap <buffer> <script> ) <Cmd>call search('^\s\{,' . indent('.') . '\}.*:$', 'eW')<CR>
-nnoremap <buffer> <script> { <Cmd>call search('^\s\{,' . (indent('.') - 1) . '\}[^ ].*:$', 'beW')<CR>
-nnoremap <buffer> <script> } <Cmd>call search('^\s\{,' . (indent('.') - 1) . '\}[^ ].*:$', 'eW')<CR>
+execute 'nnoremap <silent> <buffer> ' . g:tada_map_prefix . '1 :Fold(0)<CR>'
+execute 'nnoremap <silent> <buffer> ' . g:tada_map_prefix . '2 :Fold(1)<CR>'
+execute 'nnoremap <silent> <buffer> ' . g:tada_map_prefix . '3 :Fold(2)<CR>'
+execute 'nnoremap <silent> <buffer> ' . g:tada_map_prefix . '4 :Fold(3)<CR>'
+execute 'nnoremap <silent> <buffer> ' . g:tada_map_prefix . '5 :Fold(4)<CR>'
+execute 'nnoremap <silent> <buffer> ' . g:tada_map_prefix . '6 :Fold(5)<CR>'
+execute 'nnoremap <silent> <buffer> ' . g:tada_map_prefix . '0 :Fold(6)<CR>'
+execute 'nnoremap <silent> <buffer> ' . g:tada_map_prefix . 'o :normal! zO<CR>'
+execute 'nnoremap <silent> <buffer> ' . g:tada_map_prefix . 'c :normal! zc<CR>'
+execute 'nnoremap <silent> <buffer> ' . g:tada_map_box . ' :TadaBox<CR>'
 
-inoremap <buffer> <script> <C-B> <Cmd>TadaBox<CR>
-inoremap <buffer> <script> <C-H> <Cmd>call tada#map#EmptyLine()<CR>
+if g:tada_goto_maps
+  nnoremap <buffer> <script> ( <Cmd>PreviousTopic<CR>
+  nnoremap <buffer> <script> ) <Cmd>NextTopic<CR>
+  nnoremap <buffer> <script> { <Cmd>PreviousParentTopic<CR>
+  nnoremap <buffer> <script> } <Cmd>NextParentTopic<CR>
+endif
+
+execute 'inoremap <buffer> <script> ' . g:tada_map_box . ' <Cmd>TadaBox<CR>'
+execute 'inoremap <buffer> <script> ' . g:tada_map_empty_line . ' <Cmd>call tada#map#EmptyLine()<CR>'
 inoremap <silent> <buffer> <script> <expr> \| <SID>IsEmptyListOrTodo() ? '\|<C-O>:call tada#map#EmptyLine()<CR> ' : '\|'
 inoremap <silent> <buffer> <script> <expr> > <SID>IsEmptyListOrTodo() ? '><C-O>:call tada#map#EmptyLine()<CR> ' : '>'
 inoremap <silent> <buffer> <script> <expr> : <SID>IsEmptyListOrTodo() ? '<C-O>S<C-D>- ' : ':'

@@ -32,7 +32,9 @@ endfunction
 function! ResetConfiguration() abort
   call ResetVar("g:tada_autolines")
   call ResetVar("g:tada_count_nested_todods")
+  call ResetVar("g:tada_goto_maps")
   call ResetVar("g:tada_map_prefix")
+  call ResetVar("g:tada_no_map")
   call ResetVar("g:tada_smart_tab")
   call ResetVar("g:tada_todo_statuses")
   call ResetVar("g:tada_todo_style")

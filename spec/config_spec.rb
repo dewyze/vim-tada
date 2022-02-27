@@ -4,11 +4,11 @@ RSpec.describe "config specs" do
       Topic:
        - Thing
 
-      @config.buffer_var = "value"
+      @config.todo_statuses = ['blank']
     CONTENT
 
     with_file(content) do |file|
-      expect(vim.echo("b:tada_buffer_var")).to eq("value")
+      expect(vim.echo("b:tada_todo_statuses")).to eq("['blank']")
     end
   end
 
