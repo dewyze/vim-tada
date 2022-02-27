@@ -9,7 +9,12 @@ function! s:TadaTopic.New(data)
   let topic['title'] = a:data.title
   let topic['metadata'] = a:data.metadata
   let topic['todos'] = a:data.todos
-  let topic['children'] = []
+  let topic['children'] = a:data.children
+  let topic['todo_counts'] = topic.CountTodos()
+
+  if b:tada_count_nested_todos
+    call topic.MergeTodoCounts()
+  endif
 
   return topic
 endfunction
@@ -20,18 +25,13 @@ function! s:TadaTopic.ToJson()
   call remove(topic, 'FoldText')
   call remove(topic, 'New')
   call remove(topic, 'ToJson')
-  call remove(topic, 'MapTodo')
+  call remove(topic, 'CountTodos')
+  call remove(topic, 'MergeTodoCounts')
   let topic["metadata"] = topic["metadata"].ToJson()
 
-  # TODO: This should just gather data about todos, counts, etc.
-
-  let topic["todos"] = map(topic["todos"], s:TadaTopic.MapTodo)
+  let topic["todos"] = map(topic["todos"], { _, todo -> todo.ToJson() })
 
   return topic
-endfunction
-
-function! s:TadaTopic.MapTodo(idx, todo)
-  return a:todo.ToJson()
 endfunction
 
 function! s:TadaTopic.FoldText()
@@ -41,34 +41,39 @@ function! s:TadaTopic.FoldText()
   let strings = []
 
   if self.metadata.status != ''
-    let strings = add(strings, '*' . self.metadata.status . '*')
+    call add(strings, '*' . self.metadata.status . '*')
   endif
 
-  let s:todo_counts = {}
-
   for status in b:tada_todo_statuses
-    let s:todo_counts[status] = 0
-  endfor
+    let count = self.todo_counts[status]
 
-  for todo in self.todos
-    let s:todo_counts[todo.status] += 1
-  endfor
-
-  for status in b:tada_todo_statuses
-    let strings += s:TodoStringFor(status)
+    if count > 0
+      call add(strings, count .'[' . b:tada_todo_symbols[status] . ']')
+    endif
   endfor
 
   let fold_text .= join(strings, ', ')
-
   return fold_text
 endfunction
 
-function! s:TodoStringFor(status)
-  let count = s:todo_counts[a:status]
+function! s:TadaTopic.CountTodos()
+  let todo_counts = {}
 
-  if count > 0
-    return [count .'[' . b:tada_todo_symbols[a:status] . ']']
-  endif
+  for status in b:tada_todo_statuses
+    let todo_counts[status] = 0
+  endfor
 
-  return []
+  for todo in self.todos
+    let todo_counts[todo.status] += 1
+  endfor
+
+  return todo_counts
+endfunction
+
+function! s:TadaTopic.MergeTodoCounts()
+  for child in self.children
+    for status in b:tada_todo_statuses
+      let self.todo_counts[status] += child.todo_counts[status]
+    endfor
+  endfor
 endfunction

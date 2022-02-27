@@ -44,6 +44,7 @@ endfunction
 function! tada#init#Settings()
   call tada#init#Global('tada_autolines', 1)
   call tada#init#Global('tada_smart_tab', 1)
+  call tada#init#BufferGlobal('tada_count_nested_todos', 1)
 endfunction
 
 function! tada#init#Mappings()

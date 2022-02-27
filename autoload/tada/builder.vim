@@ -7,6 +7,7 @@ function! tada#builder#Topic(lnum)
   let text_lines = {
     \ 'metadata': [],
     \ 'todos': [],
+    \ 'topic_lines': [],
     \ }
 
   let topic_indent = indent(a:lnum)
@@ -26,8 +27,9 @@ function! tada#builder#Topic(lnum)
     \ 'title': tada#builder#Title(getline(a:lnum)),
     \ 'line': a:lnum,
     \ 'level': tada#TitleLevel(a:lnum),
-    \ 'metadata': tada#builder#Metadata(text_lines["metadata"]),
-    \ 'todos': tada#builder#Todos(text_lines["todos"]),
+    \ 'metadata': tada#builder#Metadata(text_lines['metadata']),
+    \ 'todos': tada#builder#Todos(text_lines['todos']),
+    \ 'children': map(text_lines['topic_lines'], { _, num -> tada#builder#Topic(num) }),
     \ }
 
   return g:TadaTopic.New(params)
@@ -36,8 +38,10 @@ endfunction
 function! tada#builder#Line(lnum, lines, indent)
   let text = getline(a:lnum)
 
-  if text !~ '^\s\{' . a:indent . '}\S' || text =~ g:tada_pat_topic
+  if text !~ '^\s\{' . a:indent . '}\S'
     return
+  elseif text =~ '^\s\{' . a:indent . '}-.*:$'
+    call add(a:lines['topic_lines'], a:lnum)
   elseif text =~ g:tada_pat_metadata
     call add(a:lines['metadata'], text)
   elseif text =~ g:tada_pat_todo_item

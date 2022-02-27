@@ -30,12 +30,13 @@ function! ResetVar(var) abort
 endfunction
 
 function! ResetConfiguration() abort
-  call ResetVar("g:tada_todo_symbols")
-  call ResetVar("g:tada_todo_style")
-  call ResetVar("g:tada_todo_statuses")
   call ResetVar("g:tada_autolines")
+  call ResetVar("g:tada_count_nested_todods")
+  call ResetVar("g:tada_map_prefix")
   call ResetVar("g:tada_smart_tab")
+  call ResetVar("g:tada_todo_statuses")
+  call ResetVar("g:tada_todo_style")
   call ResetVar("g:tada_todo_switch_status_mapping")
   call ResetVar("g:tada_todo_switch_status_reverse_mapping")
-  call ResetVar("g:tada_map_prefix")
+  call ResetVar("g:tada_todo_symbols")
 endfunction
