@@ -4,7 +4,7 @@
     - [✔] Check out <Cmd>/:map-cmd to simplify map commands
     - [✔] Convert to keymaps to commands'
     - [✔] Remove <expr>
-    - [ ] Builder should iterate over lines and not assume order
+    - [•] Builder should iterate over lines and not assume order
   - Help text:
     - [ ] Add help text for everything
   - Docs:

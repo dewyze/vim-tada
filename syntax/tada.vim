@@ -11,7 +11,7 @@ syn spell toplevel
 syn sync fromstart
 syn case ignore
 
-syn match tadaDescription /^\s*[^ \-|>]\+.*$/
+execute 'syn match tadaDescription "' . g:tada_pat_description . '"'
 execute 'syn match tadaArchive "' . g:tada_pat_archive . '"'
 execute 'syn match tadaComment "' . g:tada_pat_comment . '"'
 execute 'syn match tadaListItem "' . g:tada_pat_list_item . '"'

@@ -8,7 +8,6 @@ function! s:TadaTopic.New(data)
   let topic['level'] = a:data.level
   let topic['title'] = a:data.title
   let topic['metadata'] = a:data.metadata
-  let topic['description'] = a:data.description
   let topic['todos'] = a:data.todos
   let topic['children'] = []
 

@@ -156,6 +156,7 @@ function! tada#init#Patterns()
   let g:tada_pat_blank_line = '^\s*$'
   let g:tada_pat_buffer_config = '^\s*@config\.[^ ]\+\s\?=\s\?.\+$'
   let g:tada_pat_comment = '^\s*#.*$'
+  let g:tada_pat_description = '^\s*[^ \-|>]\+.*$'
   let g:tada_pat_invalid_config = '^\s*@config\..*$'
   let g:tada_pat_list_item = '^\s*-\s*[^ [].*\(:\)\@<!$'
   let g:tada_pat_list_item_empty = '^\s*-\s*$'

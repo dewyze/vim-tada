@@ -3,99 +3,91 @@ if exists('g:tada_loaded_builder_autoload')
 endif
 let g:tada_loaded_builder_autoload = 1
 
-function! tada#builder#Result(lnum, value)
-  let result = {}
-  let result['next_line'] = a:lnum
-  let result['value'] = a:value
-
-  return result
-endfunction
-
 function! tada#builder#Topic(lnum)
-  let num = a:lnum
-  let topic_data = {}
-  let topic_data['line'] = num
-  let topic_data['level'] = tada#builder#TopicLevel(num)
-  let title_result = tada#builder#Title(num)
-  let topic_data['title'] = title_result.value
-  let metadata_result = tada#builder#Metadata(title_result.next_line)
-  let topic_data['metadata'] = metadata_result.value
-  let description_result = tada#builder#Description(metadata_result.next_line)
-  let topic_data['description'] = description_result.value
-  let todos_result = tada#builder#Todos(description_result.next_line)
-  let topic_data['todos'] = todos_result.value
+  let text_lines = {
+    \ 'metadata': [],
+    \ 'todos': [],
+    \ }
 
-  return g:TadaTopic.New(topic_data)
-endfunction
+  let topic_indent = indent(a:lnum)
+  let builder_indent = topic_indent + &sw
+  let end_line = line('$')
+  let lnum = a:lnum + 1
+  let curindent = indent(lnum)
 
-function! tada#builder#Title(lnum)
-  let num = a:lnum
+  while curindent != topic_indent && lnum <= end_line
+    call tada#builder#Line(lnum, text_lines, builder_indent)
 
-  if tada#IsTopicTitle(num)
-    let title = matchlist(getline(num), '^\s*-\s*\(.*\):$')[1]
-    return tada#builder#Result(num + 1, title)
-  endif
-
-  return tada#builder#Result(num + 1, '')
-endfunction
-
-function! tada#builder#Metadata(lnum)
-  let num = a:lnum
-  let l:metadata = {}
-
-  while getline(num) =~ '^\s\{2,}|.*$'
-    let matches = matchlist(getline(num), '| \(.\):\(.*\)$')
-    let l:metadata[matches[1]] = matches[2]
-    let num += 1
+    let lnum = lnum + 1
+    let curindent = indent(lnum)
   endwhile
 
-  return tada#builder#Result(num, g:TadaMetadata.New(l:metadata))
+  let params = {
+    \ 'title': tada#builder#Title(getline(a:lnum)),
+    \ 'line': a:lnum,
+    \ 'level': tada#TitleLevel(a:lnum),
+    \ 'metadata': tada#builder#Metadata(text_lines["metadata"]),
+    \ 'todos': tada#builder#Todos(text_lines["todos"]),
+    \ }
+
+  return g:TadaTopic.New(params)
 endfunction
 
-function! tada#builder#TopicLevel(lnum)
-  let title_level = tada#TitleLevel(a:lnum)
+function! tada#builder#Line(lnum, lines, indent)
+  let text = getline(a:lnum)
 
-  if title_level
-    return title_level
+  if text !~ '^\s\{' . a:indent . '}\S' || text =~ g:tada_pat_topic
+    return
+  elseif text =~ g:tada_pat_metadata
+    call add(a:lines['metadata'], text)
+  elseif text =~ g:tada_pat_todo_item
+    call add(a:lines['todos'], text)
   endif
-
-  return min([indent(a:lnum) / 2, 3])
 endfunction
 
-function! tada#builder#Description(lnum)
-  let num = a:lnum
-  let description = []
-
-  while !(tada#IsTopicTitle(num)) && !(tada#IsTodoItem(num)) && num <= line('$')
-    call add(description, substitute(getline(num), '^\s*', '', ''))
-    let num += 1
-  endwhile
-
-  return tada#builder#Result(num, description)
+function! tada#builder#Title(text)
+  return matchlist(a:text, '^\s*-\s*\(.*\):$')[1]
 endfunction
 
-function! tada#builder#Todos(lnum)
-  let num = a:lnum
+function! tada#builder#Metadata(lines)
+  let metadata = {}
+
+  for text in a:lines
+    let matches = matchlist(text, '| \(.\):\(.*\)$')
+    let metadata[matches[1]] = matches[2]
+  endfor
+
+  return g:TadaMetadata.New(metadata)
+endfunction
+
+" function! tada#builder#TopicLevel(lnum)
+"   let title_level = tada#TitleLevel(a:lnum)
+"
+"   if title_level
+"     return title_level
+"   endif
+"
+"   return min([indent(a:lnum) / 2, 3])
+" endfunction
+
+function! tada#builder#Todos(lines)
   let todos = []
 
-  while tada#IsTodoItem(num)
-    let matches = matchlist(getline(num), '- \[\([^\]]*\)\]')
+  for text in a:lines
+    let matches = matchlist(text, '- \[\([^\]]*\)\]')
     let symbol = matches[1]
 
     for [key, value] in items(b:tada_todo_symbols)
       if symbol == value
         let params = {}
         let params['status'] = key
-        let params['line'] = num
         let todo = g:TadaTodo.New(params)
 
         call add(todos, todo)
         break
       endif
     endfor
+  endfor
 
-    let num += 1
-  endwhile
-
-  return tada#builder#Result(num, todos)
+  return todos
 endfunction
