@@ -66,7 +66,19 @@ function! s:SearchTopic(indent, flags)
   call search('^\s\{,' . a:indent . '\}-.*:$', a:flags)
 endfunction
 
-command -nargs=0 -range TadaArchive <line1>,<line2>s/^/= /
+function! s:Archive() range
+  let range_length = a:lastline - a:firstline + 1
+
+  execute a:firstline . ',' . a:lastline . 's/^/= /'
+  execute a:firstline . ',' . a:lastline . 'm$'
+
+  let previous_num = line('$') - range_length
+
+  if getline(previous_num) !~ '^='
+    call append(previous_num, ['', '==='])
+  endif
+endfunction
+command -nargs=0 -range TadaArchive :<line1>,<line2>call <SID>Archive()
 
 command -nargs=1 Fold :call tada#fold#To(<args>)
 command -nargs=0 TadaBox :call tada#box#Toggle()

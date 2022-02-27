@@ -512,14 +512,17 @@ RSpec.describe "map specs" do
       CONTENT
 
       with_file(content) do |file|
-        vim.normal "2G"
+        vim.normal "gg"
         vim.feedkeys 'Vj\<C-T>a'
         vim.write
 
         expect(file.read).to eq(<<~NEW)
-          - [ ] todo 1
+          - [ ] todo 2
+          - [ ] todo 3
+
+          ===
+          = - [ ] todo 1
           = - [ ] todo 2
-          = - [ ] todo 3
         NEW
       end
     end
