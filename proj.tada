@@ -80,7 +80,7 @@
     - Folds:
       - [✔] Archived ones are always folded
     - Keymap:
-      - [ ] Keymap to archive, add leading =?
+      - [✔] Keymap to archive, add leading =?
   - Bugs:
     - [✔] <C-B> on empty line
     - [✔] <C-B> with '>' throws an error

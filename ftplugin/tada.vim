@@ -66,6 +66,8 @@ function! s:SearchTopic(indent, flags)
   call search('^\s\{,' . a:indent . '\}-.*:$', a:flags)
 endfunction
 
+command -nargs=0 -range TadaArchive <line1>,<line2>s/^/= /
+
 command -nargs=1 Fold :call tada#fold#To(<args>)
 command -nargs=0 TadaBox :call tada#box#Toggle()
 command -nargs=0 Cut :call tada#map#EmptyLine()
@@ -89,14 +91,16 @@ execute 'nnoremap <silent> <buffer> ' . g:tada_map_prefix . 'c :normal! zc<CR>'
 execute 'nnoremap <silent> <buffer> ' . g:tada_map_box . ' :TadaBox<CR>'
 
 if g:tada_goto_maps
-  nnoremap <buffer> <script> ( <Cmd>PreviousTopic<CR>
-  nnoremap <buffer> <script> ) <Cmd>NextTopic<CR>
-  nnoremap <buffer> <script> { <Cmd>PreviousParentTopic<CR>
-  nnoremap <buffer> <script> } <Cmd>NextParentTopic<CR>
+  nnoremap <buffer> ( <Cmd>PreviousTopic<CR>
+  nnoremap <buffer> ) <Cmd>NextTopic<CR>
+  nnoremap <buffer> { <Cmd>PreviousParentTopic<CR>
+  nnoremap <buffer> } <Cmd>NextParentTopic<CR>
 endif
 
-execute 'inoremap <buffer> <script> ' . g:tada_map_box . ' <Cmd>TadaBox<CR>'
-execute 'inoremap <buffer> <script> ' . g:tada_map_empty_line . ' <Cmd>call tada#map#EmptyLine()<CR>'
+execute 'vnoremap <buffer> ' . g:tada_map_prefix . ' :TadaArchive<CR>'
+
+execute 'inoremap <buffer> ' . g:tada_map_box . ' <Cmd>TadaBox<CR>'
+execute 'inoremap <buffer> ' . g:tada_map_empty_line . ' <Cmd>call tada#map#EmptyLine()<CR>'
 inoremap <silent> <buffer> <script> <expr> \| <SID>IsEmptyListOrTodo() ? '\|<C-O>:call tada#map#EmptyLine()<CR> ' : '\|'
 inoremap <silent> <buffer> <script> <expr> > <SID>IsEmptyListOrTodo() ? '><C-O>:call tada#map#EmptyLine()<CR> ' : '>'
 inoremap <silent> <buffer> <script> <expr> : <SID>IsEmptyListOrTodo() ? '<C-O>S<C-D>- ' : ':'

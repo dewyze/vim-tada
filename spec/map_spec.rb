@@ -502,4 +502,26 @@ RSpec.describe "map specs" do
       end
     end
   end
+
+  describe "archiving" do
+    it "adds a leading =" do
+      content = <<~CONTENT
+        - [ ] todo 1
+        - [ ] todo 2
+        - [ ] todo 3
+      CONTENT
+
+      with_file(content) do |file|
+        vim.normal "2G"
+        vim.feedkeys 'Vj\<C-T>a'
+        vim.write
+
+        expect(file.read).to eq(<<~NEW)
+          - [ ] todo 1
+          = - [ ] todo 2
+          = - [ ] todo 3
+        NEW
+      end
+    end
+  end
 end
