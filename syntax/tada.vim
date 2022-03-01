@@ -39,7 +39,7 @@ hi def link tadaComment Comment
 hi def link tadaInvalidConfig SpellBad
 hi def link tadaMetadata Identifier
 hi def link tadaNote SpecialComment
-hi def link tadaTodoItemBlocked Error
+hi def link tadaTodoItemFlagged Error
 hi def link tadaTodoItemDone Label
 hi def link tadaTodoItemInProgress Type
 hi def link tadaTopicTitle1 Define

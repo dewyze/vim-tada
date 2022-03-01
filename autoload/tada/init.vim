@@ -83,8 +83,8 @@ endfunction
 
 function! tada#init#StatusesAndSymbols()
   if b:tada_todo_style == 'ascii'
-    let s:statuses = ['blank', 'in_progress', 'done', 'blocked']
-    let s:symbols =  { 'blank': ' ', 'in_progress': '-', 'done': 'x', 'blocked': 'o' }
+    let s:statuses = ['blank', 'in_progress', 'done', 'flagged']
+    let s:symbols =  { 'blank': ' ', 'in_progress': '-', 'done': 'x', 'flagged': 'o' }
   elseif b:tada_todo_style == 'simple'
     let s:statuses = ['blank', 'done']
     let s:symbols =  { 'blank': ' ', 'done': '✔' }
@@ -92,8 +92,8 @@ function! tada#init#StatusesAndSymbols()
     let s:statuses = ['blank', 'done']
     let s:symbols =  { 'blank': ' ', 'done': 'x' }
   else " 'unicode'
-    let s:statuses = ['blank', 'in_progress', 'done', 'blocked']
-    let s:symbols = { 'blank': ' ', 'in_progress': '•', 'done': '✔', 'blocked': '⚑' }
+    let s:statuses = ['blank', 'in_progress', 'done', 'flagged']
+    let s:symbols = { 'blank': ' ', 'in_progress': '•', 'done': '✔', 'flagged': '⚑' }
   endif
 endfunction
 
@@ -109,8 +109,8 @@ function! tada#init#ValidateTodoConfig()
       echoerr 'Todo status does not have symbol: ' . status
 
       let b:tada_todo_style = 'unicode'
-      let b:tada_todo_statuses = ['blank', 'in_progress', 'done', 'blocked']
-      let b:tada_todo_symbols = { 'blank': ' ', 'in_progress': '•', 'done': '✔', 'blocked': '⚑' }
+      let b:tada_todo_statuses = ['blank', 'in_progress', 'done', 'flagged']
+      let b:tada_todo_symbols = { 'blank': ' ', 'in_progress': '•', 'done': '✔', 'flagged': '⚑' }
 
       break
     endif
@@ -148,7 +148,7 @@ function! tada#init#Colors()
   \   "todo": {
   \     "in_progress": yellow,
   \     "done": green,
-  \     "blocked": red,
+  \     "flagged": red,
   \   },
   \   "topic": {
   \     "1": purple,

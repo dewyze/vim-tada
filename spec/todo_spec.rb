@@ -4,7 +4,7 @@ RSpec.describe "todo" do
       - [ ] Todo item
       - [•] In progress item
       - [✔] Done item
-      - [⚑] Blocked item
+      - [⚑] Flagged item
     CONTENT
   end
 
@@ -20,7 +20,7 @@ RSpec.describe "todo" do
         - [•] Todo item
         - [✔] In progress item
         - [⚑] Done item
-        - [ ] Blocked item
+        - [ ] Flagged item
         NEW
       end
     end
@@ -63,7 +63,7 @@ RSpec.describe "todo" do
         - [⚑] Todo item
         - [ ] In progress item
         - [•] Done item
-        - [✔] Blocked item
+        - [✔] Flagged item
       NEW
     end
   end

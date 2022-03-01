@@ -16,11 +16,11 @@ RSpec.describe "config specs" do
     it "defaults to unicode" do
       with_file("") do
         expect(vim.echo("b:tada_todo_style")).to eq("unicode")
-        expect(vim.echo("b:tada_todo_statuses")).to eq("['blank', 'in_progress', 'done', 'blocked']")
+        expect(vim.echo("b:tada_todo_statuses")).to eq("['blank', 'in_progress', 'done', 'flagged']")
         expect(vim.echo("b:tada_todo_symbols['blank']")).to eq(" ")
         expect(vim.echo("b:tada_todo_symbols['in_progress']")).to eq("•")
         expect(vim.echo("b:tada_todo_symbols['done']")).to eq("✔")
-        expect(vim.echo("b:tada_todo_symbols['blocked']")).to eq("⚑")
+        expect(vim.echo("b:tada_todo_symbols['flagged']")).to eq("⚑")
       end
     end
 
@@ -29,11 +29,11 @@ RSpec.describe "config specs" do
 
       with_file("") do
         expect(vim.echo("b:tada_todo_style")).to eq("ascii")
-        expect(vim.echo("b:tada_todo_statuses")).to eq("['blank', 'in_progress', 'done', 'blocked']")
+        expect(vim.echo("b:tada_todo_statuses")).to eq("['blank', 'in_progress', 'done', 'flagged']")
         expect(vim.echo("b:tada_todo_symbols['blank']")).to eq(" ")
         expect(vim.echo("b:tada_todo_symbols['in_progress']")).to eq("-")
         expect(vim.echo("b:tada_todo_symbols['done']")).to eq("x")
-        expect(vim.echo("b:tada_todo_symbols['blocked']")).to eq("o")
+        expect(vim.echo("b:tada_todo_symbols['flagged']")).to eq("o")
       end
     end
 

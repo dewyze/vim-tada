@@ -63,7 +63,7 @@ RSpec.describe "syntax" do
           - [ ] Todo item 3
           - [•] In progress item
           - [✔] Done item
-          - [⚑] Blocked item
+          - [⚑] Flagged item
         CONTENT
 
         with_file(content) do
@@ -72,7 +72,7 @@ RSpec.describe "syntax" do
           expect("\\[ ] Todo item 3").to have_highlight("tadaTodoItemBlank")
           expect("\\[•] In progress item").to have_highlight("tadaTodoItemInProgress")
           expect("\\[✔] Done item").to have_highlight("tadaTodoItemDone")
-          expect("\\[⚑] Blocked item").to have_highlight("tadaTodoItemBlocked")
+          expect("\\[⚑] Flagged item").to have_highlight("tadaTodoItemFlagged")
         end
       end
     end
@@ -85,34 +85,34 @@ RSpec.describe "syntax" do
           - [ ] Todo item
           - [-] In progress item
           - [x] Done item
-          - [O] Blocked item
+          - [O] Flagged item
         CONTENT
 
         with_file(content) do
           expect("\\[ ] Todo item").to have_highlight("tadaTodoItemBlank")
           expect("\\[\-] In progress item").to have_highlight("tadaTodoItemInProgress")
           expect("\\[x] Done item").to have_highlight("tadaTodoItemDone")
-          expect("\\[O] Blocked item").to have_highlight("tadaTodoItemBlocked")
+          expect("\\[O] Flagged item").to have_highlight("tadaTodoItemFlagged")
         end
       end
     end
 
     context "with custom symbols" do
       it "parses todo items" do
-        vim.command("let g:tada_todo_symbols = { 'blank': 'T', 'in_progress': 'I', 'done': 'D', 'blocked': 'B' }")
+        vim.command("let g:tada_todo_symbols = { 'blank': 'T', 'in_progress': 'I', 'done': 'D', 'flagged': 'B' }")
 
         content = <<~CONTENT
           - [T] Todo item
           - [I] In progress item
           - [D] Done item
-          - [B] Blocked item
+          - [B] Flagged item
         CONTENT
 
         with_file(content) do
           expect("\\[T] Todo item").to have_highlight("tadaTodoItemBlank")
           expect("\\[I] In progress item").to have_highlight("tadaTodoItemInProgress")
           expect("\\[D] Done item").to have_highlight("tadaTodoItemDone")
-          expect("\\[B] Blocked item").to have_highlight("tadaTodoItemBlocked")
+          expect("\\[B] Flagged item").to have_highlight("tadaTodoItemFlagged")
         end
       end
     end
@@ -120,20 +120,20 @@ RSpec.describe "syntax" do
     context "with custom todo statuses" do
       it "parses todo items" do
         vim.command("let g:tada_todo_statuses = ['todo', 'doing', 'donezo']")
-        vim.command("let g:tada_todo_symbols = { 'todo': 'T', 'doing': 'I', 'donezo': 'D', 'blocked': 'B' }")
+        vim.command("let g:tada_todo_symbols = { 'todo': 'T', 'doing': 'I', 'donezo': 'D', 'flagged': 'B' }")
 
         content = <<~CONTENT
           - [T] Todo item
           - [I] In progress item
           - [D] Done item
-          - [B] Blocked item
+          - [B] Flagged item
         CONTENT
 
         with_file(content) do
           expect("\\[T] Todo item").to have_highlight("tadaTodoItemTodo")
           expect("\\[I] In progress item").to have_highlight("tadaTodoItemDoing")
           expect("\\[D] Done item").to have_highlight("tadaTodoItemDonezo")
-          expect("\\[B] Blocked item").to have_highlight("")
+          expect("\\[B] Flagged item").to have_highlight("")
         end
       end
     end

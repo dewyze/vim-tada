@@ -517,7 +517,6 @@ RSpec.describe "map specs" do
         vim.write
 
         expect(file.read).to eq(<<~NEW)
-          - [ ] todo 2
           - [ ] todo 3
 
           ===
