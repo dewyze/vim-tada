@@ -188,7 +188,7 @@ This will move the lines to the bottom of the file, and add an archive header
 **NOTE:** This does not change indentation, which is why I recommend only
 archiving top level topics.
 
-The archive will stay closed at all fold levels, but can be toggled open with 
+The archive will stay closed at all fold levels, but can be toggled open with
 `<Enter>`.
 
 ## Keymaps
@@ -317,6 +317,9 @@ let g:tada_colors = {
 Sometimes you may want different statuses or symbols for a specific file. (Maybe
 the file is more complex or simple than your typical file). You can set file
 specific configurations. You can put this anywhere in your file.
+
+**NOTE:** These must be one line long, they are not parsed if they are multiple
+lines.
 
 ```vim
 # proj.tada
