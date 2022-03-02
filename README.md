@@ -35,6 +35,7 @@ Plug 'dewyze/vim-tada'
 1. [Todos](#todos)
 1. [Folds](#folds)
 1. [Metadata](#metadata)
+1. [Archives](#archives)
 1. [Keymaps](#keymaps)
 1. [Configuration](#configuration)
 1. [File Config](#file-config)
@@ -57,7 +58,7 @@ Vim tada will recognize files named `Tadafile` or with the `.tada` extension.
       | ^:2022-04-01
       | !:High
 - **Comment**: Comments start with a `#`
-    # This is a comment
+    - \# This is a comment
 - **Archive**: Starts with a `=== Archive Title` line, followed by lines
 prefixed with `=`
     === My Archive
@@ -173,6 +174,22 @@ Possible symbols are:
 - `&`: External Link
 - `#`: Tags
 - `!`: Priority
+
+## Archives
+
+If you complete a top level topic (or any topic) you can move it to an "archive"
+which is fancy for a folded section at the bottom of the file.
+
+Highlight the lines you want to archive and type `<C-T>a`.
+
+This will move the lines to the bottom of the file, and add an archive header
+`===` if an archive does not exist.
+
+**NOTE:** This does not change indentation, which is why I recommend only
+archiving top level topics.
+
+The archive will stay closed at all fold levels, but can be toggled open with 
+`<Enter>`.
 
 ## Keymaps
 
