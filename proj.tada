@@ -6,15 +6,17 @@
     - [✔] Remove <expr>
     - [✔] Builder should iterate over lines and not assume order
   - Help text:
-    - [ ] Add help text for everything
+    - [⚑] Add help text for everything
+          > Not going to add vimdoc for now.
   - Docs:
+
     - Features:
-      - [ ] 6 layered todo list
-      - [ ] Smart keystrokes built for speed
-      - [ ] Keymaps
-      - [ ] Colors
-      - [ ] Statuses
-      - [ ] Symbols
+      - [✔] 6 layered todo list
+      - [✔] Smart keystrokes built for speed
+      - [✔] Keymaps
+      - [✔] Colors
+      - [✔] Statuses
+      - [✔] Symbols
     - Keymaps:
       - [ ] <C-B>
       - [ ] '|'

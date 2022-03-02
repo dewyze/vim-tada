@@ -5,6 +5,20 @@ Turn your todos :white_check_mark: into tadas :tada:.
 Vim tada is a file syntax and tools for managing a simple todo list including a
 hierarchy and some metadata.
 
+![Vim-tada](https://user-images.githubusercontent.com/1312168/156285987-5ffaa526-816a-4e1c-895c-aeaf36951ebe.png)
+
+## Features
+
+- Smart keymaps built for speed
+  - Toggle todo states with <space> and <c-space>
+  - Collapse todo's various levels with `<C-T>1` - `<C-T>6`
+  - Collapse topics with `<Enter>`
+- Customizable statuses, symbols, and colors
+- Supports up to 6 levels of nested to-do's
+- Global and file specific configuration
+- Archive collapsible sections
+
+
 ## Installation
 
 Using your preferred package manager add `dewyze/vim-tada`. For example, with
@@ -14,43 +28,233 @@ Using your preferred package manager add `dewyze/vim-tada`. For example, with
 Plug 'dewyze/vim-tada'
 ```
 
-## Features
+## Sections
 
-- Set custom todo symbols
-- Toggle todo states with <space> and <c-space>
+1. [Format](#format)
+1. [Topics](#topics)
+1. [Todos](#todos)
+1. [Folds](#folds)
+1. [Metadata](#metadata)
+1. [Keymaps](#keymaps)
+1. [Configuration](#configuration)
+1. [File Config](#file-config)
 
-## Keymaps and Commands
+## Format
 
-### Todo:
+- **Topics**: Start with `-` and end with `:`
+    - This is a topic:
+- **Todo Items**: Start with `- [ ] ` followed by text
+    - [ ] This is a todo item
+- **List Items**: Start with `-` but do not end with `:`
+    - This is a list item
+- **Notes**: Notes start with a `>`
+    > This is a note
+- **Metadata**: Starts with `| ` followed by one of: `[@,^,$,&,#,!,?]` and `:`
+    - This is a topic followed by metadata:
+      | @:alice,bob
+      | ^:2022-04-01
+      | !:High
+- **Comment**: Comments start with a `#`
+    # This is a comment
+- **Archive**: Starts with a `=== Archive Title` line, followed by lines
+prefixed with `=`
+    === My Archive
+    = - This is an archived topic:
+
+## Topics
+
+Topics are just headers. You can think of them as milestones, epics, or stories.
+Or you can think of them as organizational folders. Or just as `h1`, `h2`, `h3`.
+They are just a way to organize todos and list items. They are indented by one
+`shiftwidth` level. I.e. if your `shiftwidth` is 2, then a one space indent will
+not register as a topic.
+
+Topics also determine how [folds](#folds) work. See [that section](#folds) for
+more details.
+
+Topics can also have [metadata](#metadata).
+> Note: Currently metadata does nothing. Eventually I hope for it to allow for
+some advanced features with sorting, displaying info, or developing an
+interactive UI.
+
+## Todos
+
+Todos are the bread and butter of vim-tada! You can create a todo item by
+pressing `<C-B>`. It will toggle a box with `- [ ] ` in your line.
+
+### Toggling Todos
+
+![todo](https://user-images.githubusercontent.com/1312168/156286093-6b2e3768-3c54-4b98-8144-c8a212744cf6.gif)
+
+If you want to toggle between todo states:
 
 - `<space>`: Toggle between todo item states
 - `<C-space>`: Toggle between todo item states in reverse
+
+### Configuring Todos
+
+You can configure todo statuses and symbols.
+
+#### Todo Style
+
+A todo style is a predetermined set of statuses and symbols:
+
+- `unicode` (default): `blank: [ ], in_progress: [•], done: [✔], flagged: [⚑]`
+- `ascii` (default): `blank: [ ], in_progress: [-], done: [x], flagged: [o]`
+- `simple` (default): `blank: [ ], done: [✔]`
+- `markdown` (default): `blank: [ ], done: [x]`
+
+You can just set the style and these will be the todo states.
+
+```vim
+let g:tada_todo_styles = 'ascii'
+```
+
+Or via [file specific configs](#file-config):
+
+```vim
+@config.todo_style = 'ascii'
+```
+
+#### Todo Statuses and Symbols
+
+You can set the todo statuses to anything you want, and the symbols as well.
+
+Via global config in a vimrc:
+
+```vim
+let g:tada_todo_statuses = ['planned', 'doing', 'complete']
+let g:tada_todo_symbols = {'planned': ' ' , 'doing': '🛠️', 'complete': '✅' }
+```
+
+Or via a [file specific configs](#file-config):
+
+```vim
+@config.todo_statuses = ['planned', 'doing', 'complete']
+@config.todo_symbols = {'planned': ' ' , 'doing': '🛠️', 'complete': '✅' }
+```
+
+**NOTE:** The first status in the array is considered the "default" for new todo
+items.
+
+## Folds
+
+![Folding](https://user-images.githubusercontent.com/1312168/156286175-acaf53dc-1132-4897-997b-c5181bc6bf0d.gif)
+
+You can fold topics basic on the indent level of the topic. There are several
+shortcuts you can use:
+
+- `<C-T>#` where `#` is a number `1-6` will fold to various topic levels.
+- `<C-T>0` will unfold everything except an archive.
+- `<C-T>o` will completely open all folds for the topic under the cursor.
+- `<C-T>c` will close all folds for the line under the cursor.
+
+These are just shortcuts on top of some existing vim fold commands, so if you
+know the vim fold commands, feel free to use those.
+
+## Metadata
+
+:construction::construction: **UNDER CONSTRUCTION** :construction::construction:
+
+For now, metadata does nothing. Eventually it can/will be used to add some
+advanced functionality for sorting, shortcuts, or an advanced UI.
+
+### Metadata fields
+
+Metadata syntax is `| <sym>:<val>`
+
+Possible symbols are:
+- `?`: Status
+- `@`: Assignees (comma separated)
+- `^`: Start date (YYYY-MM-DD)
+- `$`: End date (YYYY-MM-DD)
+- `&`: External Link
+- `#`: Tags
+- `!`: Priority
+
+## Keymaps
+
+#### Insert Mode
+- `<C-B>`: to toggle adding/removing a todo box `- [ ]`
+- `<C-H>`: to toggle adding/removing a todo box `- [ ]`
+- `:`: on an empty line to dedent to a topic
+- `|`: on an empty line to convert it to metadata
+- `>`: on an empty line to convert it to a note
+
+#### Normal Mode
+- `<C-B>` to toggle adding/removing a todo box `- [ ]`
+- `(` Goes to the previous topic
+- `)` Goes to the next topic
+- `{` Goes to the previous parent topic
+- `}` Goes to the next parent topic
 
 ## Configuration
 
 Vim tada has a variety of configuration options below is a list of them all:
 
-#### `g:tada_todo_symbols_set`
+#### Configuring Todo Styles
 
-**Default:** `unicode`
-**Options:** `ascii`
+See [todo styles](#todo-style) for information on using pre-defined todo styles.
 
-This variable will set `g:tada_todo_symbols` to a preset set of values:
 
-- `unicode`: `{ 'blank': ' ', 'inProgress': '•', 'done': '✔', 'blocked':'⚑' }`
-- `ascii`: `{ 'blank': ' ', 'inProgress': '-', 'done': 'x', 'blocked':'o' }`
+#### Configuring Todo Statuses and Symbols
+See [configuring todos](#configuring-todos) for information on configuring todo
+statuses and symbols.
 
-#### `g:tada_todo_symbols`
+#### `g:tada_autolines`
 
-**Default**: `{ 'blank': ' ', 'inProgress': '•', 'done': '✔', 'blocked':'⚑' }`
-(Set via `unicode` in `g:tada_todo_symbols_set`)
-**Options**: Any dictionary with the keys: `['blank', 'inProgress', 'done', 'blocked']`
+**Default:** `1`
 
-These are the symbols used to iterate through todo statuses.
+By default, when pressing `<Enter>`, `o`, or `O`, automatically insert the same
+leading characters.
+
+#### `g:tada_count_nested_todos`
+
+**Default:** `1`
+
+By default, when using [folds](#folds), the summary line will sum todo items
+from children. If you are on a slower machine, this could be slow. Set this to 0
+to turn this feature off.
+
+#### `g:tada_goto_maps`
+
+**Default:** `1`
+
+This determines whether `(`,`)`,`{`,`}` are remapped in normal mode.
+
+#### `g:tada_map_box`
+
+**Default:** `<C-B>`
+
+For both normal and insert mode, this will toggle a box `- [ ] ` on a line.
+
+#### `g:tada_map_empty_line`
+
+**Default:** `<C-H>`
+
+In insert mode, this will clear everything to the left of the cursor.
+
+#### `g:tada_map_prefix`
+
+**Default:** `<C-T>`
+
+For folds and archives (and future features) this is the map prefix used.
+
+#### `g:tada_no_map`
+
+**Default:** `0`
+
+Use this to turn off all the mappings for `<Space>`, `<C-T>`, `<C-B>`, `<C-H>`.
+
+#### `g:tada_smart_tab`
+
+**Default:** `1`
+
+By default, `<Tab>` will indent list/todo items if they are empty.
 
 #### `g:tada_todo_switch_status_mapping`
 
-**Default:** `<space>`
+**Default:** `<Space>`
 
 Set the mapping to toggle between todo states.
 
@@ -60,8 +264,38 @@ Set the mapping to toggle between todo states.
 
 Set the mapping to toggle between todo states in reverse.
 
+## File Config
+
+Sometimes you may want different statuses or symbols for a specific file. (Maybe
+the file is more complex or simple than your typical file). You can set file
+specific configurations. You can put this anywhere in your file.
+
+```vim
+# proj.tada
+@config.todo_statuses = ['blank', 'done']
+@config.todo_symbols = { 'blank': ' ', 'done': 'D' }
+```
+
+Available settings:
+- `@config.todo_stasuses`: Array of strings
+- `@config.todo_symbols`: Hash with statuses as keys
+- `@config.todo_style`: One of: `unicode`, `ascii`, `markdown`, `simple`
+
 ## Contributing
 
-## License
+I am open to feature adds and pull requests and issues. Feel free to open them and I will take a look!
 
-MIT
+I can't promise all features will be added, but feel free to open an issue to
+  discuss before starting.
+
+### Improvements
+
+See the final sections of the [proj.tada](proj.tada):
+
+- Fancy Todo Lists
+- Project Collaboration
+- UI Based
+
+## [Code of Conduct](CODE_OF_CONDUCT.md)
+
+## [License](LICENSE)
