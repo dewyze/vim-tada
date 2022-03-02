@@ -137,6 +137,8 @@ Or via a [file specific configs](#file-config):
 @config.todo_symbols = {'planned': ' ' , 'doing': '🛠️', 'complete': '✅' }
 ```
 
+**NOTE:** For now, the status names are not visible and serve no purpose. I
+think eventually they may be displayed or used in a some UI elements.
 **NOTE:** The first status in the array is considered the "default" for new todo
 items.
 
