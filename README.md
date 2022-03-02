@@ -10,7 +10,7 @@ hierarchy and some metadata.
 ## Features
 
 - Smart keymaps built for speed
-  - Toggle todo states with <space> and <c-space>
+  - Toggle todo states with `<Space>` and `<C-space>`
   - Collapse todo's various levels with `<C-T>1` - `<C-T>6`
   - Collapse topics with `<Enter>`
 - Customizable statuses, symbols, and colors
