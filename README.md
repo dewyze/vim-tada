@@ -41,6 +41,8 @@ Plug 'dewyze/vim-tada'
 
 ## Format
 
+Vim tada will recognize files named `Tadafile` or with the `.tada` extension.
+
 - **Topics**: Start with `-` and end with `:`
     - This is a topic:
 - **Todo Items**: Start with `- [ ] ` followed by text
@@ -264,6 +266,35 @@ Set the mapping to toggle between todo states.
 
 Set the mapping to toggle between todo states in reverse.
 
+### Colors
+
+You can configure the colors by overriding any of the following keys.
+
+**NOTE:** if you override the todo key, you need to define all of the colors.
+
+```vim
+let g:tada_colors = {
+\   "archive": gray,
+\   "comment": gray,
+\   "invalid_config": red,
+\   "metadata": jade,
+\   "note": canary,
+\   "todo": {
+\     "in_progress": yellow,
+\     "done": green,
+\     "flagged": red,
+\   },
+\   "topic": {
+\     "1": purple,
+\     "2": royal,
+\     "3": orange,
+\     "4": purple,
+\     "5": royal,
+\     "6": orange,
+\   },
+\ }
+```
+
 ## File Config
 
 Sometimes you may want different statuses or symbols for a specific file. (Maybe
@@ -280,13 +311,12 @@ Available settings:
 - `@config.todo_stasuses`: Array of strings
 - `@config.todo_symbols`: Hash with statuses as keys
 - `@config.todo_style`: One of: `unicode`, `ascii`, `markdown`, `simple`
+- `@config.colors`: Hash with string keys and hex color values. See
+[colors](#colors)
 
 ## Contributing
 
-I am open to feature adds and pull requests and issues. Feel free to open them and I will take a look!
-
-I can't promise all features will be added, but feel free to open an issue to
-  discuss before starting.
+See [CONTRIBUTING.md](CONTRIBUTING.md)
 
 ### Improvements
 
