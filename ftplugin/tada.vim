@@ -134,13 +134,25 @@ setlocal fillchars=fold:\ "
 setlocal foldenable
 setlocal foldlevel=6
 
-function s:Hi(group, fg, bg = "")
-  if a:fg != ""
-    exec "hi " . a:group . " guifg=#" . a:fg
+function s:Hi(group, fg, bg = [])
+  if !empty(a:fg)
+    if type(a:fg) == 3
+      exec 'hi ' . a:group . ' guifg=' . a:fg[0] . ' ctermfg=' . a:fg[1]
+    elseif a:fg =~ '^#'
+      exec 'hi ' . a:group . ' guifg=' . a:fg
+    elseif type(a:fg) == 0
+      exec 'hi ' . a:group . ' ctermfg=' . a:fg
+    endif
   endif
 
-  if a:bg != ""
-    exec "hi " . a:group . " guibg=#" . a:bg
+  if !empty(a:bg)
+    if type(a:bg) == 3
+      exec 'hi ' . a:group . ' guibg=' . a:bg[0] . ' ctermbg=' . a:bg[1]
+    elseif a:bg =~ '^#'
+      exec 'hi ' . a:group . ' guibg=' . a:bg
+    elseif type(a:bg) == 0
+      exec 'hi ' . a:group . ' ctermbg=' . a:bg
+    endif
   endif
 endfun
 
@@ -151,7 +163,7 @@ call <SID>Hi("tadaTopicTitle3", b:tada_colors["topic"]["3"])
 call <SID>Hi("tadaTopicTitle4", b:tada_colors["topic"]["4"])
 call <SID>Hi("tadaTopicTitle5", b:tada_colors["topic"]["5"])
 call <SID>Hi("tadaTopicTitle6", b:tada_colors["topic"]["6"])
-call <SID>Hi("tadaInvalidConfig", "ffffff", b:tada_colors["invalid_config"])
+call <SID>Hi("tadaInvalidConfig", ["#ffffff", 255], b:tada_colors["invalid_config"])
 call <SID>Hi("tadaComment", b:tada_colors["comment"])
 call <SID>Hi("tadaMetadata", b:tada_colors["metadata"])
 call <SID>Hi("tadaNote", b:tada_colors["note"])
@@ -160,8 +172,8 @@ for status in b:tada_todo_statuses
   let name = tada#utils#Camelize(status)
 
   if has_key(b:tada_colors["todo"], status)
-    let color = substitute(b:tada_colors["todo"][status], '^#', '', '')
-    execute 'call <SID>Hi("tadaTodoItem' . name . '", "' . color . '")'
+    let color = string(b:tada_colors["todo"][status])
+    execute 'call <SID>Hi("tadaTodoItem' . name . '", ' . color . ')'
   endif
 endfor
 

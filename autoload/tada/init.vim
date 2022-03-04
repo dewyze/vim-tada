@@ -124,19 +124,17 @@ function! tada#init#ValidateTodoConfig()
 endfunction
 
 function! tada#init#Colors()
-  let salmon = "e69ca0"
-  let red = "cc6666"
-  let orange = "de935f"
-  let yellow = "f0c674"
-  let canary = "bfbc91"
-  let green = "84b97c"
-  let jade = "4bb1a7"
-  let aqua = "639ee4"
-  let blue = "81a2be"
-  let royal = "648cb4"
-  let purple = "b294bb"
-  let gray = "969896"
-  let white = "ffffff"
+  let red = ["#cc6666", 168]
+  let orange = ["#de935f", 173]
+  let yellow = ["#f0c674", 180]
+  let canary = ["#bfbc91", 179]
+  let green = ["#84b97c", 108]
+  let jade = ["#4bb1a7", 73]
+  let blue = ["#81a2be", 80]
+  let royal = ["#648cb4", 74]
+  let purple = ["#b294bb", 140]
+  let gray = ["#969896", 245]
+  let white = ["#ffffff", 255]
 
   let tada_colors = {
   \   "archive": gray,

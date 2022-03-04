@@ -283,9 +283,27 @@ Set the mapping to toggle between todo states.
 
 You can configure the colors by overriding any of the following keys.
 
+A color must be one of the following:
+
+- A hex string beginning with `#` (for terminals that support `guifg`)
+- An integer (for terminals using `ctermfg`)
+- An array with [`<gui hex>`, `<cterm int>`]
+
 **NOTE:** if you override the todo key, you need to define all of the colors.
 
 ```vim
+let red = ["#cc6666", 168]
+let orange = ["#de935f", 173]
+let yellow = ["#f0c674", 180]
+let canary = ["#bfbc91", 179]
+let green = ["#84b97c", 108]
+let jade = ["#4bb1a7", 73]
+let blue = ["#81a2be", 80]
+let royal = ["#648cb4", 74]
+let purple = ["#b294bb", 140]
+let gray = ["#969896", 245]
+let white = ["#ffffff", 255]
+
 let g:tada_colors = {
 \   "archive": gray,
 \   "comment": gray,
@@ -327,7 +345,7 @@ Available settings:
 - `@config.todo_stasuses`: Array of strings
 - `@config.todo_symbols`: Hash with statuses as keys
 - `@config.todo_style`: One of: `unicode`, `ascii`, `markdown`, `simple`
-- `@config.colors`: Hash with string keys and hex color values. See
+- `@config.colors`: Hash with string keys and hex/int/array colors. See
 [colors](#colors)
 
 ## Contributing
