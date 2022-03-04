@@ -1,4 +1,4 @@
-## main - 2022-03-04
+## 0.2.0 - 2022-03-04
 - Fix colors to support `gui` and `cterm` colors
 - Change Box command to `<C-Space>`
   - I forgot about `<C-B>` for scrolling :see_no_evil:
