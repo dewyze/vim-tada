@@ -10,7 +10,7 @@ hierarchy and some metadata.
 ## Features
 
 - Smart keymaps built for speed
-  - Toggle todo states with `<Space>` and `<C-space>`
+  - Toggle todo states with `<Space>`
   - Collapse todo's various levels with `<C-T>1` - `<C-T>6`
   - Collapse topics with `<Enter>`
 - Customizable statuses, symbols, and colors
@@ -83,7 +83,7 @@ interactive UI.
 ## Todos
 
 Todos are the bread and butter of vim-tada! You can create a todo item by
-pressing `<C-B>`. It will toggle a box with `- [ ] ` in your line.
+pressing `<C-Space>`. It will toggle a box with `- [ ] ` in your line.
 
 ### Toggling Todos
 
@@ -196,14 +196,14 @@ The archive will stay closed at all fold levels, but can be toggled open with
 ## Keymaps
 
 #### Insert Mode
-- `<C-B>`: to toggle adding/removing a todo box `- [ ]`
+- `<C-Space>`: to toggle adding/removing a todo box `- [ ]`
 - `<C-H>`: to toggle adding/removing a todo box `- [ ]`
 - `:`: on an empty line to dedent to a topic
 - `|`: on an empty line to convert it to metadata
 - `>`: on an empty line to convert it to a note
 
 #### Normal Mode
-- `<C-B>` to toggle adding/removing a todo box `- [ ]`
+- `<C-Space>` to toggle adding/removing a todo box `- [ ]`
 - `(` Goes to the previous topic
 - `)` Goes to the next topic
 - `{` Goes to the previous parent topic
@@ -245,7 +245,7 @@ This determines whether `(`,`)`,`{`,`}` are remapped in normal mode.
 
 #### `g:tada_map_box`
 
-**Default:** `<C-B>`
+**Default:** `<C-Space>`
 
 For both normal and insert mode, this will toggle a box `- [ ] ` on a line.
 
@@ -265,7 +265,7 @@ For folds and archives (and future features) this is the map prefix used.
 
 **Default:** `0`
 
-Use this to turn off all the mappings for `<Space>`, `<C-T>`, `<C-B>`, `<C-H>`.
+Use this to turn off all the mappings for `<Space>`, `<C-T>`, `<C-Space>`, `<C-H>`.
 
 #### `g:tada_smart_tab`
 
@@ -278,12 +278,6 @@ By default, `<Tab>` will indent list/todo items if they are empty.
 **Default:** `<Space>`
 
 Set the mapping to toggle between todo states.
-
-#### `g:tada_todo_switch_status_reverse_mapping`
-
-**Default:** `<C-space>`
-
-Set the mapping to toggle between todo states in reverse.
 
 ### Colors
 

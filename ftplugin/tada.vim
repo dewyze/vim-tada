@@ -87,7 +87,6 @@ command -nargs=0 NextTodo :call tada#todo#ToggleTodoStatus(1)
 command -nargs=0 PreviousTodo :call tada#todo#ToggleTodoStatus(-1)
 
 execute 'nnoremap <silent> <buffer> ' . g:tada_todo_switch_status_mapping . ' :NextTodo<CR>'
-execute 'nnoremap <silent> <buffer> ' . g:tada_todo_switch_status_reverse_mapping . ' :PreviousTodo<CR>'
 nmap <silent> <buffer> <nowait> <script> <expr> <CR> <SID>HandleNormalCR()
 nnoremap <silent> <buffer> <script> <expr> o <SID>Handleo()
 nnoremap <silent> <buffer> <script> <expr> O <SID>HandleO()

@@ -1,97 +1,3 @@
-- All:
-  - Housekeeping:
-    - [✔] Handle blank space for box when config has no blank
-    - [✔] Check out <Cmd>/:map-cmd to simplify map commands
-    - [✔] Convert to keymaps to commands'
-    - [✔] Remove <expr>
-    - [✔] Builder should iterate over lines and not assume order
-  - Help text:
-    - [⚑] Add help text for everything
-          > Not going to add vimdoc for now.
-  - Docs:
-
-    - Features:
-      - [✔] 6 layered todo list
-      - [✔] Smart keystrokes built for speed
-      - [✔] Keymaps
-      - [✔] Colors
-      - [✔] Statuses
-      - [✔] Symbols
-    - Keymaps:
-      - [ ] <C-B>
-      - [ ] '|'
-      - [ ] '>'
-      - [ ] ':'
-      - [ ] <C-T>1-6
-      - [ ] <C-T>o/O
-      - [ ] <C-T>o/O
-      - [ ] <C-H>
-      - [ ] <Space>
-      - [ ] <Tab>/<S-Tab>
-  - Configuration:
-    - Performance:
-      - [✔] Nested Topics
-    - Warnings:
-      - [✔] Duplicate statuses
-      - [✔] Duplicate symbols
-      - [✔] Invalid config variable
-    - Keymaps:
-      - [✔] <C-B>
-      - [⚑] \|
-      - [⚑] \>
-      - [⚑] '\:'
-      - [✔] <C-T>1-6
-      - [✔] <C-T>o/c
-      - [✔] <C-T>o/O
-      - [✔] <C-H>
-      - [✔] <Space>
-      - [⚑] <Tab>/<S-Tab>
-      - [⚑] Aal on/off
-      - [✔] (){}
-    - [✔] Colors
-    - [✔] Autolines
-  - Folds:
-    - Comment:
-      - [⚑] Fold commented topics
-            > For now, this is too complicated. Maintaining <C-T> fold info is
-            > too difficult. It's possible we could implement something that
-            > would ignore those and just save the folds, but I can look at
-            > that later.
-      - [⚑] Config as 'remember folds' or something
-            > See same reasons as above.
-    - Enter:
-      - [⚑] Should enter fold from any line?
-            > For now, no.
-      - [✔] Enter should always just fold the minimum amount
-            > Ideally it should not fold/unfold anything else
-      - [✔] If clicking on not topic title, it does not recalculate fold on enter, look up for most recent topic
-  - Go to:
-    - [✔] parent
-      - [✔] add to config
-    - [✔] grandparent
-      - [✔] add to config
-    - [⚑] metadata
-      - [⚑] add to config
-  - Archive:
-    > Archive ability is really about automatic folding
-    > Maybe also about moving stuff to the bottom of the file
-    - What are options?:
-      - [✔] Some sort of archive option
-      - [✔] Archive goes below config?
-      - [✔] Does this matter without fancy UI?
-    - Folds:
-      - [✔] Archived ones are always folded
-    - Keymap:
-      - [✔] Keymap to archive, add leading =?
-  - Bugs:
-    - [✔] <C-B> on empty line
-    - [✔] <C-B> with '>' throws an error
-    - [✔] <C-H> after topic/just dash
-    - [⚑] <C-H> after todo and delete space
-    - [✔] Remove '>' when converting to box
-    - [✔] When typing '|' or ':' in a note, it should go do the typical thing
-          > Not sure what this is.
-    - [✔] Shift tab when '>' should go backwards
 - Fancy Todo Lists:
   - Metadata Enhancements:
     - Default Metadata:
@@ -157,7 +63,7 @@
 =   - Enter:
 =     - Topic:
 =       - [✔] Insert dash
-=       - [✔] If description/notes after todo item, can we get the previous todo item width for the <C-B> command?
+=       - [✔] If description/notes after todo item, can we get the previous todo item width for the <C-Space> command?
 =     - Metadata:
 =       - [✔] If not empty, add another | line
 =       - [✔] If empty, delete | and add blank line
@@ -230,3 +136,97 @@
 =         > There is a "markdown" mode, so it's still visible in markdown.
 =   - [✔] Can you unload markdown plugin files?
 =         > Ultimately not going to do this, if we want, we can produce some html.
+= - All:
+=   - Housekeeping:
+=     - [✔] Handle blank space for box when config has no blank
+=     - [✔] Check out <Cmd>/:map-cmd to simplify map commands
+=     - [✔] Convert to keymaps to commands'
+=     - [✔] Remove <expr>
+=     - [✔] Builder should iterate over lines and not assume order
+=   - Help text:
+=     - [⚑] Add help text for everything
+=           > Not going to add vimdoc for now.
+=   - Docs:
+=
+=     - Features:
+=       - [✔] 6 layered todo list
+=       - [✔] Smart keystrokes built for speed
+=       - [✔] Keymaps
+=       - [✔] Colors
+=       - [✔] Statuses
+=       - [✔] Symbols
+=     - Keymaps:
+=       - [✔] <C-Space>
+=       - [✔] '|'
+=       - [✔] '>'
+=       - [✔] ':'
+=       - [✔] <C-T>1-6
+=       - [✔] <C-T>o/O
+=       - [⚑] <C-T>o/O
+=       - [✔] <C-H>
+=       - [✔] <Space>
+=       - [✔] <Tab>/<S-Tab>
+=   - Configuration:
+=     - Performance:
+=       - [✔] Nested Topics
+=     - Warnings:
+=       - [✔] Duplicate statuses
+=       - [✔] Duplicate symbols
+=       - [✔] Invalid config variable
+=     - Keymaps:
+=       - [✔] <C-Space>
+=       - [⚑] \|
+=       - [⚑] \>
+=       - [⚑] '\:'
+=       - [✔] <C-T>1-6
+=       - [✔] <C-T>o/c
+=       - [✔] <C-T>o/O
+=       - [✔] <C-H>
+=       - [✔] <Space>
+=       - [⚑] <Tab>/<S-Tab>
+=       - [⚑] Aal on/off
+=       - [✔] (){}
+=     - [✔] Colors
+=     - [✔] Autolines
+=   - Folds:
+=     - Comment:
+=       - [⚑] Fold commented topics
+=             > For now, this is too complicated. Maintaining <C-T> fold info is
+=             > too difficult. It's possible we could implement something that
+=             > would ignore those and just save the folds, but I can look at
+=             > that later.
+=       - [⚑] Config as 'remember folds' or something
+=             > See same reasons as above.
+=     - Enter:
+=       - [⚑] Should enter fold from any line?
+=             > For now, no.
+=       - [✔] Enter should always just fold the minimum amount
+=             > Ideally it should not fold/unfold anything else
+=       - [✔] If clicking on not topic title, it does not recalculate fold on enter, look up for most recent topic
+=   - Go to:
+=     - [✔] parent
+=       - [✔] add to config
+=     - [✔] grandparent
+=       - [✔] add to config
+=     - [⚑] metadata
+=       - [⚑] add to config
+=   - Archive:
+=     > Archive ability is really about automatic folding
+=     > Maybe also about moving stuff to the bottom of the file
+=     - What are options?:
+=       - [✔] Some sort of archive option
+=       - [✔] Archive goes below config?
+=       - [✔] Does this matter without fancy UI?
+=     - Folds:
+=       - [✔] Archived ones are always folded
+=     - Keymap:
+=       - [✔] Keymap to archive, add leading =?
+=   - Bugs:
+=     - [✔] <C-Space> on empty line
+=     - [✔] <C-Space> with '>' throws an error
+=     - [✔] <C-H> after topic/just dash
+=     - [⚑] <C-H> after todo and delete space
+=     - [✔] Remove '>' when converting to box
+=     - [✔] When typing '|' or ':' in a note, it should go do the typical thing
+=           > Not sure what this is.
+=     - [✔] Shift tab when '>' should go backwards

@@ -1,5 +1,5 @@
 RSpec.describe "box toggle specs" do
-  describe "<C-B> converting boxes to list items" do
+  describe "<C-Space> converting boxes to list items" do
     context "in normal mode" do
       it "doesn't move the cursor if after the box" do
         content = <<~CONTENT
@@ -8,7 +8,7 @@ RSpec.describe "box toggle specs" do
 
         with_file(content) do |file|
           vim.normal "gg03w"
-          vim.feedkeys '\<C-B>'
+          vim.feedkeys '\<C-Space>'
           vim.write
 
           expect(file.read).to eq(<<~NEW)
@@ -24,7 +24,7 @@ RSpec.describe "box toggle specs" do
 
         with_file(content) do |file|
           vim.normal "gg0"
-          vim.feedkeys '\<C-B>'
+          vim.feedkeys '\<C-Space>'
           vim.write
 
           expect(file.read).to eq(<<~NEW)
@@ -40,7 +40,7 @@ RSpec.describe "box toggle specs" do
 
         with_file(content) do |file|
           vim.normal "gg02w"
-          vim.feedkeys '\<C-B>'
+          vim.feedkeys '\<C-Space>'
           vim.write
 
           expect(file.read).to eq(<<~NEW)
@@ -48,7 +48,7 @@ RSpec.describe "box toggle specs" do
           NEW
 
           vim.normal "gg0w"
-          vim.feedkeys '\<C-B>iMy '
+          vim.feedkeys '\<C-Space>iMy '
           vim.write
 
           file.rewind
@@ -65,7 +65,7 @@ RSpec.describe "box toggle specs" do
 
         with_file(content) do |file|
           vim.normal "gg$"
-          vim.feedkeys '\<C-B>aHello'
+          vim.feedkeys '\<C-Space>aHello'
           vim.write
 
           expect(file.read).to eq(<<~NEW)
@@ -82,7 +82,7 @@ RSpec.describe "box toggle specs" do
 
         with_file(content) do |file|
           vim.normal "G$x"
-          vim.feedkeys '\<C-B>aHello'
+          vim.feedkeys '\<C-Space>aHello'
           vim.write
 
           expect(file.read).to eq(<<~NEW)
@@ -102,7 +102,7 @@ RSpec.describe "box toggle specs" do
 
         with_file(content) do |file|
           vim.normal "gg03wi"
-          vim.feedkeys '\<C-B>'
+          vim.feedkeys '\<C-Space>'
           vim.write
 
           expect(file.read).to eq(<<~NEW)
@@ -118,7 +118,7 @@ RSpec.describe "box toggle specs" do
 
         with_file(content) do |file|
           vim.normal "gg0i"
-          vim.feedkeys '\<C-B>'
+          vim.feedkeys '\<C-Space>'
           vim.write
 
           expect(file.read).to eq(<<~NEW)
@@ -134,7 +134,7 @@ RSpec.describe "box toggle specs" do
 
         with_file(content) do |file|
           vim.normal "gg02wi"
-          vim.feedkeys '\<C-B>'
+          vim.feedkeys '\<C-Space>'
           vim.write
 
           expect(file.read).to eq(<<~NEW)
@@ -142,7 +142,7 @@ RSpec.describe "box toggle specs" do
           NEW
 
           vim.normal "gg0w"
-          vim.feedkeys 'i\<C-B>My '
+          vim.feedkeys 'i\<C-Space>My '
           vim.write
 
           file.rewind
@@ -159,7 +159,7 @@ RSpec.describe "box toggle specs" do
 
         with_file(content) do |file|
           vim.normal "gg$"
-          vim.feedkeys 'i\<C-B>Hello'
+          vim.feedkeys 'i\<C-Space>Hello'
           vim.write
 
           expect(file.read).to eq(<<~NEW)
@@ -176,7 +176,7 @@ RSpec.describe "box toggle specs" do
 
         with_file(content) do |file|
           vim.normal "G$S"
-          vim.feedkeys '\<C-B>Hello'
+          vim.feedkeys '\<C-Space>Hello'
           vim.write
 
           expect(file.read).to eq(<<~NEW)
@@ -189,7 +189,7 @@ RSpec.describe "box toggle specs" do
     end
   end
 
-  describe "<C-B> converting list items to boxes" do
+  describe "<C-Space> converting list items to boxes" do
     context "in normal mode" do
       it "doesn't move the cursor if after the box" do
         content = <<~CONTENT
@@ -198,7 +198,7 @@ RSpec.describe "box toggle specs" do
 
         with_file(content) do |file|
           vim.normal "gg02w"
-          vim.feedkeys '\<C-B>'
+          vim.feedkeys '\<C-Space>'
           vim.write
 
           expect(file.read).to eq(<<~NEW)
@@ -214,7 +214,7 @@ RSpec.describe "box toggle specs" do
 
         with_file(content) do |file|
           vim.normal "gg0"
-          vim.feedkeys '\<C-B>'
+          vim.feedkeys '\<C-Space>'
           vim.write
 
           expect(file.read).to eq(<<~NEW)
@@ -230,7 +230,7 @@ RSpec.describe "box toggle specs" do
 
         with_file(content) do |file|
           vim.normal "gg$"
-          vim.feedkeys '\<C-B>AHello'
+          vim.feedkeys '\<C-Space>AHello'
           vim.write
 
           expect(file.read).to eq(<<~NEW)
@@ -249,7 +249,7 @@ RSpec.describe "box toggle specs" do
 
         with_file(content) do |file|
           vim.normal "$"
-          vim.feedkeys '\<C-B>'
+          vim.feedkeys '\<C-Space>'
           vim.write
 
           expect(file.read).to eq(<<~NEW)
@@ -268,7 +268,7 @@ RSpec.describe "box toggle specs" do
 
         with_file(content) do |file|
           vim.normal "gg02wi"
-          vim.feedkeys '\<C-B>my '
+          vim.feedkeys '\<C-Space>my '
           vim.write
 
           expect(file.read).to eq(<<~NEW)
@@ -284,7 +284,7 @@ RSpec.describe "box toggle specs" do
 
         with_file(content) do |file|
           vim.normal "gg0i"
-          vim.feedkeys '\<C-B>My '
+          vim.feedkeys '\<C-Space>My '
           vim.write
 
           expect(file.read).to eq(<<~NEW)
@@ -300,7 +300,7 @@ RSpec.describe "box toggle specs" do
 
         with_file(content) do |file|
           vim.normal "A"
-          vim.feedkeys '\<C-B>Hello'
+          vim.feedkeys '\<C-Space>Hello'
           vim.write
 
           expect(file.read).to eq(<<~NEW)
@@ -311,7 +311,7 @@ RSpec.describe "box toggle specs" do
     end
   end
 
-  describe "<C-B> converting non dash items to boxes" do
+  describe "<C-Space> converting non dash items to boxes" do
     it "works with a description" do
       content = <<~CONTENT
         - Topic:
@@ -321,7 +321,7 @@ RSpec.describe "box toggle specs" do
 
       with_file(content) do |file|
         vim.normal "GA"
-        vim.feedkeys '\<C-B>'
+        vim.feedkeys '\<C-Space>'
         vim.write
 
         expect(file.read).to eq(<<~NEW)
@@ -341,7 +341,7 @@ RSpec.describe "box toggle specs" do
 
       with_file(content) do |file|
         vim.normal "GA"
-        vim.feedkeys '\<C-B>'
+        vim.feedkeys '\<C-Space>'
         vim.write
 
         expect(file.read).to eq(<<~NEW)
@@ -361,7 +361,7 @@ RSpec.describe "box toggle specs" do
 
       with_file(content) do |file|
         vim.normal "GA"
-        vim.feedkeys '\<C-B>'
+        vim.feedkeys '\<C-Space>'
         vim.write
 
         expect(file.read).to eq(<<~NEW)
@@ -381,7 +381,7 @@ RSpec.describe "box toggle specs" do
 
       with_file(content) do |file|
         vim.normal "GA"
-        vim.feedkeys '\<C-B>'
+        vim.feedkeys '\<C-Space>'
         vim.write
 
         expect(file.read).to eq(<<~NEW)

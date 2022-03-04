@@ -52,9 +52,8 @@ function! tada#init#Mappings()
 
   if !g:tada_no_map
     call tada#init#Global('tada_todo_switch_status_mapping', "<Space>")
-    call tada#init#Global('tada_todo_switch_status_reverse_mapping', "<C-Space>")
     call tada#init#Global('tada_map_prefix', "<C-T>")
-    call tada#init#Global('tada_map_box', "<C-B>")
+    call tada#init#Global('tada_map_box', "<C-Space>")
     call tada#init#Global('tada_map_empty_line', "<C-H>")
     call tada#init#Global('tada_goto_maps', 1)
   endif

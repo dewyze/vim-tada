@@ -53,21 +53,6 @@ RSpec.describe "todo" do
     end
   end
 
-  it "advances todo list items in reverse" do
-    with_file(content) do |file|
-      vim.normal "gg"
-      vim.feedkeys '\<C-space>j\<C-space>j\<C-space>j\<C-space>'
-      vim.write
-
-      expect(file.read).to eq(<<~NEW)
-        - [⚑] Todo item
-        - [ ] In progress item
-        - [•] Done item
-        - [✔] Flagged item
-      NEW
-    end
-  end
-
   it "doesn't move the cursor if after the box" do
     content = <<~CONTENT
       - [ ] Todo item
