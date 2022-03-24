@@ -36,6 +36,7 @@ Plug 'dewyze/vim-tada'
 1. [Folds](#folds)
 1. [Metadata](#metadata)
 1. [Archives](#archives)
+1. [Todo Pane](#todo-pane)
 1. [Keymaps](#keymaps)
 1. [Configuration](#configuration)
 1. [File Config](#file-config)
@@ -193,7 +194,45 @@ archiving top level topics.
 The archive will stay closed at all fold levels, but can be toggled open with
 `<Enter>`.
 
+## Todo Pane
+
+You can quickly open a specified tada file with the pane open command.
+
+`<LocalLeader>td` will open the `Tadafile` in a vertical split on the right.
+This is the only tada command available outside of editing a tada file.
+
+### Todo Pane Configuration
+
+#### `g:tada_todo_pane_file`
+
+**Default:** `Tadafile`
+
+Set the file that is opened by the tada todo pane. Another option could be
+`todo.tada` or anything that meets the [format](#format) extension.
+
+#### `g:tada_todo_pane_location`
+
+**Default:** `right`
+
+Set the location for the tada todo pane.
+Acceptable values: `left, top, right, bottom`
+
+#### `g:tada_todo_pane_map`
+
+**Default:** `<LocalLeader>td`
+
+Set the global keymap for opening a tada side pane.
+
+#### `g:tada_todo_pane_size`
+
+**Default:** `min([round(&columns * 0.33), 60])` (33% width of vim, or 60
+columns whichever is the minimum.
+
+Set the size for a tada side pane. Can be a number or a calculation.
+
 ## Keymaps
+
+The following maps are present in tada specific files:
 
 #### Insert Mode
 - `<C-Space>`: to toggle adding/removing a todo box `- [ ]`
