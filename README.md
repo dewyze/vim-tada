@@ -93,7 +93,6 @@ pressing `<C-Space>`. It will toggle a box with `- [ ] ` in your line.
 If you want to toggle between todo states:
 
 - `<space>`: Toggle between todo item states
-- `<C-space>`: Toggle between todo item states in reverse
 
 ### Configuring Todos
 
