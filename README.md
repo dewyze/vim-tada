@@ -159,6 +159,7 @@ items.
 You can fold topics basic on the indent level of the topic. There are several
 shortcuts you can use:
 
+- `<Enter>` in insert mode will, if on a topic, will collapse that topic.
 - `<C-T>#` where `#` is a number `1-6` will fold to various topic levels.
 - `<C-T>0` will unfold everything except an archive.
 - `<C-T>o` will completely open all folds for the topic under the cursor.
@@ -235,7 +236,7 @@ Set the global keymap for opening a tada side pane.
 #### `g:tada_todo_pane_size`
 
 **Default:** `min([round(&columns * 0.33), 60])` (33% width of vim, or 60
-columns whichever is the minimum.
+columns whichever is the minimum).
 
 Set the size for a tada side pane. Can be a number or a calculation.
 
@@ -245,7 +246,7 @@ The following maps are present in tada specific files:
 
 #### Insert Mode
 - `<C-Space>`: to toggle adding/removing a todo box `- [ ]`
-- `<C-H>`: to toggle adding/removing a todo box `- [ ]`
+- `<C-H>`: to clear anything to the left of the cursor
 - `:`: on an empty line to dedent to a topic
 - `|`: on an empty line to convert it to metadata
 - `>`: on an empty line to convert it to a note
