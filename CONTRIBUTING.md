@@ -29,7 +29,7 @@ VIM_TADA_REFOCUS_COMMAND="open /Applications/Alacritty.app"
 
 - `VIM_TADA_VIM_PATH` is the application path to the vim server app.
 - `VIM_TADA_REFOCUS_COMMAND` is for when you have a different app running vim,
-it will refocus back to your existing app (Terminal.all, iTerm 2, Alacritty,
+it will refocus back to your existing app (Terminal.app, iTerm 2, Alacritty,
 etc.).
 
 Run tests with

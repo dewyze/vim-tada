@@ -18,6 +18,15 @@ hierarchy and some metadata.
 - Global and file specific configuration
 - Archive collapsible sections
 
+## Motivation
+
+Sometimes on solo projects, I have wanted an organized todo structure. But
+things like GitHub projects, Trello, Jira, etc. are all too complicated.
+Additionally, when it's just me, I wanted to not have to leave my vim editor in
+order to keep track of what I wanted to work on. So...vim-tada!
+
+I may eventually add advanced opt-in functionality with labels, dates, and some
+  GUI-ish features. Or maybe not.
 
 ## Installation
 
@@ -40,6 +49,7 @@ Plug 'dewyze/vim-tada'
 1. [Keymaps](#keymaps)
 1. [Configuration](#configuration)
 1. [File Config](#file-config)
+1. [Contributing](#contributing)
 
 ## Format
 
