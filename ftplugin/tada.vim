@@ -77,6 +77,9 @@ function! s:Archive() range
   if getline(previous_num) !~ '^='
     call append(previous_num, ['', '==='])
   endif
+
+  " return to the last cursor position before tasks were removed
+  execute a:firstline
 endfunction
 command -nargs=0 -range TadaArchive :<line1>,<line2>call <SID>Archive()
 
