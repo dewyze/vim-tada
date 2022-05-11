@@ -70,7 +70,7 @@ function! s:Archive() range
   let range_length = a:lastline - a:firstline + 1
 
   execute a:firstline . ',' . a:lastline . 's/^/= /'
-  execute a:firstline . ',' . a:lastline . 'm$'
+  silent execute a:firstline . ',' . a:lastline . 'm$'
 
   let previous_num = line('$') - range_length
 
