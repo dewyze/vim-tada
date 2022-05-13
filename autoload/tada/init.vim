@@ -174,20 +174,22 @@ function! tada#init#Colors()
 endfunction
 
 function! tada#init#Patterns()
+  call tada#init#Global('tada_sigil', '-')
+
   let g:tada_pat_archive = '^\s*=.*$'
   let g:tada_pat_archive_header = '^\s*===.*$'
   let g:tada_pat_blank_line = '^\s*$'
   let g:tada_pat_buffer_config = '^\s*@config\.[^ ]\+\s\?=\s\?.\+$'
   let g:tada_pat_comment = '^\s*#.*$'
-  let g:tada_pat_description = '^\s*[^ \-|>]\+.*$'
+  let g:tada_pat_description = '^\s*[^ \' . g:tada_sigil . '|>]\+.*$'
   let g:tada_pat_invalid_config = '^\s*@config\..*$'
-  let g:tada_pat_list_item = '^\s*-\s*[^ [].*\(:\)\@<!$'
-  let g:tada_pat_list_item_empty = '^\s*-\s*$'
+  let g:tada_pat_list_item = '^\s*' . g:tada_sigil . '\s*[^ [].*\(:\)\@<!$'
+  let g:tada_pat_list_item_empty = '^\s*' . g:tada_sigil . '\s*$'
   let g:tada_pat_list_item_end = '\(:\)\@<!$'
-  let g:tada_pat_list_item_start = '^\s*-\s*[^ []'
+  let g:tada_pat_list_item_start = '^\s*' . g:tada_sigil . '\s*[^ []'
   let g:tada_pat_metadata = '^\s\{2,}|.*$'
-  let g:tada_pat_no_dash = '^\s*[^ -=].*$'
+  let g:tada_pat_no_dash = '^\s*[^ ' . g:tada_sigil . '=].*$'
   let g:tada_pat_note = '^\s*>.*'
-  let g:tada_pat_todo_item = '^\s*-\s*\[.\].*$'
-  let g:tada_pat_topic = '^\s*-.*:$'
+  let g:tada_pat_todo_item = '^\s*' . g:tada_sigil . '\s*\[.\].*$'
+  let g:tada_pat_topic = '^\s*' . g:tada_sigil . '.*:$'
 endfunction

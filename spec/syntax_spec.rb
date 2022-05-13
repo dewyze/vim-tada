@@ -2,17 +2,17 @@ RSpec.describe "syntax" do
   describe "topic levels" do
     let(:content) do
       <<~CONTENT
-      - Milestone:
+      #{SIGIL} Milestone:
         | @:john
-        - Epic:
-        # - Commented:
+        #{SIGIL} Epic:
+        # #{SIGIL} Commented:
           My description
-          - Story:
-            Description with -
-          - List item
-            - Level 4:
-              - Level 5:
-                - Level 6:
+          #{SIGIL} Story:
+            Description with #{SIGIL}
+          #{SIGIL} List item
+            #{SIGIL} Level 4:
+              #{SIGIL} Level 5:
+                #{SIGIL} Level 6:
                   > Note
       CONTENT
     end
@@ -28,7 +28,7 @@ RSpec.describe "syntax" do
         expect("Level 6").to have_highlight("tadaTopicTitle6")
         expect("@:john").to have_highlight("tadaMetadata")
         expect("My description").to have_highlight("tadaDescription")
-        expect("Description with -").to have_highlight("tadaDescription")
+        expect("Description with #{SIGIL}").to have_highlight("tadaDescription")
         expect("List item").to have_highlight("tadaListItem")
         expect("Note").to have_highlight("tadaNote")
       end
@@ -36,16 +36,16 @@ RSpec.describe "syntax" do
 
     it "parses an empty list item" do
       content = <<~CONTENT
-        -
+        #{SIGIL}
       CONTENT
       with_file(content) do
-        expect("\-").to have_highlight("tadaListItem")
+        expect("#{SIGIL}").to have_highlight("tadaListItem")
       end
     end
 
     it "parses a single character list item" do
       content = <<~CONTENT
-        - A
+        #{SIGIL} A
       CONTENT
 
       with_file(content) do
@@ -58,12 +58,12 @@ RSpec.describe "syntax" do
     context "with unicode symbols" do
       it "parses todo items" do
         content = <<~CONTENT
-         -[ ] Todo item 1
-          -[ ] Todo item 2
-          - [ ] Todo item 3
-          - [•] In progress item
-          - [✔] Done item
-          - [⚑] Flagged item
+         #{SIGIL}[ ] Todo item 1
+          #{SIGIL}[ ] Todo item 2
+          #{SIGIL} [ ] Todo item 3
+          #{SIGIL} [•] In progress item
+          #{SIGIL} [✔] Done item
+          #{SIGIL} [⚑] Flagged item
         CONTENT
 
         with_file(content) do
@@ -82,10 +82,10 @@ RSpec.describe "syntax" do
         vim.command("let g:tada_todo_style = 'ascii'")
 
         content = <<~CONTENT
-          - [ ] Todo item
-          - [-] In progress item
-          - [x] Done item
-          - [O] Flagged item
+          #{SIGIL} [ ] Todo item
+          #{SIGIL} [-] In progress item
+          #{SIGIL} [x] Done item
+          #{SIGIL} [O] Flagged item
         CONTENT
 
         with_file(content) do
@@ -102,10 +102,10 @@ RSpec.describe "syntax" do
         vim.command("let g:tada_todo_symbols = { 'blank': 'T', 'in_progress': 'I', 'done': 'D', 'flagged': 'B' }")
 
         content = <<~CONTENT
-          - [T] Todo item
-          - [I] In progress item
-          - [D] Done item
-          - [B] Flagged item
+          #{SIGIL} [T] Todo item
+          #{SIGIL} [I] In progress item
+          #{SIGIL} [D] Done item
+          #{SIGIL} [B] Flagged item
         CONTENT
 
         with_file(content) do
@@ -123,10 +123,10 @@ RSpec.describe "syntax" do
         vim.command("let g:tada_todo_symbols = { 'todo': 'T', 'doing': 'I', 'donezo': 'D', 'flagged': 'B' }")
 
         content = <<~CONTENT
-          - [T] Todo item
-          - [I] In progress item
-          - [D] Done item
-          - [B] Flagged item
+          #{SIGIL} [T] Todo item
+          #{SIGIL} [I] In progress item
+          #{SIGIL} [D] Done item
+          #{SIGIL} [B] Flagged item
         CONTENT
 
         with_file(content) do

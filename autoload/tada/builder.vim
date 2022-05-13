@@ -40,7 +40,7 @@ function! tada#builder#Line(lnum, lines, indent)
 
   if text !~ '^\s\{' . a:indent . '}\S'
     return
-  elseif text =~ '^\s\{' . a:indent . '}-.*:$'
+  elseif text =~ '^\s\{' . a:indent . '}' . g:tada_sigil . '.*:$'
     call add(a:lines['topic_lines'], a:lnum)
   elseif text =~ g:tada_pat_metadata
     call add(a:lines['metadata'], text)
@@ -50,7 +50,7 @@ function! tada#builder#Line(lnum, lines, indent)
 endfunction
 
 function! tada#builder#Title(text)
-  return matchlist(a:text, '^\s*-\s*\(.*\):$')[1]
+  return matchlist(a:text, '^\s*' . g:tada_sigil . '\s*\(.*\):$')[1]
 endfunction
 
 function! tada#builder#Metadata(lines)
@@ -78,7 +78,7 @@ function! tada#builder#Todos(lines)
   let todos = []
 
   for text in a:lines
-    let matches = matchlist(text, '- \[\([^\]]*\)\]')
+    let matches = matchlist(text, g:tada_sigil . ' \[\([^\]]*\)\]')
     let symbol = matches[1]
 
     for [key, value] in items(b:tada_todo_symbols)
