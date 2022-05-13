@@ -53,9 +53,14 @@ function! tada#init#Mappings()
   if !g:tada_no_map
     call tada#init#Global('tada_todo_switch_status_mapping', "<Space>")
     call tada#init#Global('tada_map_prefix', "<C-T>")
-    call tada#init#Global('tada_map_box', "<C-Space>")
     call tada#init#Global('tada_map_empty_line', "<C-H>")
     call tada#init#Global('tada_goto_maps', 1)
+
+    if has('nvim') || has('gui_running')
+      call tada#init#Global('tada_map_box', "<C-Space>")
+    else
+      call tada#init#Global('tada_map_box', "<C-@>")
+    endif
   endif
 endfunction
 
