@@ -12,7 +12,7 @@ function! tada#todo#DefaultSymbol()
 endfunction
 
 function! tada#todo#SymbolToStatus(text)
-  let current = matchlist(a:text, '^\s*-\s\[\(.\)\]')[1]
+  let current = matchlist(a:text, '^\s*' . g:tada_sigil . '\s\[\(.\)\]')[1]
 
   for [status, symbol] in items(b:tada_todo_symbols)
     if symbol == current
@@ -41,7 +41,7 @@ function! tada#todo#ToggleTodoStatus(dir = 1)
 
   call cursor(line('.'), 1)
   let [symline, symcol] = searchpos('\[' . current_symbol . '\]', 'n', line('.'))
-  call setline('.', substitute(getline('.'), '^\(\s*-\s\?\)\[.\]', '\1[' . next_symbol . ']', ''))
+  call setline('.', substitute(getline('.'), '^\(\s*' . g:tada_sigil . '\s\?\)\[.\]', '\1[' . next_symbol . ']', ''))
 
   let symcol = symcol + 1
 

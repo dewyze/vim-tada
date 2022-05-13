@@ -7,11 +7,11 @@ function! s:IsTodoItem(line)
 endfunction
 
 function! s:IsEmptyIndentable()
-  return g:tada_smart_tab && getline('.') =~ '^\s*\%(-\s*\%(\[.\]\)\?\|>\)\s*$'
+  return g:tada_smart_tab && getline('.') =~ '^\s*\%(' . g:tada_sigil . '\s*\%(\[.\]\)\?\|>\)\s*$'
 endfunction
 
 function! s:IsEmptyListOrTodo()
-  return getline('.') =~ '^\s*-\s*\%(\[.\]\)\?\s*$'
+  return getline('.') =~ '^\s*' . g:tada_sigil . '\s*\%(\[.\]\)\?\s*$'
 endfunction
 
 function! s:HandleNormalCR()
@@ -63,7 +63,7 @@ endfunction
 command -nargs=0 PreviousParentTopic :call <SID>PreviousParentTopic()
 
 function! s:SearchTopic(indent, flags)
-  call search('^\s\{,' . a:indent . '\}-.*:$', a:flags)
+  call search('^\s\{,' . a:indent . '\}' . g:tada_sigil . '.*:$', a:flags)
 endfunction
 
 function! s:Archive() range
@@ -117,13 +117,13 @@ execute 'inoremap <buffer> ' . g:tada_map_box . ' <Cmd>TadaBox<CR>'
 execute 'inoremap <buffer> ' . g:tada_map_empty_line . ' <Cmd>call tada#map#EmptyLine()<CR>'
 inoremap <silent> <buffer> <script> <expr> \| <SID>IsEmptyListOrTodo() ? '\|<C-O>:call tada#map#EmptyLine()<CR> ' : '\|'
 inoremap <silent> <buffer> <script> <expr> > <SID>IsEmptyListOrTodo() ? '><C-O>:call tada#map#EmptyLine()<CR> ' : '>'
-inoremap <silent> <buffer> <script> <expr> : <SID>IsEmptyListOrTodo() ? '<C-O>S<C-D>- ' : ':'
+inoremap <silent> <buffer> <script> <expr> : <SID>IsEmptyListOrTodo() ? '<C-O>S<C-D>' . expand(g:tada_sigil) . ' ' : ':'
 inoremap <silent> <buffer> <script> <expr> <Tab> <SID>IsEmptyIndentable() ? '<C-T>' : '<Tab>'
 inoremap <silent> <buffer> <script> <expr> <S-Tab> <SID>IsEmptyIndentable() ? '<C-D>' : '<S-Tab>'
 inoremap <silent> <buffer> <script> <expr> <CR> <SID>HandleInsertCR()
 
 if g:tada_autolines
-  setlocal comments=b:\|,b:-,b:>
+  execute 'setlocal comments=b:\|,b:' . g:tada_sigil . ',b:>'
   setlocal formatoptions=tron
 end
 

@@ -20,7 +20,7 @@ function! tada#autoline#Handle(key, on_empty = 1)
     return a:key
   endif
 
-  let empty_pattern = '^\s*\%(-\||\|-\s*\[' . b:tada_todo_default . '\]\)\s*$'
+  let empty_pattern = '^\s*\%(' . g:tada_sigil . '\||\|' . g:tada_sigil . '\s*\[' . b:tada_todo_default . '\]\)\s*$'
 
   if a:on_empty && getline('.') =~ empty_pattern
     return "\<ESC>S\<CR>"

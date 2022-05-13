@@ -21,13 +21,13 @@ execute 'syn match tadaNote "' . g:tada_pat_note . '"'
 
 for level in [1,2,3,4,5,6]
   let indent = (level - 1) * 2
-  execute 'syn region tadaTopicTitle' . level . ' matchgroup=tadaDelimiter start="^\s\{' . indent . '}-\s*" end=":$" oneline'
+  execute 'syn region tadaTopicTitle' . level . ' matchgroup=tadaDelimiter start="^\s\{' . indent . '}' . g:tada_sigil . '\s*" end=":$" oneline'
 endfor
 
 for [status, symbol] in items(b:tada_todo_symbols)
   let name = tada#utils#Camelize(status)
 
-  execute 'syn match tadaTodoItem' . name . ' /^\s*-\s*\[' . symbol . '\].*$/'
+  execute 'syn match tadaTodoItem' . name . ' /^\s*' . g:tada_sigil . '\s*\[' . symbol . '\].*$/'
 endfor
 
 execute 'syn match tadaInvalidConfig "' . g:tada_pat_invalid_config . '"'

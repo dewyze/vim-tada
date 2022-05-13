@@ -1,10 +1,10 @@
 RSpec.describe "todo" do
   let(:content) do
     <<~CONTENT
-      - [ ] Todo item
-      - [•] In progress item
-      - [✔] Done item
-      - [⚑] Flagged item
+      #{SIGIL} [ ] Todo item
+      #{SIGIL} [•] In progress item
+      #{SIGIL} [✔] Done item
+      #{SIGIL} [⚑] Flagged item
     CONTENT
   end
 
@@ -17,10 +17,10 @@ RSpec.describe "todo" do
 
 
         expect(file.read).to eq(<<~NEW)
-        - [•] Todo item
-        - [✔] In progress item
-        - [⚑] Done item
-        - [ ] Flagged item
+        #{SIGIL} [•] Todo item
+        #{SIGIL} [✔] In progress item
+        #{SIGIL} [⚑] Done item
+        #{SIGIL} [ ] Flagged item
         NEW
       end
     end
@@ -28,10 +28,10 @@ RSpec.describe "todo" do
     context "with custom symbols" do
       it "advances with the custom symbols" do
         content = <<~CONTENT
-          - [T] Todo item
-          - [I] Doing item
-          - [Z] Donezo item
-          - [S] Stuck item
+          #{SIGIL} [T] Todo item
+          #{SIGIL} [I] Doing item
+          #{SIGIL} [Z] Donezo item
+          #{SIGIL} [S] Stuck item
         CONTENT
 
         vim.command("let g:tada_todo_statuses = ['todo', 'doing', 'donezo', 'stuck']")
@@ -43,10 +43,10 @@ RSpec.describe "todo" do
           vim.write
 
           expect(file.read).to eq(<<~NEW)
-            - [I] Todo item
-            - [Z] Doing item
-            - [S] Donezo item
-            - [T] Stuck item
+            #{SIGIL} [I] Todo item
+            #{SIGIL} [Z] Doing item
+            #{SIGIL} [S] Donezo item
+            #{SIGIL} [T] Stuck item
           NEW
         end
       end
@@ -55,7 +55,7 @@ RSpec.describe "todo" do
 
   it "doesn't move the cursor if after the box" do
     content = <<~CONTENT
-      - [ ] Todo item
+      #{SIGIL} [ ] Todo item
     CONTENT
 
     with_file(content) do |file|
@@ -64,14 +64,14 @@ RSpec.describe "todo" do
       vim.write
 
       expect(file.read).to eq(<<~NEW)
-        - [•] My Todo item
+        #{SIGIL} [•] My Todo item
       NEW
     end
   end
 
   it "doesn't move the cursor if before the box" do
     content = <<~CONTENT
-      - [ ] Todo item
+      #{SIGIL} [ ] Todo item
     CONTENT
 
     with_file(content) do |file|
@@ -80,14 +80,14 @@ RSpec.describe "todo" do
       vim.write
 
       expect(file.read).to eq(<<~NEW)
-        My - [•] Todo item
+        My #{SIGIL} [•] Todo item
       NEW
     end
   end
 
   it "doesn't move the cursor if in the box" do
     content = <<~CONTENT
-      - [ ] Todo item
+      #{SIGIL} [ ] Todo item
     CONTENT
 
     with_file(content) do |file|
@@ -96,7 +96,7 @@ RSpec.describe "todo" do
       vim.write
 
       expect(file.read).to eq(<<~NEW)
-        - [My•] Todo item
+        #{SIGIL} [My•] Todo item
       NEW
     end
   end

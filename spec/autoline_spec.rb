@@ -1,10 +1,12 @@
 RSpec.describe "autolines" do
   describe "with configuration off" do
-    before { vim.command("let g:tada_autolines = 0") }
+    before do
+      vim.command("let g:tada_autolines = 0")
+    end
 
     it "does not insert metadata line" do
       content = <<~CONTENT
-          - Topic:
+          #{SIGIL} Topic:
             | @:john
       CONTENT
 
@@ -14,7 +16,7 @@ RSpec.describe "autolines" do
         vim.write
 
         expect(file.read).to eq(<<~NEW)
-            - Topic:
+            #{SIGIL} Topic:
               | @:john
               $:3
         NEW
@@ -23,8 +25,8 @@ RSpec.describe "autolines" do
 
     it "does not insert todo line" do
       content = <<~CONTENT
-          - Topic:
-            - [ ] Walk the dog
+          #{SIGIL} Topic:
+            #{SIGIL} [ ] Walk the dog
       CONTENT
 
       with_file(content) do |file|
@@ -33,8 +35,8 @@ RSpec.describe "autolines" do
         vim.write
 
         expect(file.read).to eq(<<~NEW)
-            - Topic:
-              - [ ] Walk the dog
+            #{SIGIL} Topic:
+              #{SIGIL} [ ] Walk the dog
               Milk the cat
         NEW
       end
@@ -42,7 +44,7 @@ RSpec.describe "autolines" do
 
     it "does not insert topic line" do
       content = <<~CONTENT
-          - Topic:
+          #{SIGIL} Topic:
       CONTENT
 
       with_file(content) do |file|
@@ -51,7 +53,7 @@ RSpec.describe "autolines" do
         vim.write
 
         expect(file.read).to eq(<<~NEW)
-            - Topic:
+            #{SIGIL} Topic:
             Milk the cat
         NEW
       end
@@ -62,7 +64,7 @@ RSpec.describe "autolines" do
     context "with a non empty line" do
       let(:content) do
         <<~CONTENT
-          - Topic:
+          #{SIGIL} Topic:
             | @:john
         CONTENT
       end
@@ -74,7 +76,7 @@ RSpec.describe "autolines" do
           vim.write
 
           expect(file.read).to eq(<<~NEW)
-            - Topic:
+            #{SIGIL} Topic:
               | @:john
               | $:3
           NEW
@@ -88,7 +90,7 @@ RSpec.describe "autolines" do
           vim.write
 
           expect(file.read).to eq(<<~NEW)
-            - Topic:
+            #{SIGIL} Topic:
               | @:john
               | $:3
           NEW
@@ -102,7 +104,7 @@ RSpec.describe "autolines" do
           vim.write
 
           expect(file.read).to eq(<<~NEW)
-            - Topic:
+            #{SIGIL} Topic:
               | $:3
               | @:john
           NEW
@@ -113,7 +115,7 @@ RSpec.describe "autolines" do
     context "with an empty line" do
       let(:content) do
         <<~CONTENT
-          - Topic:
+          #{SIGIL} Topic:
             | @:john
             |
         CONTENT
@@ -126,7 +128,7 @@ RSpec.describe "autolines" do
           vim.write
 
           expect(file.read).to eq(<<~NEW)
-            - Topic:
+            #{SIGIL} Topic:
               | @:john
 
               Hello
@@ -141,7 +143,7 @@ RSpec.describe "autolines" do
           vim.write
 
           expect(file.read).to eq(<<~NEW)
-            - Topic:
+            #{SIGIL} Topic:
               | @:john
 
               Hello
@@ -156,7 +158,7 @@ RSpec.describe "autolines" do
           vim.write
 
           expect(file.read).to eq(<<~NEW)
-            - Topic:
+            #{SIGIL} Topic:
               | @:john
               |Hello
               |
@@ -170,8 +172,8 @@ RSpec.describe "autolines" do
     context "with a non empty line" do
       let(:content) do
         <<~CONTENT
-          - Topic:
-            - [ ] Feed the dog
+          #{SIGIL} Topic:
+            #{SIGIL} [ ] Feed the dog
         CONTENT
       end
 
@@ -182,9 +184,9 @@ RSpec.describe "autolines" do
           vim.write
 
           expect(file.read).to eq(<<~NEW)
-            - Topic:
-              - [ ] Feed the dog
-              - [ ] Milk the cat
+            #{SIGIL} Topic:
+              #{SIGIL} [ ] Feed the dog
+              #{SIGIL} [ ] Milk the cat
           NEW
         end
       end
@@ -196,9 +198,9 @@ RSpec.describe "autolines" do
           vim.write
 
           expect(file.read).to eq(<<~NEW)
-            - Topic:
-              - [ ] Feed the dog
-              - [ ] Milk the cat
+            #{SIGIL} Topic:
+              #{SIGIL} [ ] Feed the dog
+              #{SIGIL} [ ] Milk the cat
           NEW
         end
       end
@@ -210,9 +212,9 @@ RSpec.describe "autolines" do
           vim.write
 
           expect(file.read).to eq(<<~NEW)
-            - Topic:
-              - [ ] Milk the cat
-              - [ ] Feed the dog
+            #{SIGIL} Topic:
+              #{SIGIL} [ ] Milk the cat
+              #{SIGIL} [ ] Feed the dog
           NEW
         end
       end
@@ -221,9 +223,9 @@ RSpec.describe "autolines" do
     context "with an empty line" do
       let(:content) do
         <<~CONTENT
-          - Topic:
-            - [ ] Feed the dog
-            - [ ]
+          #{SIGIL} Topic:
+            #{SIGIL} [ ] Feed the dog
+            #{SIGIL} [ ]
         CONTENT
       end
 
@@ -234,8 +236,8 @@ RSpec.describe "autolines" do
           vim.write
 
           expect(file.read).to eq(<<~NEW)
-            - Topic:
-              - [ ] Feed the dog
+            #{SIGIL} Topic:
+              #{SIGIL} [ ] Feed the dog
 
               Hello
           NEW
@@ -249,8 +251,8 @@ RSpec.describe "autolines" do
           vim.write
 
           expect(file.read).to eq(<<~NEW)
-            - Topic:
-              - [ ] Feed the dog
+            #{SIGIL} Topic:
+              #{SIGIL} [ ] Feed the dog
 
               Hello
           NEW
@@ -264,10 +266,10 @@ RSpec.describe "autolines" do
           vim.write
 
           expect(file.read).to eq(<<~NEW)
-            - Topic:
-              - [ ] Feed the dog
-              - [ ] Milk the cat
-              - [ ]
+            #{SIGIL} Topic:
+              #{SIGIL} [ ] Feed the dog
+              #{SIGIL} [ ] Milk the cat
+              #{SIGIL} [ ]
           NEW
         end
       end
@@ -275,8 +277,8 @@ RSpec.describe "autolines" do
 
     it "adds the configured todo state" do
       content = <<~CONTENT
-          - Topic:
-            - [◦] Feed the dog
+          #{SIGIL} Topic:
+            #{SIGIL} [◦] Feed the dog
       CONTENT
 
       vim.command "let g:tada_todo_symbols = { 'blank': '◦', 'in_progress': '•', 'done': '✔', 'flagged':'⚑' }"
@@ -286,9 +288,9 @@ RSpec.describe "autolines" do
         vim.write
 
         expect(file.read).to eq(<<~NEW)
-          - Topic:
-            - [◦] Feed the dog
-            - [◦] Hello
+          #{SIGIL} Topic:
+            #{SIGIL} [◦] Feed the dog
+            #{SIGIL} [◦] Hello
         NEW
 
       end
@@ -296,8 +298,8 @@ RSpec.describe "autolines" do
 
     it "uses the configured empty state" do
       content = <<~CONTENT
-          - Topic:
-            - [◦]
+          #{SIGIL} Topic:
+            #{SIGIL} [◦]
       CONTENT
 
       vim.command "let g:tada_todo_symbols = { 'blank': '◦', 'in_progress': '•', 'done': '✔', 'flagged':'⚑' }"
@@ -307,7 +309,7 @@ RSpec.describe "autolines" do
         vim.write
 
         expect(file.read).to eq(<<~NEW)
-          - Topic:
+          #{SIGIL} Topic:
 
             Hello
         NEW
@@ -320,8 +322,8 @@ RSpec.describe "autolines" do
     context "with a non empty line" do
       let(:content) do
         <<~CONTENT
-          - Topic:
-            - Feed the dog
+          #{SIGIL} Topic:
+            #{SIGIL} Feed the dog
         CONTENT
       end
 
@@ -332,9 +334,9 @@ RSpec.describe "autolines" do
           vim.write
 
           expect(file.read).to eq(<<~NEW)
-            - Topic:
-              - Feed the dog
-              - Milk the cat
+            #{SIGIL} Topic:
+              #{SIGIL} Feed the dog
+              #{SIGIL} Milk the cat
           NEW
         end
       end
@@ -346,9 +348,9 @@ RSpec.describe "autolines" do
           vim.write
 
           expect(file.read).to eq(<<~NEW)
-            - Topic:
-              - Feed the dog
-              - Milk the cat
+            #{SIGIL} Topic:
+              #{SIGIL} Feed the dog
+              #{SIGIL} Milk the cat
           NEW
         end
       end
@@ -360,9 +362,9 @@ RSpec.describe "autolines" do
           vim.write
 
           expect(file.read).to eq(<<~NEW)
-            - Topic:
-              - Milk the cat
-              - Feed the dog
+            #{SIGIL} Topic:
+              #{SIGIL} Milk the cat
+              #{SIGIL} Feed the dog
           NEW
         end
       end
@@ -371,9 +373,9 @@ RSpec.describe "autolines" do
     context "with an empty line" do
       let(:content) do
         <<~CONTENT
-          - Topic:
-            - Feed the dog
-            -
+          #{SIGIL} Topic:
+            #{SIGIL} Feed the dog
+            #{SIGIL}
         CONTENT
       end
 
@@ -384,8 +386,8 @@ RSpec.describe "autolines" do
           vim.write
 
           expect(file.read).to eq(<<~NEW)
-            - Topic:
-              - Feed the dog
+            #{SIGIL} Topic:
+              #{SIGIL} Feed the dog
 
               Hello
           NEW
@@ -399,8 +401,8 @@ RSpec.describe "autolines" do
           vim.write
 
           expect(file.read).to eq(<<~NEW)
-            - Topic:
-              - Feed the dog
+            #{SIGIL} Topic:
+              #{SIGIL} Feed the dog
 
               Hello
           NEW
@@ -414,10 +416,10 @@ RSpec.describe "autolines" do
           vim.write
 
           expect(file.read).to eq(<<~NEW)
-            - Topic:
-              - Feed the dog
-              -Milk the cat
-              -
+            #{SIGIL} Topic:
+              #{SIGIL} Feed the dog
+              #{SIGIL}Milk the cat
+              #{SIGIL}
           NEW
         end
       end
@@ -428,7 +430,7 @@ RSpec.describe "autolines" do
     context "with a non empty line" do
       let(:content) do
         <<~CONTENT
-          - Topic:
+          #{SIGIL} Topic:
         CONTENT
       end
 
@@ -439,8 +441,8 @@ RSpec.describe "autolines" do
           vim.write
 
           expect(file.read).to eq(<<~NEW)
-            - Topic:
-            - Milk the cat
+            #{SIGIL} Topic:
+            #{SIGIL} Milk the cat
           NEW
         end
       end
@@ -452,8 +454,8 @@ RSpec.describe "autolines" do
           vim.write
 
           expect(file.read).to eq(<<~NEW)
-            - Topic:
-            - Milk the cat
+            #{SIGIL} Topic:
+            #{SIGIL} Milk the cat
           NEW
         end
       end
@@ -465,8 +467,8 @@ RSpec.describe "autolines" do
           vim.write
 
           expect(file.read).to eq(<<~NEW)
-            - Milk the cat
-            - Topic:
+            #{SIGIL} Milk the cat
+            #{SIGIL} Topic:
           NEW
         end
       end
@@ -476,8 +478,8 @@ RSpec.describe "autolines" do
   describe "with CR in middle of line" do
     it "moves the text to the new line" do
       content = <<~CONTENT
-        - Topic:
-          - Feed the dog
+        #{SIGIL} Topic:
+          #{SIGIL} Feed the dog
       CONTENT
 
       with_file(content) do |file|
@@ -486,9 +488,9 @@ RSpec.describe "autolines" do
         vim.write
 
         expect(file.read).to eq(<<~NEW)
-          - Topic:
-            - Feed
-            - Milk the dog
+          #{SIGIL} Topic:
+            #{SIGIL} Feed
+            #{SIGIL} Milk the dog
         NEW
       end
     end
