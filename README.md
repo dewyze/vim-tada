@@ -120,7 +120,7 @@ A todo style is a predetermined set of statuses and symbols:
 You can just set the style and these will be the todo states.
 
 ```vim
-let g:tada_todo_styles = 'ascii'
+let g:tada_todo_style = 'ascii'
 ```
 
 Or via [file specific configs](#file-config):
