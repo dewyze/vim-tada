@@ -3,7 +3,7 @@ RSpec.describe "box toggle specs" do
     context "in normal mode" do
       it "doesn't move the cursor if after the box" do
         content = <<~CONTENT
-          - [ ] Todo item
+          #{SIGIL} [ ] Todo item
         CONTENT
 
         with_file(content) do |file|
@@ -12,14 +12,14 @@ RSpec.describe "box toggle specs" do
           vim.write
 
           expect(file.read).to eq(<<~NEW)
-            - Todo item
+            #{SIGIL} Todo item
           NEW
         end
       end
 
       it "doesn't move the cursor if before the box" do
         content = <<~CONTENT
-          - [ ] Todo item
+          #{SIGIL} [ ] Todo item
         CONTENT
 
         with_file(content) do |file|
@@ -28,14 +28,14 @@ RSpec.describe "box toggle specs" do
           vim.write
 
           expect(file.read).to eq(<<~NEW)
-            - Todo item
+            #{SIGIL} Todo item
           NEW
         end
       end
 
       it "doesn't move the cursor if in the box" do
         content = <<~CONTENT
-          - [ ] Todo item
+          #{SIGIL} [ ] Todo item
         CONTENT
 
         with_file(content) do |file|
@@ -44,7 +44,7 @@ RSpec.describe "box toggle specs" do
           vim.write
 
           expect(file.read).to eq(<<~NEW)
-            - Todo item
+            #{SIGIL} Todo item
           NEW
 
           vim.normal "gg0w"
@@ -53,14 +53,14 @@ RSpec.describe "box toggle specs" do
 
           file.rewind
           expect(file.read).to eq(<<~NEW)
-            - [ ] My Todo item
+            #{SIGIL} [ ] My Todo item
           NEW
         end
       end
 
       it "works with an empty box" do
         content = <<~CONTENT
-          - [ ]
+          #{SIGIL} [ ]
         CONTENT
 
         with_file(content) do |file|
@@ -69,14 +69,14 @@ RSpec.describe "box toggle specs" do
           vim.write
 
           expect(file.read).to eq(<<~NEW)
-            - Hello
+            #{SIGIL} Hello
           NEW
         end
       end
 
       it "adds a box at same level for empty line below todo item" do
         content = <<~CONTENT
-          - [ ] Todo Item
+          #{SIGIL} [ ] Todo Item
                 A
         CONTENT
 
@@ -86,8 +86,8 @@ RSpec.describe "box toggle specs" do
           vim.write
 
           expect(file.read).to eq(<<~NEW)
-            - [ ] Todo Item
-            - [ ] Hello
+            #{SIGIL} [ ] Todo Item
+            #{SIGIL} [ ] Hello
           NEW
         end
 
@@ -97,7 +97,7 @@ RSpec.describe "box toggle specs" do
     context "in insert mode" do
       it "doesn't move the cursor if after the box" do
         content = <<~CONTENT
-          - [ ] Todo item
+          #{SIGIL} [ ] Todo item
         CONTENT
 
         with_file(content) do |file|
@@ -106,14 +106,14 @@ RSpec.describe "box toggle specs" do
           vim.write
 
           expect(file.read).to eq(<<~NEW)
-            - Todo item
+            #{SIGIL} Todo item
           NEW
         end
       end
 
       it "doesn't move the cursor if before the box" do
         content = <<~CONTENT
-          - [ ] Todo item
+          #{SIGIL} [ ] Todo item
         CONTENT
 
         with_file(content) do |file|
@@ -122,14 +122,14 @@ RSpec.describe "box toggle specs" do
           vim.write
 
           expect(file.read).to eq(<<~NEW)
-            - Todo item
+            #{SIGIL} Todo item
           NEW
         end
       end
 
       it "doesn't move the cursor if in the box" do
         content = <<~CONTENT
-          - [ ] Todo item
+          #{SIGIL} [ ] Todo item
         CONTENT
 
         with_file(content) do |file|
@@ -138,7 +138,7 @@ RSpec.describe "box toggle specs" do
           vim.write
 
           expect(file.read).to eq(<<~NEW)
-            - Todo item
+            #{SIGIL} Todo item
           NEW
 
           vim.normal "gg0w"
@@ -147,14 +147,14 @@ RSpec.describe "box toggle specs" do
 
           file.rewind
           expect(file.read).to eq(<<~NEW)
-            - [ ] My Todo item
+            #{SIGIL} [ ] My Todo item
           NEW
         end
       end
 
       it "works with an empty box" do
         content = <<~CONTENT
-          - [ ]
+          #{SIGIL} [ ]
         CONTENT
 
         with_file(content) do |file|
@@ -163,14 +163,14 @@ RSpec.describe "box toggle specs" do
           vim.write
 
           expect(file.read).to eq(<<~NEW)
-            - Hello
+            #{SIGIL} Hello
           NEW
         end
       end
 
       it "adds a box at same level for empty line below todo item" do
         content = <<~CONTENT
-          - [ ] Todo Item
+          #{SIGIL} [ ] Todo Item
                 A
         CONTENT
 
@@ -180,8 +180,8 @@ RSpec.describe "box toggle specs" do
           vim.write
 
           expect(file.read).to eq(<<~NEW)
-            - [ ] Todo Item
-            - [ ] Hello
+            #{SIGIL} [ ] Todo Item
+            #{SIGIL} [ ] Hello
           NEW
         end
 
@@ -193,7 +193,7 @@ RSpec.describe "box toggle specs" do
     context "in normal mode" do
       it "doesn't move the cursor if after the box" do
         content = <<~CONTENT
-          - Todo item
+          #{SIGIL} Todo item
         CONTENT
 
         with_file(content) do |file|
@@ -202,14 +202,14 @@ RSpec.describe "box toggle specs" do
           vim.write
 
           expect(file.read).to eq(<<~NEW)
-            - [ ] Todo item
+            #{SIGIL} [ ] Todo item
           NEW
         end
       end
 
       it "doesn't move the cursor if before the box" do
         content = <<~CONTENT
-          - Todo item
+          #{SIGIL} Todo item
         CONTENT
 
         with_file(content) do |file|
@@ -218,14 +218,14 @@ RSpec.describe "box toggle specs" do
           vim.write
 
           expect(file.read).to eq(<<~NEW)
-            - [ ] Todo item
+            #{SIGIL} [ ] Todo item
           NEW
         end
       end
 
       it "works with an empty item" do
         content = <<~CONTENT
-          -
+          #{SIGIL}
         CONTENT
 
         with_file(content) do |file|
@@ -234,14 +234,14 @@ RSpec.describe "box toggle specs" do
           vim.write
 
           expect(file.read).to eq(<<~NEW)
-            - [ ] Hello
+            #{SIGIL} [ ] Hello
           NEW
         end
       end
 
       it "works with box configuration" do
         content = <<~CONTENT
-          - Todo item
+          #{SIGIL} Todo item
         CONTENT
 
         vim.command("let g:tada_todo_statuses = ['doing', 'donezo']")
@@ -253,7 +253,7 @@ RSpec.describe "box toggle specs" do
           vim.write
 
           expect(file.read).to eq(<<~NEW)
-            - [o] Todo item
+            #{SIGIL} [o] Todo item
           NEW
         end
 
@@ -263,7 +263,7 @@ RSpec.describe "box toggle specs" do
     context "in insert mode" do
       it "doesn't move the cursor if after the box" do
         content = <<~CONTENT
-          - Todo item
+          #{SIGIL} Todo item
         CONTENT
 
         with_file(content) do |file|
@@ -272,14 +272,14 @@ RSpec.describe "box toggle specs" do
           vim.write
 
           expect(file.read).to eq(<<~NEW)
-            - [ ] Todo my item
+            #{SIGIL} [ ] Todo my item
           NEW
         end
       end
 
       it "doesn't move the cursor if before the box" do
         content = <<~CONTENT
-          - Todo item
+          #{SIGIL} Todo item
         CONTENT
 
         with_file(content) do |file|
@@ -288,14 +288,14 @@ RSpec.describe "box toggle specs" do
           vim.write
 
           expect(file.read).to eq(<<~NEW)
-            My - [ ] Todo item
+            My #{SIGIL} [ ] Todo item
           NEW
         end
       end
 
       it "works with an empty list item" do
         content = <<~CONTENT
-          -
+          #{SIGIL}
         CONTENT
 
         with_file(content) do |file|
@@ -304,7 +304,7 @@ RSpec.describe "box toggle specs" do
           vim.write
 
           expect(file.read).to eq(<<~NEW)
-            - [ ] Hello
+            #{SIGIL} [ ] Hello
           NEW
         end
       end
@@ -314,8 +314,8 @@ RSpec.describe "box toggle specs" do
   describe "<C-Space> converting non dash items to boxes" do
     it "works with a description" do
       content = <<~CONTENT
-        - Topic:
-          - [ ] Todo item
+        #{SIGIL} Topic:
+          #{SIGIL} [ ] Todo item
                 Description
       CONTENT
 
@@ -325,17 +325,17 @@ RSpec.describe "box toggle specs" do
         vim.write
 
         expect(file.read).to eq(<<~NEW)
-          - Topic:
-            - [ ] Todo item
-            - [ ] Description
+          #{SIGIL} Topic:
+            #{SIGIL} [ ] Todo item
+            #{SIGIL} [ ] Description
         NEW
       end
     end
 
     it "works with metadata" do
       content = <<~CONTENT
-        - Topic:
-          - [ ] Todo item
+        #{SIGIL} Topic:
+          #{SIGIL} [ ] Todo item
                 | Hello
       CONTENT
 
@@ -345,17 +345,17 @@ RSpec.describe "box toggle specs" do
         vim.write
 
         expect(file.read).to eq(<<~NEW)
-          - Topic:
-            - [ ] Todo item
-            - [ ] Hello
+          #{SIGIL} Topic:
+            #{SIGIL} [ ] Todo item
+            #{SIGIL} [ ] Hello
         NEW
       end
     end
 
     it "works with a note" do
       content = <<~CONTENT
-        - Topic:
-          - [ ] Todo item
+        #{SIGIL} Topic:
+          #{SIGIL} [ ] Todo item
                 > Hello
       CONTENT
 
@@ -365,17 +365,17 @@ RSpec.describe "box toggle specs" do
         vim.write
 
         expect(file.read).to eq(<<~NEW)
-          - Topic:
-            - [ ] Todo item
-            - [ ] Hello
+          #{SIGIL} Topic:
+            #{SIGIL} [ ] Todo item
+            #{SIGIL} [ ] Hello
         NEW
       end
     end
 
     it "works with a comment" do
       content = <<~CONTENT
-        - Topic:
-          - [ ] Todo item
+        #{SIGIL} Topic:
+          #{SIGIL} [ ] Todo item
                 # Hello
       CONTENT
 
@@ -385,9 +385,9 @@ RSpec.describe "box toggle specs" do
         vim.write
 
         expect(file.read).to eq(<<~NEW)
-          - Topic:
-            - [ ] Todo item
-            - [ ] Hello
+          #{SIGIL} Topic:
+            #{SIGIL} [ ] Todo item
+            #{SIGIL} [ ] Hello
         NEW
       end
     end

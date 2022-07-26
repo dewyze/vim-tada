@@ -2,7 +2,7 @@ RSpec.describe "tabs" do
   describe "with smart tabs off" do
     it "does not indent list items" do
       content = <<~CONTENT
-        - Item
+        #{SIGIL} Item
       CONTENT
 
       vim.command("let g:tada_smart_tab = 0")
@@ -13,15 +13,15 @@ RSpec.describe "tabs" do
         vim.write
 
         expect(file.read).to eq(<<~CONTENT)
-          - Item
-          -   Item 2
+          #{SIGIL} Item
+          #{SIGIL}   Item 2
         CONTENT
       end
     end
 
     it "does not indent todo items" do
       content = <<~CONTENT
-        - [ ] Item
+        #{SIGIL} [ ] Item
       CONTENT
 
       vim.command("let g:tada_smart_tab = 0")
@@ -32,15 +32,15 @@ RSpec.describe "tabs" do
         vim.write
 
         expect(file.read).to eq(<<~CONTENT)
-          - [ ] Item
-          - [ ]   Item 2
+          #{SIGIL} [ ] Item
+          #{SIGIL} [ ]   Item 2
         CONTENT
       end
     end
 
     it "does not indent note items" do
       content = <<~CONTENT
-        - [ ] Item
+        #{SIGIL} [ ] Item
               >
       CONTENT
 
@@ -52,7 +52,7 @@ RSpec.describe "tabs" do
         vim.write
 
         expect(file.read).to eq(<<~CONTENT)
-          - [ ] Item
+          #{SIGIL} [ ] Item
                 >   Note
         CONTENT
       end
@@ -62,7 +62,7 @@ RSpec.describe "tabs" do
   describe "with smart tabs on" do
     it "indents list items" do
       content = <<~CONTENT
-        - Item
+        #{SIGIL} Item
       CONTENT
 
       with_file(content) do |file|
@@ -71,15 +71,15 @@ RSpec.describe "tabs" do
         vim.write
 
         expect(file.read).to eq(<<~CONTENT)
-          - Item
-            - Item 2
+          #{SIGIL} Item
+            #{SIGIL} Item 2
         CONTENT
       end
     end
 
     it "indents todo items" do
       content = <<~CONTENT
-        - [ ] Item
+        #{SIGIL} [ ] Item
       CONTENT
 
       with_file(content) do |file|
@@ -88,15 +88,15 @@ RSpec.describe "tabs" do
         vim.write
 
         expect(file.read).to eq(<<~CONTENT)
-          - [ ] Item
-            - [ ] Item 2
+          #{SIGIL} [ ] Item
+            #{SIGIL} [ ] Item 2
         CONTENT
       end
     end
 
     it "indents note items" do
       content = <<~CONTENT
-        - [ ] Item
+        #{SIGIL} [ ] Item
               >
       CONTENT
 
@@ -106,7 +106,7 @@ RSpec.describe "tabs" do
         vim.write
 
         expect(file.read).to eq(<<~CONTENT)
-          - [ ] Item
+          #{SIGIL} [ ] Item
                   > Note
         CONTENT
       end
@@ -114,7 +114,7 @@ RSpec.describe "tabs" do
 
     it "does not indent non-empty lines" do
       content = <<~CONTENT
-        - [ ] Item
+        #{SIGIL} [ ] Item
       CONTENT
 
       with_file(content) do |file|
@@ -124,8 +124,8 @@ RSpec.describe "tabs" do
         vim.write
 
         expect(file.read).to eq(<<~CONTENT)
-          - [ ] Item
-          - [ ] Item  2
+          #{SIGIL} [ ] Item
+          #{SIGIL} [ ] Item  2
         CONTENT
       end
     end

@@ -2,7 +2,7 @@ RSpec.describe "map specs" do
   describe "remaps" do
     it "remaps spaces for todo toggling" do
       content = <<~CONTENT
-        - [ ] Todo item
+        #{SIGIL} [ ] Todo item
       CONTENT
 
       vim.command("let g:tada_todo_switch_status_mapping = \"<C-S>\"")
@@ -12,7 +12,7 @@ RSpec.describe "map specs" do
         vim.write
 
         expect(file.read).to eq(<<~NEW)
-          - [•] Todo item
+          #{SIGIL} [•] Todo item
         NEW
       end
     end
@@ -21,7 +21,7 @@ RSpec.describe "map specs" do
   describe "nomap" do
     it "disables maps" do
       content = <<~CONTENT
-          - [ ] Todo item
+          #{SIGIL} [ ] Todo item
       CONTENT
 
       vim.command("let g:tada_no_map = 1")
@@ -31,7 +31,7 @@ RSpec.describe "map specs" do
         vim.write
 
         expect(file.read).to eq(<<~NEW)
-            - [ ] Todo item
+            #{SIGIL} [ ] Todo item
         NEW
       end
     end
@@ -40,7 +40,7 @@ RSpec.describe "map specs" do
   describe "<C-H> in insert mode" do
     it "works with dash lines" do
       content = <<~CONTENT
-        - Topic:
+        #{SIGIL} Topic:
       CONTENT
 
       with_file(content) do |file|
@@ -49,7 +49,7 @@ RSpec.describe "map specs" do
         vim.write
 
         expect(file.read).to eq(<<~NEW)
-          - Topic:
+          #{SIGIL} Topic:
             Description
         NEW
       end
@@ -57,8 +57,8 @@ RSpec.describe "map specs" do
 
     it "empties the beginning of the line" do
       content = <<~CONTENT
-        - [ ] Todo Item
-        - [ ] Description
+        #{SIGIL} [ ] Todo Item
+        #{SIGIL} [ ] Description
       CONTENT
 
       with_file(content) do |file|
@@ -67,7 +67,7 @@ RSpec.describe "map specs" do
         vim.write
 
         expect(file.read).to eq(<<~NEW)
-          - [ ] Todo Item
+          #{SIGIL} [ ] Todo Item
                 Description
         NEW
       end
@@ -75,7 +75,7 @@ RSpec.describe "map specs" do
 
     it "works with a preceding character" do
       content = <<~CONTENT
-        - [ ] Todo Item
+        #{SIGIL} [ ] Todo Item
       CONTENT
 
       with_file(content) do |file|
@@ -84,7 +84,7 @@ RSpec.describe "map specs" do
         vim.write
 
         expect(file.read).to eq(<<~NEW)
-          - [ ] Todo Item
+          #{SIGIL} [ ] Todo Item
                 Description
         NEW
       end
@@ -94,7 +94,7 @@ RSpec.describe "map specs" do
   describe "delete list item if immediately typing metadata" do
     it "removes the leading hyphen" do
       content = <<~CONTENT
-        - Todo Item:
+        #{SIGIL} Todo Item:
       CONTENT
 
       with_file(content) do |file|
@@ -103,7 +103,7 @@ RSpec.describe "map specs" do
         vim.write
 
         expect(file.read).to eq(<<~NEW)
-          - Todo Item:
+          #{SIGIL} Todo Item:
             | Description
         NEW
       end
@@ -111,7 +111,7 @@ RSpec.describe "map specs" do
 
     it "removes the leading todo boxes" do
       content = <<~CONTENT
-        - [ ] Todo Item:
+        #{SIGIL} [ ] Todo Item:
       CONTENT
 
       with_file(content) do |file|
@@ -120,7 +120,7 @@ RSpec.describe "map specs" do
         vim.write
 
         expect(file.read).to eq(<<~NEW)
-          - [ ] Todo Item:
+          #{SIGIL} [ ] Todo Item:
                 | Description
         NEW
       end
@@ -130,7 +130,7 @@ RSpec.describe "map specs" do
   describe "delete list item if immediately typing note" do
     it "removes the leading hyphen" do
       content = <<~CONTENT
-        - Todo Item:
+        #{SIGIL} Todo Item:
       CONTENT
 
       with_file(content) do |file|
@@ -139,7 +139,7 @@ RSpec.describe "map specs" do
         vim.write
 
         expect(file.read).to eq(<<~NEW)
-          - Todo Item:
+          #{SIGIL} Todo Item:
             > Note
         NEW
       end
@@ -147,7 +147,7 @@ RSpec.describe "map specs" do
 
     it "removes the leading todo box" do
       content = <<~CONTENT
-        - [ ] Todo Item:
+        #{SIGIL} [ ] Todo Item:
       CONTENT
 
       with_file(content) do |file|
@@ -156,7 +156,7 @@ RSpec.describe "map specs" do
         vim.write
 
         expect(file.read).to eq(<<~NEW)
-          - [ ] Todo Item:
+          #{SIGIL} [ ] Todo Item:
                 > Note
         NEW
       end
@@ -166,8 +166,8 @@ RSpec.describe "map specs" do
   describe "dedent and remove box if typing colon after hypen or box" do
     it "removes the leading hyphen" do
       content = <<~CONTENT
-        - Topic:
-          - [ ] Todo Item
+        #{SIGIL} Topic:
+          #{SIGIL} [ ] Todo Item
       CONTENT
 
       with_file(content) do |file|
@@ -176,17 +176,17 @@ RSpec.describe "map specs" do
         vim.write
 
         expect(file.read).to eq(<<~NEW)
-          - Topic:
-            - [ ] Todo Item
-          - Topic 2:
+          #{SIGIL} Topic:
+            #{SIGIL} [ ] Todo Item
+          #{SIGIL} Topic 2:
         NEW
       end
     end
 
     it "removes the leading todo box" do
       content = <<~CONTENT
-        - Topic 1:
-          - Topic 2
+        #{SIGIL} Topic 1:
+          #{SIGIL} Topic 2
       CONTENT
 
       with_file(content) do |file|
@@ -195,9 +195,9 @@ RSpec.describe "map specs" do
         vim.write
 
         expect(file.read).to eq(<<~NEW)
-          - Topic 1:
-            - Topic 2
-          - Topic 3:
+          #{SIGIL} Topic 1:
+            #{SIGIL} Topic 2
+          #{SIGIL} Topic 3:
         NEW
       end
     end
@@ -206,13 +206,13 @@ RSpec.describe "map specs" do
   describe "goto maps" do
     let(:content) do
       <<~CONTENT
-          - Parent 1:
-            - Topic 1:
-              - [ ] Todo 1
-              - Topic 2:
-                - [ ] Todo 2
-            - Topic 3:
-              - [ ] Todo 3
+          #{SIGIL} Parent 1:
+            #{SIGIL} Topic 1:
+              #{SIGIL} [ ] Todo 1
+              #{SIGIL} Topic 2:
+                #{SIGIL} [ ] Todo 2
+            #{SIGIL} Topic 3:
+              #{SIGIL} [ ] Todo 3
       CONTENT
     end
 
@@ -226,13 +226,13 @@ RSpec.describe "map specs" do
           vim.write
 
           expect(file.read).to eq(<<~NEW)
-            X- Parent 1:
-              - Topic 1:
-                - [ ] Todo 1
-                - Topic 2:
-                  - [ ] Todo 2
-              - Topic 3:
-                - [ ] Todo 3
+            X#{SIGIL} Parent 1:
+              #{SIGIL} Topic 1:
+                #{SIGIL} [ ] Todo 1
+                #{SIGIL} Topic 2:
+                  #{SIGIL} [ ] Todo 2
+              #{SIGIL} Topic 3:
+                #{SIGIL} [ ] Todo 3
           NEW
         end
       end
@@ -244,13 +244,13 @@ RSpec.describe "map specs" do
           vim.write
 
           expect(file.read).to eq(<<~NEW)
-            - Parent 1:
-              - Topic 1:
-                - [ ] Todo 1
-                - Topic 2:
-                  - [ ] Todo 2
-              - Topic 3X:
-                - [ ] Todo 3
+            #{SIGIL} Parent 1:
+              #{SIGIL} Topic 1:
+                #{SIGIL} [ ] Todo 1
+                #{SIGIL} Topic 2:
+                  #{SIGIL} [ ] Todo 2
+              #{SIGIL} Topic 3X:
+                #{SIGIL} [ ] Todo 3
           NEW
         end
       end
@@ -262,13 +262,13 @@ RSpec.describe "map specs" do
           vim.write
 
           expect(file.read).to eq(<<~NEW)
-            - Parent 1:
-              - Topic 1X:
-                - [ ] Todo 1
-                - Topic 2:
-                  - [ ] Todo 2
-              - Topic 3:
-                - [ ] Todo 3
+            #{SIGIL} Parent 1:
+              #{SIGIL} Topic 1X:
+                #{SIGIL} [ ] Todo 1
+                #{SIGIL} Topic 2:
+                  #{SIGIL} [ ] Todo 2
+              #{SIGIL} Topic 3:
+                #{SIGIL} [ ] Todo 3
           NEW
         end
       end
@@ -280,13 +280,13 @@ RSpec.describe "map specs" do
           vim.write
 
           expect(file.read).to eq(<<~NEW)
-            - Parent 1X:
-              - Topic 1:
-                - [ ] Todo 1
-                - Topic 2:
-                  - [ ] Todo 2
-              - Topic 3:
-                - [ ] Todo 3
+            #{SIGIL} Parent 1X:
+              #{SIGIL} Topic 1:
+                #{SIGIL} [ ] Todo 1
+                #{SIGIL} Topic 2:
+                  #{SIGIL} [ ] Todo 2
+              #{SIGIL} Topic 3:
+                #{SIGIL} [ ] Todo 3
           NEW
         end
       end
@@ -302,13 +302,13 @@ RSpec.describe "map specs" do
           vim.write
 
           expect(file.read).to eq(<<~NEW)
-            X- Parent 1:
-              - Topic 1:
-                - [ ] Todo 1
-                - Topic 2:
-                  - [ ] Todo 2
-              - Topic 3:
-                - [ ] Todo 3
+            X#{SIGIL} Parent 1:
+              #{SIGIL} Topic 1:
+                #{SIGIL} [ ] Todo 1
+                #{SIGIL} Topic 2:
+                  #{SIGIL} [ ] Todo 2
+              #{SIGIL} Topic 3:
+                #{SIGIL} [ ] Todo 3
           NEW
         end
       end
@@ -320,13 +320,13 @@ RSpec.describe "map specs" do
           vim.write
 
           expect(file.read).to eq(<<~NEW)
-            - Parent 1:
-              - Topic 1:
-                - [ ] Todo 1
-                - Topic 2:
-                  - [ ] Todo 2
-              - Topic 3X:
-                - [ ] Todo 3
+            #{SIGIL} Parent 1:
+              #{SIGIL} Topic 1:
+                #{SIGIL} [ ] Todo 1
+                #{SIGIL} Topic 2:
+                  #{SIGIL} [ ] Todo 2
+              #{SIGIL} Topic 3X:
+                #{SIGIL} [ ] Todo 3
           NEW
         end
       end
@@ -338,13 +338,13 @@ RSpec.describe "map specs" do
           vim.write
 
           expect(file.read).to eq(<<~NEW)
-            - Parent 1X:
-              - Topic 1:
-                - [ ] Todo 1
-                - Topic 2:
-                  - [ ] Todo 2
-              - Topic 3:
-                - [ ] Todo 3
+            #{SIGIL} Parent 1X:
+              #{SIGIL} Topic 1:
+                #{SIGIL} [ ] Todo 1
+                #{SIGIL} Topic 2:
+                  #{SIGIL} [ ] Todo 2
+              #{SIGIL} Topic 3:
+                #{SIGIL} [ ] Todo 3
           NEW
         end
       end
@@ -360,13 +360,13 @@ RSpec.describe "map specs" do
           vim.write
 
           expect(file.read).to eq(<<~NEW)
-            - Parent 1:
-              - Topic 1:
-                - [ ] Todo 1
-                - Topic 2:
-                  - [ ] Todo 2
-              - Topic 3:
-                - [ ] Todo X3
+            #{SIGIL} Parent 1:
+              #{SIGIL} Topic 1:
+                #{SIGIL} [ ] Todo 1
+                #{SIGIL} Topic 2:
+                  #{SIGIL} [ ] Todo 2
+              #{SIGIL} Topic 3:
+                #{SIGIL} [ ] Todo X3
           NEW
         end
       end
@@ -378,13 +378,13 @@ RSpec.describe "map specs" do
           vim.write
 
           expect(file.read).to eq(<<~NEW)
-            - Parent 1:
-              - Topic 1:
-                - [ ] Todo 1
-                - Topic 2:
-                  - [ ] Todo 2
-              - Topic 3X:
-                - [ ] Todo 3
+            #{SIGIL} Parent 1:
+              #{SIGIL} Topic 1:
+                #{SIGIL} [ ] Todo 1
+                #{SIGIL} Topic 2:
+                  #{SIGIL} [ ] Todo 2
+              #{SIGIL} Topic 3X:
+                #{SIGIL} [ ] Todo 3
           NEW
         end
       end
@@ -396,13 +396,13 @@ RSpec.describe "map specs" do
           vim.write
 
           expect(file.read).to eq(<<~NEW)
-            - Parent 1:
-              - Topic 1:
-                - [ ] Todo 1
-                - Topic 2:
-                  - [ ] Todo 2
-              - Topic 3X:
-                - [ ] Todo 3
+            #{SIGIL} Parent 1:
+              #{SIGIL} Topic 1:
+                #{SIGIL} [ ] Todo 1
+                #{SIGIL} Topic 2:
+                  #{SIGIL} [ ] Todo 2
+              #{SIGIL} Topic 3X:
+                #{SIGIL} [ ] Todo 3
           NEW
         end
       end
@@ -414,13 +414,13 @@ RSpec.describe "map specs" do
           vim.write
 
           expect(file.read).to eq(<<~NEW)
-            - Parent 1:
-              - Topic 1:
-                - [ ] Todo 1
-                - Topic 2:
-                  - [ ] Todo 2
-              - Topic 3X:
-                - [ ] Todo 3
+            #{SIGIL} Parent 1:
+              #{SIGIL} Topic 1:
+                #{SIGIL} [ ] Todo 1
+                #{SIGIL} Topic 2:
+                  #{SIGIL} [ ] Todo 2
+              #{SIGIL} Topic 3X:
+                #{SIGIL} [ ] Todo 3
           NEW
         end
       end
@@ -436,13 +436,13 @@ RSpec.describe "map specs" do
           vim.write
 
           expect(file.read).to eq(<<~NEW)
-            - Parent 1:
-              - Topic 1:
-                - [ ] Todo 1
-                - Topic 2:
-                  - [ ] Todo 2
-              - Topic 3:
-                - [ ] Todo X3
+            #{SIGIL} Parent 1:
+              #{SIGIL} Topic 1:
+                #{SIGIL} [ ] Todo 1
+                #{SIGIL} Topic 2:
+                  #{SIGIL} [ ] Todo 2
+              #{SIGIL} Topic 3:
+                #{SIGIL} [ ] Todo X3
           NEW
         end
       end
@@ -454,13 +454,13 @@ RSpec.describe "map specs" do
           vim.write
 
           expect(file.read).to eq(<<~NEW)
-            - Parent 1:
-              - Topic 1:
-                - [ ] Todo 1
-                - Topic 2:
-                  - [ ] Todo 2
-              - Topic 3X:
-                - [ ] Todo 3
+            #{SIGIL} Parent 1:
+              #{SIGIL} Topic 1:
+                #{SIGIL} [ ] Todo 1
+                #{SIGIL} Topic 2:
+                  #{SIGIL} [ ] Todo 2
+              #{SIGIL} Topic 3X:
+                #{SIGIL} [ ] Todo 3
           NEW
         end
       end
@@ -472,13 +472,13 @@ RSpec.describe "map specs" do
           vim.write
 
           expect(file.read).to eq(<<~NEW)
-            - Parent 1:
-              - Topic 1:
-                - [ ] Todo 1
-                - Topic 2:
-                  - [ ] Todo 2
-              - Topic 3X:
-                - [ ] Todo 3
+            #{SIGIL} Parent 1:
+              #{SIGIL} Topic 1:
+                #{SIGIL} [ ] Todo 1
+                #{SIGIL} Topic 2:
+                  #{SIGIL} [ ] Todo 2
+              #{SIGIL} Topic 3X:
+                #{SIGIL} [ ] Todo 3
           NEW
         end
       end
@@ -490,13 +490,13 @@ RSpec.describe "map specs" do
           vim.write
 
           expect(file.read).to eq(<<~NEW)
-            - Parent 1:
-              - Topic 1:
-                - [ ] Todo 1
-                - Topic 2:
-                  - [ ] Todo 2
-              - Topic 3X:
-                - [ ] Todo 3
+            #{SIGIL} Parent 1:
+              #{SIGIL} Topic 1:
+                #{SIGIL} [ ] Todo 1
+                #{SIGIL} Topic 2:
+                  #{SIGIL} [ ] Todo 2
+              #{SIGIL} Topic 3X:
+                #{SIGIL} [ ] Todo 3
           NEW
         end
       end
@@ -506,9 +506,9 @@ RSpec.describe "map specs" do
   describe "archiving" do
     it "adds a leading =" do
       content = <<~CONTENT
-        - [ ] todo 1
-        - [ ] todo 2
-        - [ ] todo 3
+        #{SIGIL} [ ] todo 1
+        #{SIGIL} [ ] todo 2
+        #{SIGIL} [ ] todo 3
       CONTENT
 
       with_file(content) do |file|
@@ -517,11 +517,11 @@ RSpec.describe "map specs" do
         vim.write
 
         expect(file.read).to eq(<<~NEW)
-          - [ ] todo 3
+          #{SIGIL} [ ] todo 3
 
           ===
-          = - [ ] todo 1
-          = - [ ] todo 2
+          = #{SIGIL} [ ] todo 1
+          = #{SIGIL} [ ] todo 2
         NEW
       end
     end

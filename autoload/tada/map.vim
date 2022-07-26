@@ -6,9 +6,9 @@ let g:tada_loaded_map_autoload = 1
 function! tada#map#EmptyLine()
   let current = getline(".")
 
-  if current =~ '\s*-\s*$'
-    let dash_index = match(current, '-')
-    let spaces = repeat(' ', dash_index + 2)
+  if current =~ '\s*' . g:tada_sigil . '\s*$'
+    let sigil_index = match(current, g:tada_sigil)
+    let spaces = repeat(' ', sigil_index + 2)
     call setline('.', spaces)
     call setpos('.', [0, line('.'), col('$'), 0])
   else

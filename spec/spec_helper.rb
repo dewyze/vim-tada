@@ -48,8 +48,12 @@ RSpec::Matchers.define :have_highlight do |expected|
   end
 end
 
+SIGIL = "*"
 RSpec.configure do |config|
-  config.before(:each) { vim.command("call ResetConfiguration()") }
+  config.before(:each) do
+    vim.command("call ResetConfiguration()")
+    vim.command("let g:tada_sigil = '\\*'")
+  end
 
   config.after(:all) do
     vim.command "!#{ENV["VIM_TADA_REFOCUS_COMMAND"]}" if ENV["VIM_TADA_REFOCUS_COMMAND"]
