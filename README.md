@@ -1,5 +1,10 @@
 # Vim Tada
 
+> **Tada has moved to Neovim.** It was rewritten in Lua as
+> [tada.nvim](https://github.com/dewyze/tada.nvim), and new work happens there.
+> This repository is the original Vimscript plugin. It is archived, and it
+> still works in Vim and Neovim as it is.
+
 Turn your todos :white_check_mark: into tadas :tada:.
 
 Vim tada is a file syntax and tools for managing a simple todo list including a
